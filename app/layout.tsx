@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -52,9 +53,10 @@ export default function RootLayout({
       lang="en"
       className={`${montserrat.variable} ${playfairDisplay.variable} antialiased`}
     >
-      <body className="font-montserrat">
-        <Navbar items={navigationItems} />
-        {children}
+      <body className="font-montserrat min-h-dvh flex flex-col">
+        <Navbar items={navigationItems}></Navbar>
+        <div className="grow">{children}</div>
+        <Footer></Footer>
       </body>
     </html>
   );
