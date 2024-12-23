@@ -24,14 +24,14 @@ export default function Navbar({ items }: NavbarProps) {
   };
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-primary shadow-md md:rounded-2xl md:my-2 md:mx-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           {/* Logo section */}
           <div className="flex-shrink-0 flex items-center">
             <Link
               href="/"
-              className="text-2xl text-primary uppercase font-light"
+              className="text-2xl text-primary-content uppercase font-light"
             >
               Ordinacija Bozic
             </Link>
@@ -41,7 +41,7 @@ export default function Navbar({ items }: NavbarProps) {
           <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/"
-              className="text-gray-700 hover:text-primary transition-colors"
+              className="text-gray-700 hover:text-white transition-colors"
             >
               Domov
             </Link>
@@ -55,7 +55,7 @@ export default function Navbar({ items }: NavbarProps) {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="text-gray-700 hover:text-primary transition-colors cursor-pointer"
+                  className="text-gray-700 hover:text-white transition-colors cursor-pointer"
                 >
                   {item.name}
                 </div>
@@ -81,7 +81,7 @@ export default function Navbar({ items }: NavbarProps) {
 
             <Link
               href="/kontakt"
-              className="text-gray-700 hover:text-primary transition-colors"
+              className="text-gray-700 hover:text-white transition-colors"
             >
               Kontakt
             </Link>

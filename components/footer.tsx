@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-neutral-800 text-white py-16">
+    <footer className="bg-neutral-800 text-white py-16 md:rounded-2xl md:my-2 md:mx-4">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
         {/* Office Hours Section */}
         <div>
