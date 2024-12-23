@@ -5,20 +5,12 @@
 :root {
   --background: #fbfbfe;
   --foreground: #171717;
-  --primary: #b09054
-  --secondary: #b4a897
-  --accent: #3ca68d
+  --primary: #b09054;
+  --secondary: #b4a897;
+  --accent: #3ca68d;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }

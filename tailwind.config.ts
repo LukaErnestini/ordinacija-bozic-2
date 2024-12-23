@@ -1,14 +1,15 @@
 import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
+import typography from "@tailwindcss/typography";
 
 export default {
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: "var(--primary)",
-          secondary: "var(--secondary)",
-          accent: "var(--accent)",
+          primary: "#b09054",
+          secondary: "#b4a897",
+          accent: "#3ca68d",
           neutral: "#d8d2ca",
           "base-100": "#fbfbfe",
           info: "#00aeff",
@@ -32,8 +33,12 @@ export default {
         primary: "var(--primary)",
         secondary: "var(--secondary)",
         accent: "var(--accent)"
+      },
+      fontFamily: {
+        sans: ["var(--font-montserrat)"],
+        serif: ["var(--font-playfair-display)"]
       }
     }
   },
-  plugins: [daisyui]
+  plugins: [daisyui, typography]
 } satisfies Config;
