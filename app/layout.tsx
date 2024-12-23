@@ -50,6 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
+      data-theme="mytheme"
       lang="en"
       className={`${montserrat.variable} ${playfairDisplay.variable} antialiased`}
     >
