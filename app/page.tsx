@@ -11,7 +11,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="">
+    <div className="-mt-20">
       {imageSrc && (
         <Image
           src={imageSrc}

@@ -106,6 +106,7 @@ export default defineConfig({
             type: "string",
             name: "type",
             label: "Type",
+            required: true,
             options: [
               {
                 value: "Specialistično",
