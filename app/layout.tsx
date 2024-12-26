@@ -3,6 +3,7 @@ import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import client from "@/tina/__generated__/client";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -43,11 +44,22 @@ const navigationItems = [
   }
 ];
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locationsResponse = await client.queries.locationConnection();
+  const locations =
+    locationsResponse.data.locationConnection.edges?.map((edge) => {
+      const node = edge?.node;
+      return {
+        officeHours: node?.officeHours || null,
+        phone: node?.phone?.filter((p): p is string => p !== null) || [],
+        googleMapsEmbedSrc: node?.googleMapsEmbedSrc || ""
+      };
+    }) || [];
+
   return (
     <html
       data-theme="mytheme"
@@ -57,7 +69,7 @@ export default function RootLayout({
       <body className="font-montserrat min-h-dvh flex flex-col">
         <Navbar items={navigationItems}></Navbar>
         <div className="grow">{children}</div>
-        <Footer></Footer>
+        <Footer locations={locations} />
       </body>
     </html>
   );
