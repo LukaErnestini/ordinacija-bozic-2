@@ -12,7 +12,7 @@ interface FooterProps {
 
 export default function Footer({ locations }: FooterProps) {
   return (
-    <footer className="bg-neutral-800 text-white py-16 md:rounded-2xl md:my-2 md:mx-4">
+    <footer className="bg-neutral-800 text-white py-16">
       <div className="container mx-auto px-6">
         {locations.map((location, locationIndex) => (
           <div key={locationIndex}>

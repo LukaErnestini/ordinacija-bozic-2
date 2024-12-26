@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface NavigationItem {
@@ -15,6 +15,16 @@ interface NavbarProps {
 export default function Navbar({ items }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({});
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleSection = (sectionName: string) => {
     setExpandedSections((prev) => ({
@@ -24,8 +34,15 @@ export default function Navbar({ items }: NavbarProps) {
   };
 
   return (
-    <nav className="bg-primary shadow-md md:rounded-2xl md:my-2 md:mx-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={`fixed w-full transition-all duration-300 ${hasScrolled ? "bg-white/50" : "bg-transparent"}`}>
+      {hasScrolled && (
+        <>
+          <div className="absolute inset-0 backdrop-blur-md bg-gradient-to-b from-white/95 to-transparent to-50% pointer-events-none" />
+          <div className="absolute left-0 right-0 bottom-0 h-0.5 backdrop-blur-md brightness-95 bg-white/10 translate-y-full pointer-events-none" />
+        </>
+      )}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex justify-between h-20">
           {/* Logo section */}
           <div className="flex-shrink-0 flex items-center">
