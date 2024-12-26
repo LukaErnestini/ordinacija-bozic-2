@@ -1,8 +1,10 @@
 import client from "@/tina/__generated__/client";
-import ServicesClientPage from "./storitve/client-page";
+import ServicesSmall from "../components/services/services-small";
+import Image from "next/image";
 
 export default async function Home() {
   const services = await client.queries.servicesConnection();
+  const imageSrc = (await client.queries.global({ relativePath: "global.json" })).data.global.landingImage;
 
   if (!services) {
     return null;
@@ -10,7 +12,15 @@ export default async function Home() {
 
   return (
     <div className="">
-      <ServicesClientPage {...services}></ServicesClientPage>
+      {imageSrc && (
+        <Image
+          src={imageSrc}
+          alt=""
+          width={2048}
+          height={1365}
+        />
+      )}
+      <ServicesSmall {...services}></ServicesSmall>
       {/* <pre>{JSON.stringify(services, null, 2)}</pre> */}
       {/* <ServiceSmall service={services}></ServiceSmall> */}
     </div>
