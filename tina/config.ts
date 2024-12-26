@@ -25,6 +25,46 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "location",
+        label: "Location",
+        path: "content/location",
+        format: "mdx",
+        fields: [
+          {
+            name: "address",
+            label: "Address",
+            type: "rich-text"
+          },
+          {
+            name: "googleMapsEmbedSrc",
+            label: "GoogleMapsEmbedSrc",
+            type: "string"
+          },
+          {
+            name: "phone",
+            label: "Phone",
+            type: "string",
+            list: true
+          },
+          {
+            name: "about",
+            label: "About",
+            type: "rich-text"
+          },
+          {
+            name: "officeHours",
+            label: "Office Hours",
+            type: "rich-text"
+          },
+          {
+            name: "images",
+            label: "Images",
+            type: "image",
+            list: true
+          }
+        ]
+      },
+      {
         name: "global",
         label: "Global",
         path: "content/global",
