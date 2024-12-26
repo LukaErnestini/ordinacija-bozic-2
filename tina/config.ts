@@ -92,6 +92,7 @@ export default defineConfig({
         label: "Services",
         path: "content/services",
         format: "mdx",
+        defaultItem: () => ({ type: "Splošno zobozdravstvo" }), // this is deprecated ?
         ui: {
           filename: {
             readonly: true,
@@ -101,6 +102,21 @@ export default defineConfig({
           }
         },
         fields: [
+          {
+            type: "string",
+            name: "type",
+            label: "Type",
+            options: [
+              {
+                value: "Specialistično",
+                label: "Specialistično"
+              },
+              {
+                value: "Splošno zobozdravstvo",
+                label: "Splošno zobozdravstvo"
+              }
+            ]
+          },
           {
             type: "string",
             name: "title",
