@@ -25,6 +25,19 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "global",
+        label: "Global",
+        path: "content/global",
+        format: "json",
+        fields: [
+          {
+            type: "image",
+            name: "landingImage",
+            label: "Landing Image"
+          }
+        ]
+      },
+      {
         name: "services",
         label: "Services",
         path: "content/services",
