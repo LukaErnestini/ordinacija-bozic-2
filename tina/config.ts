@@ -31,6 +31,11 @@ export default defineConfig({
         format: "mdx",
         fields: [
           {
+            name: "label",
+            label: "Label",
+            type: "string"
+          },
+          {
             name: "address",
             label: "Address",
             type: "rich-text"
@@ -45,6 +50,11 @@ export default defineConfig({
             label: "Phone",
             type: "string",
             list: true
+          },
+          {
+            name: "mail",
+            label: "Mail",
+            type: "string"
           },
           {
             name: "about",
