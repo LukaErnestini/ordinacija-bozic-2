@@ -22,7 +22,7 @@ export default function ServicesSmall(props: ClientServicesProps) {
             const service = serviceData!.node!;
             return (
               <Link
-                href={service._sys.filename}
+                href={"storitve/" + service._sys.filename}
                 key={service?.id}
                 className="btn h-56 justify-start flex-nowrap group p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
               >

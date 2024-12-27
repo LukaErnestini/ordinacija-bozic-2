@@ -4,6 +4,10 @@ import ServicesList from "@/components/services/services-list";
 export default async function Storitve() {
   const services = await client.queries.servicesConnection();
 
+  const paths = services.data?.servicesConnection.edges?.map((edge) => ({
+    filename: edge?.node?._sys.breadcrumbs
+  }));
+
   const mappedServices = services.data.servicesConnection
     .edges!.map((s) => {
       const service = s!.node!;
@@ -22,6 +26,16 @@ export default async function Storitve() {
         <h1 className="text-center text-4xl font-semibold capitalize mb-8">Storitve ki jih nudimo</h1>
         <ServicesList services={mappedServices} />
       </div>
+      <pre>{JSON.stringify(paths, null, 2)}</pre>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  const services = await client.queries.servicesConnection();
+  const paths = services.data?.servicesConnection.edges?.map((edge) => ({
+    slug: edge?.node?._sys.breadcrumbs
+  }));
+  console.log(paths);
+  return paths || [];
 }
