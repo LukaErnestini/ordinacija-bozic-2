@@ -55,7 +55,9 @@ export default async function RootLayout({
       return {
         officeHours: node?.officeHours || null,
         phone: node?.phone?.filter((p): p is string => p !== null) || [],
-        googleMapsEmbedSrc: node?.googleMapsEmbedSrc || ""
+        googleMapsEmbedSrc: node?.googleMapsEmbedSrc || "",
+        name: node?.label || "",
+        email: node?.mail || ""
       };
     }) || [];
 
