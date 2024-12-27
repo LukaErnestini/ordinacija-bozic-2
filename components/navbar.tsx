@@ -52,7 +52,7 @@ export default function Navbar({ items }: NavbarProps) {
           <div className="flex-shrink-0 flex items-center">
             <Link
               href="/"
-              className="text-2xl text-primary-content uppercase font-light"
+              className="max-w-1 sm:max-w-full text-lg leading-tight sm:text-2xl text-primary-content uppercase font-light"
             >
               Ordinacija Bozic
             </Link>
