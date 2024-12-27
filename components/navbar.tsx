@@ -4,7 +4,7 @@ import Link from "next/link";
 
 interface NavigationItem {
   name: string;
-  href: string;
+  href?: string;
   subItems?: { name: string; href: string }[];
 }
 
@@ -34,8 +34,12 @@ export default function Navbar({ items }: NavbarProps) {
   };
 
   return (
-    <nav className={`fixed w-full transition-all duration-300 ${hasScrolled ? "bg-white/50" : "bg-transparent"}`}>
-      {hasScrolled && (
+    <nav
+      className={`fixed w-full transition-all duration-300 ${
+        hasScrolled || isMenuOpen ? "bg-white/50" : "bg-transparent"
+      }`}
+    >
+      {(hasScrolled || isMenuOpen) && (
         <>
           <div className="absolute inset-0 backdrop-blur-md bg-gradient-to-b from-white/95 to-transparent to-50% pointer-events-none" />
           <div className="absolute left-0 right-0 bottom-0 h-0.5 backdrop-blur-md brightness-95 bg-white/10 translate-y-full pointer-events-none" />
@@ -43,7 +47,7 @@ export default function Navbar({ items }: NavbarProps) {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex justify-between h-20">
+        <div className="flex justify-between h-nav">
           {/* Logo section */}
           <div className="flex-shrink-0 flex items-center">
             <Link
@@ -55,32 +59,36 @@ export default function Navbar({ items }: NavbarProps) {
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/"
-              className="text-gray-700 hover:text-white transition-colors"
-            >
-              Domov
-            </Link>
-
+          <div className="hidden md:flex items-center gap-8">
             {/* Map through navigation items */}
             {items.map((item) => (
               <div
-                key={item.href}
+                key={item.name}
                 className="dropdown dropdown-hover"
               >
                 <div
                   tabIndex={0}
                   role="button"
-                  className="text-gray-700 hover:text-white transition-colors cursor-pointer"
+                  className="text-gray-700 hover:text-primary transition-colors cursor-pointer"
                 >
                   {item.name}
                 </div>
+
                 {item.subItems && (
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu bg-white rounded-box z-[1] p-2 shadow-lg"
+                    className="dropdown-content menu bg-white rounded-box z-[1] p-2 shadow-lg max-h-[80vh] overflow-y-auto right-0 min-w-[200px]"
                   >
+                    {item.href && (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="text-gray-700 hover:text-primary hover:bg-gray-50 text-nowrap"
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    )}
                     {item.subItems.map((subItem) => (
                       <li key={subItem.href}>
                         <Link
@@ -95,13 +103,6 @@ export default function Navbar({ items }: NavbarProps) {
                 )}
               </div>
             ))}
-
-            <Link
-              href="/kontakt"
-              className="text-gray-700 hover:text-white transition-colors"
-            >
-              Kontakt
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -139,19 +140,12 @@ export default function Navbar({ items }: NavbarProps) {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              href="/"
-              className="block px-3 py-2 text-gray-700 hover:text-primary"
-            >
-              Domov
-            </Link>
-
+        <div className="md:hidden relative">
+          <div className="bg px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {/* Map through navigation items for mobile */}
             {items.map((item) => (
               <div
-                key={item.href}
+                key={item.name}
                 className="space-y-1"
               >
                 <button
@@ -190,13 +184,6 @@ export default function Navbar({ items }: NavbarProps) {
                 )}
               </div>
             ))}
-
-            <Link
-              href="/kontakt"
-              className="block px-3 py-2 text-gray-700 hover:text-primary"
-            >
-              Kontakt
-            </Link>
           </div>
         </div>
       )}

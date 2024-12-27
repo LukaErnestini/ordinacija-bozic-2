@@ -35,7 +35,6 @@ const navigationItems = [
   },
   {
     name: "Informacije",
-    href: "/informacije",
     subItems: [
       { name: "O nas", href: "/o-nas" },
       { name: "Cenik", href: "/cenik" },

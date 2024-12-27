@@ -37,6 +37,9 @@ export default {
       fontFamily: {
         sans: ["var(--font-montserrat)"],
         serif: ["var(--font-playfair-display)"]
+      },
+      spacing: {
+        nav: "5rem"
       }
     }
   },
