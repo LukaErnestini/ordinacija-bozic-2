@@ -30,12 +30,3 @@ export default async function Storitve() {
     </main>
   );
 }
-
-export async function generateStaticParams() {
-  const services = await client.queries.servicesConnection();
-  const paths = services.data?.servicesConnection.edges?.map((edge) => ({
-    slug: edge?.node?._sys.breadcrumbs
-  }));
-  console.log(paths);
-  return paths || [];
-}

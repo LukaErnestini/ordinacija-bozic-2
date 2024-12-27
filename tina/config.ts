@@ -94,7 +94,7 @@ export default defineConfig({
         format: "mdx",
         defaultItem: () => ({ type: "Splošno zobozdravstvo" }), // this is deprecated ?
         ui: {
-          // router: ({ document }) => `/storitve/${document._sys.filename}`,
+          router: ({ document }) => `/storitve/${document._sys.filename}`,
           filename: {
             readonly: true,
             slugify: (values) => {
