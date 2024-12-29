@@ -39,17 +39,33 @@ export default async function RootLayout({
 
   const navigationItems = [
     {
+      name: "Predstavitev",
+      href: "/predstavitev"
+    },
+    {
       name: "Storitve",
       href: "/storitve",
       subItems: serviceItems
     },
     {
-      name: "Informacije",
+      name: "Delovni cas",
+      href: "/delovni-cas"
+    },
+    {
+      name: "Kje smo",
+      href: "/kje-smo"
+    },
+    {
+      name: "Obvestila",
       subItems: [
         { name: "O nas", href: "/o-nas" },
         { name: "Cenik", href: "/cenik" },
         { name: "Pogosta vprašanja", href: "/faq" }
       ]
+    },
+    {
+      name: "Kontakt",
+      href: "/kontakt"
     }
   ];
 
