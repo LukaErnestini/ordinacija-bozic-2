@@ -57,10 +57,6 @@ export default async function RootLayout({
     {
       name: "Obvestila",
       href: "/obvestila"
-    },
-    {
-      name: "Kontakt",
-      href: "/lokacije"
     }
   ];
 

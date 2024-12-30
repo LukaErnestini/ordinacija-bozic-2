@@ -129,6 +129,12 @@ export default function Navbar({ items }: NavbarProps) {
                 )}
               </div>
             ))}
+            <Link
+              href="/kontaktiraj-nas"
+              className="btn btn-sm btn-primary"
+            >
+              Kontaktiraj Nas
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -226,6 +232,15 @@ export default function Navbar({ items }: NavbarProps) {
                 )}
               </div>
             ))}
+            <div className="pt-4">
+              <Link
+                href="/kontaktiraj-nas"
+                className="btn btn-primary w-full"
+                onClick={closeMenu}
+              >
+                Kontaktiraj Nas
+              </Link>
+            </div>
           </div>
         </div>
       )}
