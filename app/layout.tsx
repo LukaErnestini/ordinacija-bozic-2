@@ -44,28 +44,23 @@ export default async function RootLayout({
     },
     {
       name: "Storitve",
-      href: "/storitve",
       subItems: serviceItems
     },
     {
       name: "Delovni cas",
-      href: "/delovni-cas"
+      href: "/lokacije"
     },
     {
       name: "Kje smo",
-      href: "/kje-smo"
+      href: "/lokacije"
     },
     {
       name: "Obvestila",
-      subItems: [
-        { name: "O nas", href: "/o-nas" },
-        { name: "Cenik", href: "/cenik" },
-        { name: "Pogosta vprašanja", href: "/faq" }
-      ]
+      href: "/obvestila"
     },
     {
       name: "Kontakt",
-      href: "/kontakt"
+      href: "/lokacije"
     }
   ];
 
