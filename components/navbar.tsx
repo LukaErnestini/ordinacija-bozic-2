@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Dropdown from "@/components/ui/dropdown";
 
 interface NavigationItem {
   name: string;
@@ -16,6 +17,13 @@ export default function Navbar({ items }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({});
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setExpandedSections({});
+    setOpenDropdown(null);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,54 +67,72 @@ export default function Navbar({ items }: NavbarProps) {
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex items-center gap-8">
-            {/* Map through navigation items */}
+          <div className="hidden lg:flex items-center gap-8">
             {items.map((item) => (
-              <div
-                key={item.name}
-                className="dropdown dropdown-hover"
-              >
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="text-gray-700 hover:text-primary transition-colors cursor-pointer"
-                >
-                  {item.name}
-                </div>
-
-                {item.subItems && (
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content menu bg-white rounded-box z-[1] p-2 shadow-lg max-h-[80vh] overflow-y-auto right-0 min-w-[200px]"
+              <div key={item.name}>
+                {item.subItems ? (
+                  <Dropdown
+                    isOpen={openDropdown === item.name}
+                    onOpenChange={(isOpen) => setOpenDropdown(isOpen ? item.name : null)}
+                    trigger={
+                      <div
+                        role="button"
+                        className="text-gray-700 hover:text-primary transition-colors cursor-pointer"
+                      >
+                        {item.name}
+                      </div>
+                    }
                   >
-                    {item.href && (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          className="text-gray-700 hover:text-primary hover:bg-gray-50 text-nowrap"
+                    <ul
+                      className="p-2 max-h-[80vh] overflow-y-auto"
+                      role="menu"
+                    >
+                      {item.href && (
+                        <li role="none">
+                          <Link
+                            href={item.href}
+                            className="block px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 text-nowrap"
+                            onClick={closeMenu}
+                            role="menuitem"
+                            tabIndex={openDropdown === item.name ? 0 : -1}
+                          >
+                            {item.name}
+                          </Link>
+                        </li>
+                      )}
+                      {item.subItems.map((subItem) => (
+                        <li
+                          key={subItem.href}
+                          role="none"
                         >
-                          {item.name}
-                        </Link>
-                      </li>
-                    )}
-                    {item.subItems.map((subItem) => (
-                      <li key={subItem.href}>
-                        <Link
-                          href={subItem.href}
-                          className="text-gray-700 hover:text-primary hover:bg-gray-50 text-nowrap"
-                        >
-                          {subItem.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                          <Link
+                            href={subItem.href}
+                            className="block px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 text-nowrap"
+                            onClick={closeMenu}
+                            role="menuitem"
+                            tabIndex={openDropdown === item.name ? 0 : -1}
+                          >
+                            {subItem.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </Dropdown>
+                ) : (
+                  <Link
+                    href={item.href || "#"}
+                    className="text-gray-700 hover:text-primary transition-colors"
+                    onClick={closeMenu}
+                  >
+                    {item.name}
+                  </Link>
                 )}
               </div>
             ))}
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-primary focus:outline-none"
@@ -140,47 +166,63 @@ export default function Navbar({ items }: NavbarProps) {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden relative">
+        <div className="lg:hidden relative">
           <div className="bg px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {/* Map through navigation items for mobile */}
             {items.map((item) => (
               <div
                 key={item.name}
                 className="space-y-1"
               >
-                <button
-                  onClick={() => toggleSection(item.name)}
-                  className="w-full flex items-center justify-between px-3 py-2 text-gray-700 font-medium"
-                >
-                  <span>{item.name}</span>
-                  <svg
-                    className={`w-4 h-4 transition-transform ${
-                      expandedSections[item.name] ? "transform rotate-180" : ""
-                    }`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {expandedSections[item.name] && item.subItems && (
-                  <div className="space-y-1">
-                    {item.subItems.map((subItem) => (
-                      <Link
-                        key={subItem.href}
-                        href={subItem.href}
-                        className="block px-3 py-2 text-gray-600 hover:text-primary pl-6"
+                {item.subItems ? (
+                  <>
+                    <button
+                      onClick={() => toggleSection(item.name)}
+                      className="w-full flex items-center justify-between px-3 py-2 text-gray-700 font-medium"
+                    >
+                      <span>{item.name}</span>
+                      <svg
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          expandedSections[item.name] ? "transform rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
                       >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    <div
+                      className={`transform transition-all duration-200 origin-top ${
+                        expandedSections[item.name] ? "opacity-100 max-h-96" : "opacity-0 max-h-0 overflow-hidden"
+                      }`}
+                    >
+                      <div className="space-y-1">
+                        {item.subItems.map((subItem) => (
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            className="block px-3 py-2 text-gray-600 hover:text-primary pl-6"
+                            onClick={closeMenu}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    href={item.href || "#"}
+                    className="block px-3 py-2 text-gray-700 font-medium hover:text-primary"
+                    onClick={closeMenu}
+                  >
+                    {item.name}
+                  </Link>
                 )}
               </div>
             ))}
