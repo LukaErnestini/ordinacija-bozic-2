@@ -39,7 +39,7 @@ export default {
         serif: ["var(--font-playfair-display)"]
       },
       spacing: {
-        nav: "5rem"
+        nav: "3rem"
       }
     }
   },
