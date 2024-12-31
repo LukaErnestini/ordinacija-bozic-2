@@ -33,38 +33,45 @@ export default defineConfig({
           {
             name: "label",
             label: "Label",
-            type: "string"
+            type: "string",
+            required: true
           },
           {
             name: "address",
             label: "Address",
-            type: "rich-text"
+            type: "rich-text",
+            required: true
           },
           {
             name: "googleMapsEmbedSrc",
             label: "GoogleMapsEmbedSrc",
-            type: "string"
+            type: "string",
+            required: true
           },
           {
             name: "phone",
             label: "Phone",
             type: "string",
-            list: true
+            list: true,
+            required: true
           },
           {
             name: "mail",
             label: "Mail",
-            type: "string"
+            type: "string",
+            required: true
           },
           {
             name: "about",
             label: "About",
-            type: "rich-text"
+            type: "rich-text",
+            required: true
           },
           {
             name: "officeHours",
             label: "Office Hours",
-            type: "rich-text"
+            type: "rich-text",
+            required: true
           },
           {
             name: "images",
@@ -129,7 +136,8 @@ export default defineConfig({
           {
             type: "string",
             name: "subtitle",
-            label: "Subtitle"
+            label: "Subtitle",
+            required: true
           },
           {
             type: "image",
