@@ -40,6 +40,9 @@ export default {
       },
       spacing: {
         nav: "3rem"
+      },
+      screens: {
+        xs: "400px"
       }
     }
   },

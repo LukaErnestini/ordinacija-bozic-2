@@ -26,7 +26,7 @@ export default function Footer({ locations }: FooterProps) {
               {/* {locationIndex > 0 && <div className="divider divider-primary my-12">ALI</div>} */}
               <div className="flex flex-wrap gap-8">
                 {/* Office Hours Section */}
-                <div className="flex justify-around min-w-96 grow">
+                <div className="flex flex-col xs:flex-row justify-around grow gap-4">
                   <div>
                     <h2 className="text-2xl font-bold mb-4">Urnik</h2>
                     <div className="space-y-2">
@@ -55,7 +55,7 @@ export default function Footer({ locations }: FooterProps) {
                   <iframe
                     src={location.googleMapsEmbedSrc}
                     width="100%"
-                    height="150"
+                    height="100%"
                     style={{ border: 0 }}
                     allowFullScreen={false}
                     loading="lazy"
