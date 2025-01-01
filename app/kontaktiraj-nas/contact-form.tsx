@@ -16,7 +16,11 @@ interface FormState {
   message?: string;
 }
 
-export default function ContactForm() {
+interface ContactFormProps {
+  locations: string[];
+}
+
+export default function ContactForm(props: ContactFormProps) {
   const [state, formAction] = useActionState<FormState, FormData>(submitContactForm, {
     success: false,
     errors: {}
@@ -125,8 +129,14 @@ export default function ContactForm() {
           name="location"
           className="select select-bordered w-full"
         >
-          <option value="Ljubljana">Ljubljana</option>
-          <option value="Maribor">Maribor</option>
+          {props.locations.map((location) => (
+            <option
+              key={location}
+              value={location}
+            >
+              {location}
+            </option>
+          ))}
           <option value="No Preference">Lokacija ni pomembna</option>
         </select>
         {state.errors?.location && (

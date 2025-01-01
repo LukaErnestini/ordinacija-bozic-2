@@ -2,11 +2,11 @@
 
 import { LocationComponent } from "@/components/locations/location";
 import { LocationConnectionQuery, LocationConnectionQueryVariables } from "@/tina/__generated__/types";
-import { ListClientPageProps } from "@/tina/utils";
+import { TinaConnectionClientPageProps } from "@/tina/utils";
 import { useTina } from "tinacms/dist/react";
 
 export default function LokacijeClientPage(
-  props: ListClientPageProps<LocationConnectionQuery, LocationConnectionQueryVariables>
+  props: TinaConnectionClientPageProps<LocationConnectionQuery, LocationConnectionQueryVariables>
 ) {
   const { data } = useTina({ ...props });
 

@@ -14,7 +14,7 @@ const formSchema = z
       .min(9, "Telefonska številka mora imeti vsaj 9 številk")
       .max(15, "Telefonska številka je predolga")
       .nullish(),
-    location: z.enum(["Ljubljana", "Maribor", "Vseeno"]),
+    location: z.string(),
     message: z.string().min(1, "Sporočilo je obvezno")
   })
   .refine((data) => data.email || data.phone, {
