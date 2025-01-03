@@ -19,7 +19,7 @@ export const createStaffMdxComponents = (
     if (!staff) return null;
 
     return (
-      <>
+      <div>
         <Link
           className="uppercase"
           href={`predstavitev/${staff._sys.filename}`}
@@ -27,7 +27,7 @@ export const createStaffMdxComponents = (
           {staff.name}
         </Link>
         <span className="ml-2">{staff.title}</span>
-      </>
+      </div>
     );
   }
 });

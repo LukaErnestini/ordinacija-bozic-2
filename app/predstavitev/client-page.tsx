@@ -3,6 +3,7 @@
 import { createStaffMdxComponents, StaffPrefetchedData } from "@/components/mdx-components";
 import { AboutQuery } from "@/tina/__generated__/types";
 import { TinaQueryClientPageProps } from "@/tina/utils";
+import Image from "next/image";
 import { tinaField, useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
@@ -15,14 +16,26 @@ export default function ClientAboutUsPage(
   const mdxComponents = createStaffMdxComponents(props.staffData);
 
   return (
-    <div
-      className="prose"
-      data-tina-field={tinaField(about, "body")}
-    >
-      <TinaMarkdown
-        components={mdxComponents}
-        content={about.body}
-      />
-    </div>
+    <>
+      {about.image && (
+        <Image
+          data-tina-field={tinaField(about, "image")}
+          className="-mt-nav max-w-7xl mx-auto w-full"
+          src={about.image}
+          alt=""
+          width={2000}
+          height={2000}
+        ></Image>
+      )}
+      <div
+        className="mx-auto py-2 sm:py-4 prose prose-a:text-blue-700"
+        data-tina-field={tinaField(about, "body")}
+      >
+        <TinaMarkdown
+          components={mdxComponents}
+          content={about.body}
+        />
+      </div>
+    </>
   );
 }
