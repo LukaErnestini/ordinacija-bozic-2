@@ -29,6 +29,13 @@ export default defineConfig({
         label: "Location",
         path: "content/location",
         format: "mdx",
+        ui: {
+          allowedActions: {
+            create: false,
+            createNestedFolder: false,
+            delete: false
+          }
+        },
         fields: [
           {
             name: "label",

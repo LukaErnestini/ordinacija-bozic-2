@@ -15,7 +15,7 @@ interface LocationProps {
 export function LocationComponent({ label, address, phone, officeHours, mail, googleMapsEmbedSrc }: LocationProps) {
   return (
     <>
-      <div className="w-full max-w-md rounded-lg border bg-white shadow-sm p-6">
+      <div className="mx-auto w-full max-w-md lg:max-w-5xl rounded-lg sm:border sm:bg-white sm:shadow-sm sm:p-6">
         <div className="mb-6">
           <h3 className="text-2xl font-bold text-gray-900">{label}</h3>
         </div>
