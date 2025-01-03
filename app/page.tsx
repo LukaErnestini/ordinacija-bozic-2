@@ -11,7 +11,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="-mt-20 mx-auto">
+    <div className="-mt-nav mx-auto">
       {imageSrc && (
         <Image
           className="mx-auto"
