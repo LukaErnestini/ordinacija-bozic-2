@@ -1,23 +1,33 @@
-import client from "@/tina/__generated__/client";
+import { StaffQuery } from "@/tina/__generated__/types";
 import Link from "next/link";
 import { Components } from "tinacms/dist/rich-text";
 
-export const components: Components<{
+export interface StaffPrefetchedData {
+  [key: string]: StaffQuery["staff"];
+}
+
+export const createStaffMdxComponents = (
+  staffData: StaffPrefetchedData
+): Components<{
   EmployeeLink: { staff: string };
-}> = {
-  async EmployeeLink(props) {
-    const { data } = await client.queries.staff({ relativePath: props.staff.split("/").slice(-1)[0] });
-    // return <pre>{JSON.stringify(staff, null, 2)}</pre>;
+}> => ({
+  EmployeeLink(props) {
+    // EXAMPLE OF props: { "staff": "content/staff/jan-bozic.mdx" }
+    const relativePath = props.staff.split("/").slice(-1)[0].split(".")[0];
+    const staff = staffData[relativePath];
+
+    if (!staff) return null;
+
     return (
       <>
         <Link
           className="uppercase"
-          href={`predstavitev/${data.staff._sys.filename}`}
+          href={`predstavitev/${staff._sys.filename}`}
         >
-          {data.staff.name}
+          {staff.name}
         </Link>
-        <span className="ml-2">{data.staff.title}</span>
+        <span className="ml-2">{staff.title}</span>
       </>
     );
   }
-};
+});
