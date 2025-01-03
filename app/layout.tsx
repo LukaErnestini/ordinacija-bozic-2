@@ -79,7 +79,7 @@ export default async function RootLayout({
         lang="en"
         className={`${montserrat.variable} ${playfairDisplay.variable} antialiased`}
       >
-        <body className="font-montserrat min-h-dvh flex flex-col min-w-96">
+        <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
           <Navbar items={navigationItems}></Navbar>
           <div className="grow mt-nav">{children}</div>
           {/* <pre>{JSON.stringify(serviceItems, null, 2)}</pre> */}

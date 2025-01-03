@@ -20,7 +20,7 @@ export default function ClientAboutUsPage(
       {about.image && (
         <Image
           data-tina-field={tinaField(about, "image")}
-          className="-mt-nav max-w-7xl mx-auto w-full"
+          className="sm:-mt-nav max-w-7xl mx-auto w-full"
           src={about.image}
           alt=""
           width={2000}
@@ -28,7 +28,7 @@ export default function ClientAboutUsPage(
         ></Image>
       )}
       <div
-        className="mx-auto py-2 sm:py-4 prose prose-a:text-blue-700"
+        className="mx-auto p-4 sm:p-8 prose prose-a:text-blue-700"
         data-tina-field={tinaField(about, "body")}
       >
         <TinaMarkdown

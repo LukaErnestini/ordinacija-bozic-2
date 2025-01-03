@@ -12,7 +12,7 @@ export default function ClientPredstavitevPage(props: TinaQueryClientPageProps<S
   const { name, title, bio, image } = staff;
 
   return (
-    <div className="max-w-4xl mx-auto pb-4 sm:py-8 sm:px-6 lg:px-8">
+    <div className="-mt-nav sm:mt-0 max-w-4xl mx-auto pb-4 sm:py-8 sm:px-6 lg:px-8">
       <div className="sm:bg-white sm:shadow-lg sm:rounded-lg overflow-hidden">
         <div className="md:flex">
           <div className="md:flex-shrink-0">

@@ -23,11 +23,10 @@ export default function Footer({ locations }: FooterProps) {
               className="pb-6"
             >
               <div className="divider divider-primary uppercase">{location.name}</div>
-              {/* {locationIndex > 0 && <div className="divider divider-primary my-12">ALI</div>} */}
               <div className="flex flex-wrap gap-8">
                 {/* Office Hours Section */}
-                <div className="flex flex-col xs:flex-row justify-around grow gap-4">
-                  <div>
+                <div className="flex flex-wrap flex-row justify-around grow gap-4">
+                  <div className="min-h-min grow xs:grow-0">
                     <h2 className="text-2xl font-bold mb-4">Urnik</h2>
                     <div className="space-y-2">
                       {location.officeHours && <TinaMarkdown content={location.officeHours} />}
@@ -35,7 +34,7 @@ export default function Footer({ locations }: FooterProps) {
                   </div>
 
                   {/* Contact Us Section */}
-                  <div>
+                  <div className="min-h-min grow xs:grow-0">
                     <h2 className="text-2xl font-bold mb-4">Kontakt</h2>
                     <div className="space-y-2 flex flex-col">
                       {location.phone.map((phone, index) => (
