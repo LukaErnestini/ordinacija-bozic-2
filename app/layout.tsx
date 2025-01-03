@@ -81,7 +81,7 @@ export default async function RootLayout({
       >
         <body className="font-montserrat min-h-dvh flex flex-col min-w-96">
           <Navbar items={navigationItems}></Navbar>
-          <div className="grow mt-20">{children}</div>
+          <div className="grow mt-nav">{children}</div>
           {/* <pre>{JSON.stringify(serviceItems, null, 2)}</pre> */}
           <Footer locations={locations} />
         </body>
