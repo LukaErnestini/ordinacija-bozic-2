@@ -82,6 +82,72 @@ export default defineConfig({
         ]
       },
       {
+        name: "notice",
+        label: "Notice",
+        path: "content/notice",
+        format: "mdx",
+        defaultItem: () => ({
+          createdAt: new Date().toISOString()
+        }),
+        fields: [
+          {
+            name: "title",
+            label: "Title",
+            type: "string",
+            required: true
+          },
+          {
+            name: "alertBody",
+            label: "Alert Body",
+            type: "rich-text",
+            required: true
+          },
+          {
+            name: "optionalAlertText",
+            label: "Optional Alert Text",
+            type: "rich-text",
+            description:
+              "In case Alert Body is too large to display in the alert popup, this will be displayed instead."
+          },
+          {
+            name: "activeFrom",
+            label: "Active From",
+            type: "datetime",
+            description: "From when to display alert to visitors.",
+            ui: {
+              validate: (value, data) => {
+                if (data.activeTo && !value) {
+                  return "Active From must be set if Active To is set";
+                }
+              }
+            }
+          },
+          {
+            name: "activeTo",
+            label: "Active To",
+            type: "datetime",
+            description: "Until when to display alert to visitors.",
+            ui: {
+              validate: (value, data) => {
+                if (!value && data.activeFrom) {
+                  return "Active To must be set if Active From is set";
+                }
+
+                if (value && data.activeFrom && new Date(value) <= new Date(data.activeFrom)) {
+                  return "Active To must be after Active From";
+                }
+              }
+            }
+          },
+          {
+            name: "createdAt",
+            label: "Created At",
+            type: "datetime",
+            required: true
+          }
+        ]
+      },
+      {
         name: "about",
         label: "About",
         path: "content/about",
