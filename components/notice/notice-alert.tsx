@@ -13,6 +13,7 @@ export default function NoticeAlert(
   const { data } = useTina(props);
   const [acknowledgedNotices, setAcknowledgedNotices] = useState<Set<string>>(new Set());
   const [mounted, setMounted] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Load acknowledged notices from localStorage on mount
   useEffect(() => {
@@ -25,25 +26,43 @@ export default function NoticeAlert(
 
   if (!mounted) return null;
 
-  // Find the first active and unacknowledged notice
-  const currentNotice = data.noticeConnection.edges?.find((edge) => {
-    const notice = edge?.node;
-    if (!notice) return false;
+  // Find all active and unacknowledged notices
+  const activeNotices = data.noticeConnection.edges
+    ?.filter((edge) => {
+      const notice = edge?.node;
+      if (!notice) return false;
 
-    const now = new Date();
-    const activeFrom = notice.activeFrom ? new Date(notice.activeFrom) : null;
-    const activeTo = notice.activeTo ? new Date(notice.activeTo) : null;
+      const now = new Date();
+      const activeFrom = notice.activeFrom ? new Date(notice.activeFrom) : null;
+      const activeTo = notice.activeTo ? new Date(notice.activeTo) : null;
 
-    const isActive = (!activeFrom || activeFrom <= now) && (!activeTo || activeTo >= now);
+      const isActive = (!activeFrom || activeFrom <= now) && (!activeTo || activeTo >= now);
 
-    return isActive && !acknowledgedNotices.has(notice.id);
-  })?.node;
+      return isActive && !acknowledgedNotices.has(notice.id);
+    })
+    .map((edge) => edge!.node!);
 
-  if (!currentNotice) return null;
+  if (!activeNotices?.length || currentIndex >= activeNotices.length) return null;
+
+  const currentNotice = activeNotices[currentIndex];
 
   const acknowledgeNotice = () => {
     const newAcknowledged = new Set(acknowledgedNotices);
     newAcknowledged.add(currentNotice.id);
+    setAcknowledgedNotices(newAcknowledged);
+    localStorage.setItem("acknowledgedNotices", JSON.stringify(Array.from(newAcknowledged)));
+
+    // Move to next notice if available
+    if (currentIndex < activeNotices.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const acknowledgeAllNotices = () => {
+    const newAcknowledged = new Set(acknowledgedNotices);
+    activeNotices.forEach((notice) => {
+      newAcknowledged.add(notice.id);
+    });
     setAcknowledgedNotices(newAcknowledged);
     localStorage.setItem("acknowledgedNotices", JSON.stringify(Array.from(newAcknowledged)));
   };
@@ -67,9 +86,16 @@ export default function NoticeAlert(
         ></path>
       </svg>
       <div className="flex-1">
-        <h3 className="font-bold">{currentNotice.title}</h3>
-        <div className="text-sm">
-          {currentNotice.optionalAlertText ? (
+        <h3 className="font-bold">
+          {currentNotice.title}
+          {activeNotices.length > 1 && (
+            <span className="text-sm font-normal ml-2">
+              ({currentIndex + 1}/{activeNotices.length})
+            </span>
+          )}
+        </h3>
+        <div className="prose text-sm">
+          {currentNotice.optionalAlertText.children.length ? (
             <TinaMarkdown content={currentNotice.optionalAlertText} />
           ) : (
             <TinaMarkdown content={currentNotice.alertBody} />
@@ -86,6 +112,7 @@ export default function NoticeAlert(
         <Link
           href="/obvestila"
           className="btn btn-sm btn-primary"
+          onClick={acknowledgeAllNotices}
         >
           Več
         </Link>
