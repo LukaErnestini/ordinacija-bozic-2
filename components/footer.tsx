@@ -21,6 +21,7 @@ export default function Footer({ locations }: FooterProps) {
             <div
               key={locationIndex}
               className="pb-6"
+              id={`location-${location.name.toLowerCase().replace(/\s+/g, "-")}`}
             >
               <div className="divider divider-primary uppercase">{location.name}</div>
               <div className="flex flex-wrap gap-8">

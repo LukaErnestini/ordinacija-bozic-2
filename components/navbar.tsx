@@ -41,6 +41,15 @@ export default function Navbar({ items }: NavbarProps) {
     }));
   };
 
+  const handleStorjeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const storjeElement = document.getElementById("location-ordinacija-štorje");
+    if (storjeElement) {
+      storjeElement.scrollIntoView({ behavior: "smooth" });
+      closeMenu();
+    }
+  };
+
   return (
     <nav
       className={`fixed w-full transition-all duration-300 ${
@@ -119,13 +128,24 @@ export default function Navbar({ items }: NavbarProps) {
                     </ul>
                   </Dropdown>
                 ) : (
-                  <Link
-                    href={item.href || "#"}
-                    className="text-gray-700 hover:text-primary transition-colors"
-                    onClick={closeMenu}
+                  <div
+                    onClick={item.name === "Ordinacija Štorje" ? handleStorjeClick : undefined}
+                    className={`text-gray-700 hover:text-primary transition-colors ${
+                      item.name === "Ordinacija Štorje" ? "cursor-pointer" : ""
+                    }`}
                   >
-                    {item.name}
-                  </Link>
+                    {item.name === "Ordinacija Štorje" ? (
+                      <span>{item.name}</span>
+                    ) : (
+                      <Link
+                        href={item.href || "#"}
+                        className="text-gray-700 hover:text-primary transition-colors"
+                        onClick={closeMenu}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </div>
                 )}
               </div>
             ))}
@@ -222,13 +242,24 @@ export default function Navbar({ items }: NavbarProps) {
                     </div>
                   </>
                 ) : (
-                  <Link
-                    href={item.href || "#"}
-                    className="block px-3 py-2 text-gray-700 font-medium hover:text-primary"
-                    onClick={closeMenu}
+                  <div
+                    onClick={item.name === "Ordinacija Štorje" ? handleStorjeClick : undefined}
+                    className={`block px-3 py-2 text-gray-700 font-medium hover:text-primary ${
+                      item.name === "Ordinacija Štorje" ? "cursor-pointer" : ""
+                    }`}
                   >
-                    {item.name}
-                  </Link>
+                    {item.name === "Ordinacija Štorje" ? (
+                      <span>{item.name}</span>
+                    ) : (
+                      <Link
+                        href={item.href || "#"}
+                        className="block px-3 py-2 text-gray-700 font-medium hover:text-primary"
+                        onClick={closeMenu}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </div>
                 )}
               </div>
             ))}

@@ -55,8 +55,7 @@ export default async function RootLayout({
       href: "/ordinacija-portoroz"
     },
     {
-      name: "Ordinacija Štorje",
-      href: "/ordinacija-storje"
+      name: "Ordinacija Štorje"
     },
     {
       name: "Obvestila",
