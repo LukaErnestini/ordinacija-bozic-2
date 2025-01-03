@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import client from "@/tina/__generated__/client";
+import NoticeAlert from "@/components/notice/notice-alert";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -27,8 +28,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locationsResponse = await client.queries.locationConnection();
-  const servicesResponse = await client.queries.servicesConnection();
+  const [locationsResponse, servicesResponse, noticesResponse] = await Promise.all([
+    client.queries.locationConnection(),
+    client.queries.servicesConnection(),
+    client.queries.noticeConnection()
+  ]);
 
   // Transform services data into navigation structure
   const serviceItems =
@@ -81,8 +85,8 @@ export default async function RootLayout({
       >
         <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
           <Navbar items={navigationItems}></Navbar>
+          <NoticeAlert {...noticesResponse} />
           <div className="grow mt-nav">{children}</div>
-          {/* <pre>{JSON.stringify(serviceItems, null, 2)}</pre> */}
           <Footer locations={locations} />
         </body>
       </html>
