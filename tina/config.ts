@@ -86,8 +86,16 @@ export default defineConfig({
         label: "About",
         path: "content/about",
         format: "mdx",
-        ui: { allowedActions: { create: false, createNestedFolder: false, delete: false } },
+        ui: {
+          router: () => `/predstavitev`,
+          allowedActions: { create: false, createNestedFolder: false, delete: false }
+        },
         fields: [
+          {
+            name: "image",
+            label: "Image",
+            type: "image"
+          },
           {
             name: "body",
             label: "Body",
@@ -108,11 +116,6 @@ export default defineConfig({
                 ]
               }
             ]
-          },
-          {
-            name: "image",
-            label: "Image",
-            type: "image"
           }
         ]
       },
@@ -122,13 +125,7 @@ export default defineConfig({
         path: "content/staff",
         format: "mdx",
         ui: {
-          router: ({ document }) => `/predstavitev/${document._sys.filename}`,
-          filename: {
-            readonly: true,
-            slugify: (values) => {
-              return `${values?.title?.toLowerCase().replace(/ /g, "-")}` || "";
-            }
-          }
+          router: ({ document }) => `/predstavitev/${document._sys.filename}`
         },
         fields: [
           {
