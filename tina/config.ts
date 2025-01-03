@@ -82,6 +82,84 @@ export default defineConfig({
         ]
       },
       {
+        name: "about",
+        label: "About",
+        path: "content/about",
+        format: "mdx",
+        ui: { allowedActions: { create: false, createNestedFolder: false, delete: false } },
+        fields: [
+          {
+            name: "body",
+            label: "Body",
+            type: "rich-text",
+            isBody: true,
+            required: true,
+            templates: [
+              {
+                name: "EmployeeLink",
+                label: "Employee Link",
+                fields: [
+                  {
+                    name: "staff",
+                    label: "Staff",
+                    type: "reference",
+                    collections: ["staff"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: "image",
+            label: "Image",
+            type: "image"
+          }
+        ]
+      },
+      {
+        name: "staff",
+        label: "Staff",
+        path: "content/staff",
+        format: "mdx",
+        ui: {
+          router: ({ document }) => `/predstavitev/${document._sys.filename}`,
+          filename: {
+            readonly: true,
+            slugify: (values) => {
+              return `${values?.title?.toLowerCase().replace(/ /g, "-")}` || "";
+            }
+          }
+        },
+        fields: [
+          {
+            name: "name",
+            label: "Name",
+            type: "string",
+            required: true
+          },
+          {
+            name: "title",
+            label: "Title",
+            type: "string",
+            required: true
+          },
+          {
+            name: "bio",
+            label: "Bio",
+            description: "Biography of the staff member",
+            type: "rich-text",
+            isBody: true,
+            required: true
+          },
+          {
+            name: "image",
+            label: "Image",
+            type: "image",
+            required: true
+          }
+        ]
+      },
+      {
         name: "global",
         label: "Global",
         path: "content/global",
