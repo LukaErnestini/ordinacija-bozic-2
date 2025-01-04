@@ -14,14 +14,14 @@
 }
 
 :root {
-  --background: #fbfbfe;
-  --foreground: #171717;
-  --primary: #b09054;
-  --secondary: #b4a897;
-  --accent: #3ca68d;
+  --background: 251 251 254; /* #fbfbfe */
+  --foreground: 23 23 23; /* #171717 */
+  --primary: 176 144 84; /* #b09054 */
+  --secondary: 180 168 151; /* #b4a897 */
+  --accent: 60 166 141; /* #3ca68d */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
 }
