@@ -22,8 +22,6 @@ export default async function Home() {
         />
       )}
       <ServicesSmall {...services}></ServicesSmall>
-      {/* <pre>{JSON.stringify(services, null, 2)}</pre> */}
-      {/* <ServiceSmall service={services}></ServiceSmall> */}
     </div>
   );
 }
