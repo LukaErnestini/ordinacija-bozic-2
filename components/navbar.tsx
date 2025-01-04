@@ -43,7 +43,7 @@ export default function Navbar({ items }: NavbarProps) {
 
   return (
     <nav
-      className={`z-10 fixed w-full transition-all duration-300 ${
+      className={`z-20 fixed w-full transition-all duration-300 ${
         hasScrolled || isMenuOpen ? "bg-white/50" : "bg-transparent"
       }`}
     >
