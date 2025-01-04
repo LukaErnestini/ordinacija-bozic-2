@@ -13,7 +13,7 @@ export default function NoticeAlert(
   const { data } = useTina(props);
   const [acknowledgedNotices, setAcknowledgedNotices] = useState<Set<string>>(new Set());
   const [mounted, setMounted] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex] = useState(0);
 
   // Load acknowledged notices from localStorage on mount
   useEffect(() => {
@@ -52,10 +52,8 @@ export default function NoticeAlert(
     setAcknowledgedNotices(newAcknowledged);
     localStorage.setItem("acknowledgedNotices", JSON.stringify(Array.from(newAcknowledged)));
 
-    // Move to next notice if available
-    if (currentIndex < activeNotices.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
+    // Stay on the same index - the next unacknowledged notice will "slide into" this position
+    // as the acknowledged notice is filtered out
   };
 
   const acknowledgeAllNotices = () => {
@@ -86,14 +84,7 @@ export default function NoticeAlert(
         ></path>
       </svg>
       <div className="flex-1">
-        <h3 className="font-bold">
-          {currentNotice.title}
-          {activeNotices.length > 1 && (
-            <span className="text-sm font-normal ml-2">
-              ({currentIndex + 1}/{activeNotices.length})
-            </span>
-          )}
-        </h3>
+        <h3 className="font-bold">{currentNotice.title}</h3>
         <div className="prose text-sm">
           {currentNotice.optionalAlertText.children.length ? (
             <TinaMarkdown content={currentNotice.optionalAlertText} />
