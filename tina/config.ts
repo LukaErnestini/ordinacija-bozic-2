@@ -29,6 +29,14 @@ export default defineConfig({
         label: "Location",
         path: "content/location",
         format: "mdx",
+        ui: {
+          router: ({ document }) => `/${document._sys.filename}`,
+          allowedActions: {
+            create: false,
+            createNestedFolder: false,
+            delete: false
+          }
+        },
         fields: [
           {
             name: "label",
