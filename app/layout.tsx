@@ -51,12 +51,12 @@ export default async function RootLayout({
       subItems: serviceItems
     },
     {
-      name: "Delovni cas",
-      href: "/lokacije"
+      name: "Ordinacija Portorož",
+      href: "/ordinacija-portoroz"
     },
     {
-      name: "Kje smo",
-      href: "/lokacije"
+      name: "Ordinacija Štorje",
+      href: "/ordinacija-storje"
     },
     {
       name: "Obvestila",

@@ -1,25 +1,99 @@
+"use client";
+
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import ScrollGallery from "../scroll-gallery";
+import { tinaField } from "tinacms/dist/react";
+import { LocationQuery } from "@/tina/__generated__/types";
 
-interface LocationProps {
-  label: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  address: any;
-  phone: string[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  officeHours: any;
-  mail: string;
-  googleMapsEmbedSrc: string;
-}
-
-export function LocationComponent({ label, address, phone, officeHours, mail, googleMapsEmbedSrc }: LocationProps) {
+export function LocationComponent(data: LocationQuery) {
+  const location = data.location;
+  const { images, label, address, phone, officeHours, mail, googleMapsEmbedSrc } = location;
   return (
-    <>
-      <div className="w-full max-w-md rounded-lg border bg-white shadow-sm p-6">
-        <div className="mb-6">
-          <h3 className="text-2xl font-bold text-gray-900">{label}</h3>
+    <div>
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {images && (
+            <div
+              className="relative rounded-xl overflow-hidden"
+              data-tina-field={tinaField(location, "images")}
+            >
+              <ScrollGallery
+                interval={5000}
+                className="w-full h-full"
+                images={images.filter((i): i is string => !!i)}
+              />
+            </div>
+          )}
+
+          <div className="space-y-8">
+            <h2
+              className="text-3xl font-bold"
+              data-tina-field={tinaField(location, "label")}
+            >
+              {label}
+            </h2>
+
+            {/* Contact Information */}
+            <div className="grid gap-6 xs:grid-cols-2 items-start">
+              <div
+                className="flex gap-3"
+                data-tina-field={tinaField(location, "address")}
+              >
+                <MapPin className="w-5 h-5 mt-1 text-primary" />
+                <TinaMarkdown content={address} />
+              </div>
+
+              <div
+                className="flex gap-3"
+                data-tina-field={tinaField(location, "phone")}
+              >
+                <Phone className="w-5 h-5 text-primary" />
+                <div>
+                  {phone.map((number) => (
+                    <a
+                      key={number}
+                      href={`tel:${number}`}
+                      className="block hover:text-primary transition-colors"
+                    >
+                      {number}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                className="flex gap-3"
+                data-tina-field={tinaField(location, "mail")}
+              >
+                <Mail className="w-5 h-5 text-primary" />
+                <a
+                  href={`mailto:${mail}`}
+                  className="hover:text-primary transition-colors break-all"
+                >
+                  {mail}
+                </a>
+              </div>
+
+              <div
+                className="flex gap-3"
+                data-tina-field={tinaField(location, "officeHours")}
+              >
+                <Clock className="w-5 h-5 mt-1 text-primary" />
+                <TinaMarkdown content={officeHours} />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="mb-6 aspect-video w-full rounded-lg overflow-hidden">
+      </div>
+
+      {/* Map Section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div
+          className="h-[400px] rounded-xl overflow-hidden"
+          data-tina-field={tinaField(location, "googleMapsEmbedSrc")}
+        >
           <iframe
             src={googleMapsEmbedSrc}
             width="100%"
@@ -28,43 +102,9 @@ export function LocationComponent({ label, address, phone, officeHours, mail, go
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="w-full h-full"
           />
         </div>
-        <div className="space-y-4">
-          <div className="flex items-start">
-            <MapPin className="mr-2 h-5 w-5 text-gray-500 flex-shrink-0" />
-            <TinaMarkdown content={address} />
-          </div>
-          <div className="flex">
-            <Phone className="mr-2 h-5 w-5 text-gray-500 flex-shrink-0" />
-            <div className="flex flex-col justify-center">
-              {phone.map((number) => (
-                <a
-                  key={number}
-                  href={`tel:${number}`}
-                  className="text-gray-600"
-                >
-                  {number}
-                </a>
-              ))}
-            </div>
-          </div>
-          <div className="flex items-center">
-            <Mail className="mr-2 h-5 w-5 text-gray-500 flex-shrink-0" />
-            <a
-              href={`mailto:${mail}`}
-              className="text-gray-600"
-            >
-              {mail}
-            </a>
-          </div>
-          <div className="flex items-start">
-            <Clock className="mr-2 h-5 w-5 text-gray-500 flex-shrink-0" />
-            <TinaMarkdown content={officeHours} />
-          </div>
-        </div>
       </div>
-    </>
+    </div>
   );
 }
