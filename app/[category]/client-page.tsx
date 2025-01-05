@@ -115,7 +115,7 @@ export default function ClientCategoryPage({
         <div className="max-w-4xl mx-auto space-y-24">
           {services?.map((service) => {
             if (!service) return null;
-            const { body, icon, longDescription, subtitle, title, _sys } = service;
+            const { body, icon, subtitle, title, _sys } = service;
             return (
               <article
                 key={_sys.filename}
@@ -152,15 +152,6 @@ export default function ClientCategoryPage({
                     )}
                   </div>
                 </div>
-
-                {longDescription && (
-                  <p
-                    className="text-lg leading-relaxed mt-6 text-foreground/80"
-                    data-tina-field={tinaField(service, "longDescription")}
-                  >
-                    {longDescription}
-                  </p>
-                )}
 
                 {body && (
                   <div

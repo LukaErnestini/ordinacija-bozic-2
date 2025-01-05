@@ -59,12 +59,14 @@ export default function StoritevClientPage(props: StoritevClientPageProps) {
                 >
                   {service.title}
                 </h1>
-                <p
-                  data-tina-field={tinaField(service, "subtitle")}
-                  className="text-xl md:text-2xl text-foreground/80 text-center max-w-2xl mx-auto"
-                >
-                  {service.subtitle}
-                </p>
+                {service.subtitle && (
+                  <p
+                    data-tina-field={tinaField(service, "subtitle")}
+                    className="text-xl md:text-2xl text-foreground/80 text-center max-w-2xl mx-auto"
+                  >
+                    {service.subtitle}
+                  </p>
+                )}
               </div>
             </div>
           </div>

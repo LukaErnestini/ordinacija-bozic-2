@@ -360,8 +360,7 @@ export default defineConfig({
           {
             type: "string",
             name: "subtitle",
-            label: "Subtitle",
-            required: true
+            label: "Subtitle"
           },
           {
             type: "image",
@@ -372,26 +371,6 @@ export default defineConfig({
             type: "image",
             name: "icon",
             label: "Service Icon",
-            required: true
-          },
-          {
-            type: "string",
-            name: "shortDescription",
-            label: "Short Description",
-            description: "Brief description for service cards on the homepage",
-            ui: {
-              component: "textarea"
-            },
-            required: true
-          },
-          {
-            type: "string",
-            name: "longDescription",
-            label: "Long Description",
-            description: "Detailed description for the service page header",
-            ui: {
-              component: "textarea"
-            },
             required: true
           },
           {
