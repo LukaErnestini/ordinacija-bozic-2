@@ -37,14 +37,16 @@ export default function StoritevClientPage(props: StoritevClientPageProps) {
     <>
       <section>
         <header>
-          <Image
-            data-tina-field={tinaField(service, "heroImage")}
-            className=""
-            src={service.heroImage}
-            alt=""
-            height={1369}
-            width={2560}
-          ></Image>
+          {service.heroImage && (
+            <Image
+              data-tina-field={tinaField(service, "heroImage")}
+              className=""
+              src={service.heroImage}
+              alt=""
+              height={1369}
+              width={2560}
+            ></Image>
+          )}
           <h1 data-tina-field={tinaField(service, "title")}>{service.title}</h1>
           <p data-tina-field={tinaField(service, "title")}>{service.subtitle}</p>
         </header>

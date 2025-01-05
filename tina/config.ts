@@ -93,6 +93,9 @@ export default defineConfig({
         name: "notice",
         label: "Notice",
         path: "content/notice",
+        ui: {
+          router: () => "/obvestila"
+        },
         format: "mdx",
         defaultItem: () => ({
           createdAt: new Date().toISOString()
@@ -235,11 +238,62 @@ export default defineConfig({
         label: "Global",
         path: "content/global",
         format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            createNestedFolder: false,
+            delete: false
+          },
+          router: () => `/`
+        },
         fields: [
           {
-            type: "image",
             name: "landingImage",
-            label: "Landing Image"
+            label: "Landing Image",
+            type: "image"
+          },
+          {
+            name: "logo",
+            label: "Logo",
+            type: "image"
+          }
+        ]
+      },
+      {
+        name: "serviceCategory",
+        label: "Service Category",
+        path: "content/service-category",
+        format: "mdx",
+        ui: {
+          router: ({ document }) => {
+            console.log(document);
+            return `/${document._sys.filename}`;
+          }
+        },
+        fields: [
+          {
+            name: "title",
+            label: "Title",
+            type: "string",
+            required: true
+          },
+          {
+            name: "shortDescription",
+            label: "Short Description",
+            type: "string",
+            required: true
+          },
+          {
+            name: "body",
+            label: "Body",
+            type: "rich-text",
+            required: true
+          },
+          {
+            name: "icon",
+            label: "Icon",
+            type: "image",
+            required: true
           }
         ]
       },
@@ -260,20 +314,11 @@ export default defineConfig({
         },
         fields: [
           {
-            type: "string",
-            name: "type",
-            label: "Type",
+            type: "reference",
+            name: "category",
+            label: "Category",
             required: true,
-            options: [
-              {
-                value: "Specialistično",
-                label: "Specialistično"
-              },
-              {
-                value: "Splošno zobozdravstvo",
-                label: "Splošno zobozdravstvo"
-              }
-            ]
+            collections: ["serviceCategory"]
           },
           {
             type: "string",
@@ -291,8 +336,7 @@ export default defineConfig({
           {
             type: "image",
             name: "heroImage",
-            label: "Hero Image",
-            required: true
+            label: "Hero Image"
           },
           {
             type: "image",

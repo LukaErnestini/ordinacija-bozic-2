@@ -12,6 +12,5 @@ export async function generateStaticParams() {
   const paths = services.data?.servicesConnection.edges?.map((edge) => ({
     slug: edge?.node?._sys.breadcrumbs
   }));
-  console.log(paths);
   return paths || [];
 }
