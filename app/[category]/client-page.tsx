@@ -86,14 +86,94 @@ export default function ClientCategoryPage({
           <TinaMarkdown content={serviceCategory.body} />
         </div>
       </div>
+      {/* Table of Contents */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl mb-12">
+            <h2 className="text-3xl font-serif font-bold mb-6">Kazalo</h2>
+            <nav className="space-y-2">
+              {services?.map((service) => {
+                if (!service) return null;
+                const { _sys, title, subtitle } = service;
+                return (
+                  <a
+                    key={_sys.filename}
+                    href={`#${_sys.filename}`}
+                    className="block text-lg hover:text-primary transition-colors duration-200"
+                  >
+                    {title}
+                    {subtitle && <span className="text-foreground/60 text-base ml-2">— {subtitle}</span>}
+                  </a>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+      </div>
       {/* Services */}
-      <div>
-        {services &&
-          services.map((service) => {
-            if (!service) return;
-            const { body, icon, longDescription, subtitle, title } = service;
-            return <pre key={service.id}>{JSON.stringify(service)}</pre>;
+      <div className="container mx-auto px-4 pb-24">
+        <div className="max-w-4xl mx-auto space-y-24">
+          {services?.map((service) => {
+            if (!service) return null;
+            const { body, icon, longDescription, subtitle, title, _sys } = service;
+            return (
+              <article
+                key={_sys.filename}
+                id={_sys.filename}
+                className="scroll-mt-24 bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl"
+              >
+                <div className="flex items-start gap-6">
+                  {icon && (
+                    <div className="relative shrink-0">
+                      <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl transform scale-150" />
+                      <Image
+                        src={icon}
+                        alt=""
+                        width={80}
+                        height={80}
+                        className="relative drop-shadow-xl"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <h2
+                      className="text-3xl font-serif font-bold mb-2"
+                      data-tina-field={tinaField(service, "title")}
+                    >
+                      {title}
+                    </h2>
+                    {subtitle && (
+                      <p
+                        className="text-xl text-foreground/70 mb-4"
+                        data-tina-field={tinaField(service, "subtitle")}
+                      >
+                        {subtitle}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {longDescription && (
+                  <p
+                    className="text-lg leading-relaxed mt-6 text-foreground/80"
+                    data-tina-field={tinaField(service, "longDescription")}
+                  >
+                    {longDescription}
+                  </p>
+                )}
+
+                {body && (
+                  <div
+                    className="prose prose-lg mt-8"
+                    data-tina-field={tinaField(service, "body")}
+                  >
+                    <TinaMarkdown content={body} />
+                  </div>
+                )}
+              </article>
+            );
           })}
+        </div>
       </div>
     </div>
   );

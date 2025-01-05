@@ -174,6 +174,22 @@ export default defineConfig({
             type: "image"
           },
           {
+            name: "showImageUnderNavbar",
+            label: "Show Image Under Navbar",
+            type: "boolean"
+          },
+          {
+            name: "title",
+            label: "Title",
+            type: "string",
+            required: true
+          },
+          {
+            name: "subtitle",
+            label: "Subtitle",
+            type: "string"
+          },
+          {
             name: "body",
             label: "Body",
             type: "rich-text",

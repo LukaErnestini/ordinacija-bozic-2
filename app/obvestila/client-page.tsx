@@ -32,7 +32,7 @@ export default function ClientObvestilaPage(
           return (
             <li
               key={id}
-              className="border rounded-lg p-4 shadow-sm"
+              className="border bg-white rounded-lg p-4 shadow-sm"
             >
               <h2 className="text-xl font-semibold mb-2">{title}</h2>
               {(activeFrom || activeTo) && (
@@ -45,7 +45,7 @@ export default function ClientObvestilaPage(
               <div className="prose mb-2">
                 <TinaMarkdown content={alertBody} />
               </div>
-              {optionalAlertText && (
+              {!!optionalAlertText.children.length && (
                 <>
                   <button
                     onClick={() => toggleNotice(id)}

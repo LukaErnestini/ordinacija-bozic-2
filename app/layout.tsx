@@ -81,7 +81,7 @@ export default async function RootLayout({
       <html
         data-theme="mytheme"
         lang="en"
-        className={`${montserrat.variable} ${playfairDisplay.variable} antialiased`}
+        className={`${montserrat.variable} ${playfairDisplay.variable} antialiased scroll-smooth`}
       >
         <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
           <Navbar items={navigationItems}></Navbar>

@@ -12,30 +12,63 @@ export default function ClientAboutUsPage(
 ) {
   const { data } = useTina(props);
   const about = data.about;
-
   const mdxComponents = createStaffMdxComponents(props.staffData);
 
   return (
-    <>
-      {about.image && (
-        <Image
-          data-tina-field={tinaField(about, "image")}
-          className="sm:-mt-nav max-w-7xl mx-auto w-full"
-          src={about.image}
-          alt=""
-          width={2000}
-          height={2000}
-        ></Image>
-      )}
-      <div
-        className="mx-auto p-4 sm:p-8 prose prose-a:text-blue-700"
-        data-tina-field={tinaField(about, "body")}
-      >
-        <TinaMarkdown
-          components={mdxComponents}
-          content={about.body}
-        />
+    <div>
+      {/* Hero Section */}
+      <div className={`relative ${about.showImageUnderNavbar ? "-mt-nav" : ""}`}>
+        <div className="h-[50vh] min-h-[400px] lg:h-[60vh] xl:h-[70vh] 2xl:h-[80vh] relative">
+          {about.image && (
+            <Image
+              data-tina-field={tinaField(about, "image")}
+              className="object-cover object-top"
+              src={about.image}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+            />
+          )}
+        </div>
+
+        {/* Title overlay */}
+        <div className="container mx-auto px-4 relative">
+          <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl">
+              <h1
+                data-tina-field={tinaField(about, "title")}
+                className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold mb-4 text-center"
+              >
+                {about.title}
+              </h1>
+              {about.subtitle && (
+                <p
+                  data-tina-field={tinaField(about, "subtitle")}
+                  className="text-xl md:text-2xl text-foreground/80 text-center max-w-2xl mx-auto"
+                >
+                  {about.subtitle}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="relative h-24"></div>
       </div>
-    </>
+
+      {/* Content Section */}
+      <div className="container mx-auto px-4 py-12">
+        <div
+          className="prose prose-lg max-w-4xl mx-auto bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl"
+          data-tina-field={tinaField(about, "body")}
+        >
+          <TinaMarkdown
+            components={mdxComponents}
+            content={about.body}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
