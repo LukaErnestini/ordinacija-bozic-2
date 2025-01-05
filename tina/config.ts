@@ -266,12 +266,26 @@ export default defineConfig({
           {
             name: "landingImage",
             label: "Landing Image",
-            type: "image"
+            type: "image",
+            required: true
           },
           {
             name: "logo",
             label: "Logo",
-            type: "image"
+            type: "image",
+            required: true
+          },
+          {
+            name: "pageTitle",
+            label: "Page Title",
+            type: "string",
+            required: true
+          },
+          {
+            name: "ourServicesText",
+            label: "Our Services Text",
+            type: "string",
+            required: true
           }
         ]
       },

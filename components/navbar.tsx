@@ -2,6 +2,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Dropdown from "@/components/ui/dropdown";
+import { TinaQueryClientPageProps } from "@/tina/utils";
+import { GlobalQuery } from "@/tina/__generated__/types";
+import { tinaField, useTina } from "tinacms/dist/react";
+import Image from "next/image";
 
 interface NavigationItem {
   name: string;
@@ -11,9 +15,11 @@ interface NavigationItem {
 
 interface NavbarProps {
   items: NavigationItem[];
+  globalQuery: TinaQueryClientPageProps<GlobalQuery>;
 }
 
-export default function Navbar({ items }: NavbarProps) {
+export default function Navbar({ items, globalQuery }: NavbarProps) {
+  const { global } = useTina(globalQuery).data;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({});
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -55,14 +61,29 @@ export default function Navbar({ items }: NavbarProps) {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex justify-between h-nav">
+        <div className="flex justify-between h-nav gap-4">
           {/* Logo section */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex-shrink-0 flex">
             <Link
               href="/"
-              className="max-w-1 sm:max-w-full text-lg leading-tight sm:text-2xl text-primary-content uppercase font-light"
+              className="flex items-center gap-4"
             >
-              Ordinacija Bozic
+              {global.logo && (
+                <Image
+                  data-tina-field={tinaField(global, "logo")}
+                  src={global.logo}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="h-8 w-auto"
+                />
+              )}
+              <span
+                data-tina-field={tinaField(global, "pageTitle")}
+                className="max-w-1 sm:max-w-full text-lg leading-tight sm:text-2xl text-primary-content font-light"
+              >
+                {global.pageTitle}
+              </span>
             </Link>
           </div>
 

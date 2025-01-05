@@ -28,17 +28,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [locationsResponse, servicesResponse, noticesResponse] = await Promise.all([
+  const [locationsResponse, noticesResponse, serviceCategoriesResponse, globalQuery] = await Promise.all([
     client.queries.locationConnection(),
-    client.queries.servicesConnection(),
-    client.queries.noticeConnection()
+    client.queries.noticeConnection(),
+    client.queries.serviceCategoryConnection(),
+    client.queries.global({ relativePath: "global.json" })
   ]);
 
-  // Transform services data into navigation structure
+  // Transform service categories data into navigation structure
   const serviceItems =
-    servicesResponse.data?.servicesConnection.edges?.map((edge) => ({
+    serviceCategoriesResponse.data?.serviceCategoryConnection.edges?.map((edge) => ({
       name: edge?.node?.title || "",
-      href: `/storitve/${edge?.node?._sys.filename}`
+      href: `/${edge?.node?._sys.filename}`
     })) || [];
 
   const navigationItems = [
@@ -84,7 +85,10 @@ export default async function RootLayout({
         className={`${montserrat.variable} ${playfairDisplay.variable} antialiased scroll-smooth`}
       >
         <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
-          <Navbar items={navigationItems}></Navbar>
+          <Navbar
+            items={navigationItems}
+            globalQuery={globalQuery}
+          ></Navbar>
           <NoticeAlert {...noticesResponse} />
           <div className="grow mt-nav">{children}</div>
           <Footer locations={locations} />
