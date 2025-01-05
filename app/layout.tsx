@@ -84,6 +84,13 @@ export default async function RootLayout({
         lang="en"
         className={`${montserrat.variable} ${playfairDisplay.variable} antialiased scroll-smooth`}
       >
+        <head>
+          <script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            async
+            defer
+          ></script>
+        </head>
         <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
           <Navbar
             items={navigationItems}

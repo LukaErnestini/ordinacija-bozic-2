@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useActionState } from "react";
 import { submitContactForm } from "./actions";
+import Turnstile from "react-turnstile";
 
 interface FormState {
   success: boolean;
@@ -26,10 +27,25 @@ export default function ContactForm(props: ContactFormProps) {
     errors: {}
   });
   const [contactMethod, setContactMethod] = useState<"email" | "phone">("email");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!turnstileToken) {
+      return;
+    }
+    const formData = new FormData(e.currentTarget);
+    formData.append("cf-turnstile-response", turnstileToken);
+
+    startTransition(() => {
+      formAction(formData);
+    });
+  };
 
   return (
     <form
-      action={formAction}
+      onSubmit={handleSubmit}
       className="space-y-6 max-w-md mx-auto p-6"
     >
       {/* Name Field */}
@@ -179,12 +195,32 @@ export default function ContactForm(props: ContactFormProps) {
         </div>
       )}
 
+      {/* Add Turnstile before the submit button */}
+      <div className="flex flex-col items-center gap-2">
+        <Turnstile
+          sitekey="0x4AAAAAAA4nzao-OjNdyws5"
+          onVerify={(token) => setTurnstileToken(token)}
+          onError={() => {
+            setTurnstileToken(null);
+            console.error("Turnstile validation failed");
+          }}
+          onExpire={() => {
+            setTurnstileToken(null);
+            console.log("Turnstile token expired");
+          }}
+        />
+        {!turnstileToken && state.message && (
+          <span className="text-sm text-error">Prosimo, potrdite, da niste robot.</span>
+        )}
+      </div>
+
       {/* Submit Button */}
       <button
         type="submit"
         className="btn btn-primary w-full"
+        disabled={!turnstileToken || isPending}
       >
-        Pošlji
+        {isPending ? "Pošiljanje..." : "Pošlji"}
       </button>
     </form>
   );

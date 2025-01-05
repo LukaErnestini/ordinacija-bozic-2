@@ -15,12 +15,38 @@ const formSchema = z
       .max(15, "Telefonska številka je predolga")
       .nullish(),
     location: z.string(),
-    message: z.string().min(1, "Sporočilo je obvezno")
+    message: z.string().min(1, "Sporočilo je obvezno"),
+    "cf-turnstile-response": z.string()
   })
   .refine((data) => data.email || data.phone, {
     message: "Vpišite e-pošto ali telefonsko številko",
     path: ["email"]
   });
+
+async function validateTurnstileToken(token: string) {
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        secret: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+        response: token
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      console.error("Turnstile validation failed:", data);
+      return false;
+    }
+    return data.success;
+  } catch (error) {
+    console.error("Error validating Turnstile token:", error);
+    return false;
+  }
+}
 
 type FormState = {
   success: boolean;
@@ -36,13 +62,25 @@ export async function submitContactForm(prevState: FormState, formData: FormData
     email: formData.get("email") || null,
     phone: formData.get("phone") || null,
     location: formData.get("location"),
-    message: formData.get("message")
+    message: formData.get("message"),
+    "cf-turnstile-response": formData.get("cf-turnstile-response")
   });
 
   if (!validatedFields.success) {
     return {
       success: false,
       errors: validatedFields.error.flatten().fieldErrors
+    };
+  }
+
+  // Validate Turnstile token
+  const turnstileToken = validatedFields.data["cf-turnstile-response"];
+  const isValidToken = await validateTurnstileToken(turnstileToken);
+
+  if (!isValidToken) {
+    return {
+      success: false,
+      message: "Preverjanje ni uspelo. Prosimo, poskusite ponovno."
     };
   }
 
