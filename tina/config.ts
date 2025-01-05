@@ -3,6 +3,23 @@ import { defineConfig } from "tinacms";
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 
+// Add these utility functions at the top of the file
+const sanitizeFilename = (filename: string) => {
+  // Replace diacritics/accents with basic latin characters
+  const normalized = filename.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  // Replace spaces with hyphens and remove unsafe characters
+  return normalized
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+};
+
+// const validateFilename = (filename: string) => {
+//   if (filename !== sanitizeFilename(filename)) {
+//     return "Filename contains invalid characters. Please use only lowercase letters, numbers, and hyphens.";
+//   }
+// };
+
 export default defineConfig({
   branch,
 
@@ -336,10 +353,8 @@ export default defineConfig({
         ui: {
           router: ({ document }) => `/storitve/${document._sys.filename}`,
           filename: {
-            readonly: true,
-            slugify: (values) => {
-              return `${values?.title?.toLowerCase().replace(/ /g, "-")}` || "";
-            }
+            readonly: false,
+            slugify: (values) => sanitizeFilename(values?.title || "")
           }
         },
         fields: [
