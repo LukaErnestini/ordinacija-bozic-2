@@ -74,10 +74,10 @@ export default function Footer({ locations }: FooterProps) {
         {/* Copyright Section */}
         <div className="container mx-auto mt-8 pt-8 border-t border-neutral-700 px-6">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-neutral-400">
-            <p>© {new Date().getFullYear()} LOREM IPSUM. ALL RIGHT RESERVED</p>
+            <p>© {new Date().getFullYear()} ORDINACIJA BOZIC. ALL RIGHT RESERVED</p>
             <div className="flex gap-4 mt-4 md:mt-0">
               <a
-                href="/accessibility"
+                href="#"
                 className="hover:text-white"
               >
                 ACCESSIBILITY STATEMENT
