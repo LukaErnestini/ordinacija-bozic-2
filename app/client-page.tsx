@@ -22,15 +22,17 @@ export default function ClientHomePage({
 }) {
   const { global } = useTina(globalQuery).data;
   return (
-    <div className="-mt-nav mx-auto flex flex-col gap-12">
-      <Image
-        data-tina-field={tinaField(global, "landingImage")}
-        className="mx-auto"
-        src={global.landingImage}
-        alt=""
-        width={2048}
-        height={1365}
-      />
+    <div className="-mt-nav mx-auto flex flex-col gap-12 ">
+      <div className="relative h-[100vh]">
+        <Image
+          data-tina-field={tinaField(global, "landingImage")}
+          className="mx-auto object-cover"
+          src={global.landingImage}
+          alt=""
+          sizes="100vw"
+          fill
+        />
+      </div>
       <h2
         data-tina-field={tinaField(global, "ourServicesText")}
         className="text-center text-4xl font-semibold capitalize mb-8"

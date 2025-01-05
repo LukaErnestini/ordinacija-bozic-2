@@ -58,9 +58,9 @@ export default function ClientAboutUsPage(
       </div>
 
       {/* Content Section */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-2 sm:px-4 py-12">
         <div
-          className="prose prose-lg max-w-4xl mx-auto bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl"
+          className="prose prose-lg max-w-4xl mx-auto sm:bg-white/50 backdrop-blur-sm sm:rounded-2xl sm:p-8 sm:shadow-xl"
           data-tina-field={tinaField(about, "body")}
         >
           <TinaMarkdown
