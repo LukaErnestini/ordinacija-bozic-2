@@ -78,7 +78,7 @@ export default function ClientCategoryPage({
         </div>
       </div>
       {/* Content Section with enhanced container */}
-      <div className="container mx-auto px-4 py-3 md:py-12">
+      <div className="mx-auto px-4 py-3 md:py-12">
         <div
           data-tina-field={tinaField(serviceCategory, "body")}
           className="prose prose-lg max-w-4xl mx-auto bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl"
@@ -87,7 +87,7 @@ export default function ClientCategoryPage({
         </div>
       </div>
       {/* Table of Contents */}
-      <div className="container mx-auto px-4 py-3 md:py-12">
+      <div className="mx-auto px-4 py-3 md:py-12">
         {/* Desktop */}
         <div className="mx-auto max-w-7xl hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services?.map((service) => {
@@ -117,7 +117,7 @@ export default function ClientCategoryPage({
         <div className="max-w-4xl mx-auto md:hidden">
           <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl mb-3 md:mb-12">
             <h2 className="text-3xl font-serif font-bold mb-6">Kazalo</h2>
-            <nav className="space-y-2">
+            <nav className="space-y-4">
               {services?.map((service) => {
                 if (!service) return null;
                 const { _sys, title } = service;
@@ -125,9 +125,25 @@ export default function ClientCategoryPage({
                   <a
                     key={_sys.filename}
                     href={`#${_sys.filename}`}
-                    className="block text-lg hover:text-primary transition-colors duration-200"
+                    className="block text-lg px-6 py-2 rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 relative group"
                   >
-                    {title}
+                    <span className="relative flex items-center">
+                      {title}
+                      <svg
+                        className="w-5 h-5 ml-auto text-primary/40 group-hover:text-primary transition-colors duration-200"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary/60 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    </span>
                   </a>
                 );
               })}
@@ -136,7 +152,7 @@ export default function ClientCategoryPage({
         </div>
       </div>
       {/* Services */}
-      <div className="container mx-auto px-4 pb-24 pt-3 md:pt-12">
+      <div className="mx-auto px-4 pb-24 pt-3 md:pt-12">
         <div className="max-w-4xl mx-auto space-y-24">
           {services?.map((service) => {
             if (!service) return null;
