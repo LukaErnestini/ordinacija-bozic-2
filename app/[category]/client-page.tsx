@@ -97,7 +97,7 @@ export default function ClientCategoryPage({
               <a
                 href={`#${_sys.filename}`}
                 key={_sys.filename}
-                className="btn h-56 justify-start flex-nowrap group p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
+                className="btn h-56 justify-start flex-nowrap group p-4 gap-1 lg:gap-2 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
               >
                 <Image
                   width={54}
