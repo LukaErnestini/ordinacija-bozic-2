@@ -81,7 +81,7 @@ export default function ClientCategoryPage({
       <div className="mx-auto px-4 py-3 md:py-12">
         <div
           data-tina-field={tinaField(serviceCategory, "body")}
-          className="prose prose-lg max-w-4xl mx-auto bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl"
+          className="prose prose-lg max-w-4xl mx-auto bg-white/50 backdrop-blur-sm rounded-2xl p-4 sm:p-8 shadow-xl"
         >
           <TinaMarkdown content={serviceCategory.body} />
         </div>
@@ -161,7 +161,7 @@ export default function ClientCategoryPage({
               <article
                 key={_sys.filename}
                 id={_sys.filename}
-                className="scroll-mt-24 bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl"
+                className="sm:bg-white/50 sm:backdrop-blur-sm sm:rounded-2xl sm:p-8 sm:shadow-xl"
               >
                 <div className="flex items-start gap-6">
                   {icon && (

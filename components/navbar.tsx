@@ -71,7 +71,15 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
           <div className="hidden lg:flex items-center gap-8">
             {items.map((item) => (
               <div key={item.name}>
-                {item.subItems ? (
+                {item.name === "Storitve" ? (
+                  <Link
+                    href="/#our-services"
+                    className="text-gray-700 hover:text-primary transition-colors"
+                    onClick={closeMenu}
+                  >
+                    {item.name}
+                  </Link>
+                ) : item.subItems ? (
                   <Dropdown
                     isOpen={openDropdown === item.name}
                     onOpenChange={(isOpen) => setOpenDropdown(isOpen ? item.name : null)}

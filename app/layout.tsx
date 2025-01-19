@@ -82,7 +82,7 @@ export default async function RootLayout({
       <html
         data-theme="mytheme"
         lang="en"
-        className={`${montserrat.variable} ${playfairDisplay.variable} antialiased scroll-smooth`}
+        className={`${montserrat.variable} ${playfairDisplay.variable} antialiased scroll-smooth scroll-pt-48`}
       >
         <head>
           <script
