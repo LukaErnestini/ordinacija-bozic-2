@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Dropdown from "@/components/ui/dropdown";
 import { TinaQueryClientPageProps } from "@/tina/utils";
@@ -22,7 +22,6 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
   const { global } = useTina(globalQuery).data;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({});
-  const [hasScrolled, setHasScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const closeMenu = () => {
@@ -30,15 +29,6 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
     setExpandedSections({});
     setOpenDropdown(null);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const toggleSection = (sectionName: string) => {
     setExpandedSections((prev) => ({
@@ -48,44 +38,34 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
   };
 
   return (
-    <nav
-      className={`z-20 fixed w-full transition-all duration-300 ${
-        hasScrolled || isMenuOpen ? "bg-white/50" : "bg-transparent"
-      }`}
-    >
-      {(hasScrolled || isMenuOpen) && (
-        <>
-          <div className="absolute inset-0 backdrop-blur-md bg-gradient-to-b from-white/95 to-transparent to-50% pointer-events-none" />
-          <div className="absolute left-0 right-0 bottom-0 h-0.5 backdrop-blur-md brightness-95 bg-white/10 translate-y-full pointer-events-none" />
-        </>
-      )}
+    <nav className={`z-20 fixed w-full transition-all duration-300 bg-white/50`}>
+      <div className="absolute inset-0 backdrop-blur-md bg-gradient-to-b from-white/95 to-transparent to-50% pointer-events-none" />
+      <div className="absolute left-0 right-0 bottom-0 h-0.5 backdrop-blur-md brightness-95 bg-white/10 translate-y-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex justify-between h-nav gap-4">
-          {/* Logo section */}
-          <div className="flex-shrink-0 flex">
+        <div className="flex flex-col items-center  gap-2 lg:gap-4 pt-2 pb-2">
+          {/* Logo and title section */}
+          {global.logo && (
             <Link
               href="/"
-              className="flex items-center gap-4"
+              className="flex flex-col gap-2 items-center"
             >
-              {global.logo && (
-                <Image
-                  data-tina-field={tinaField(global, "logo")}
-                  src={global.logo}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="h-8 w-auto"
-                />
-              )}
+              <Image
+                data-tina-field={tinaField(global, "logo")}
+                src={global.logo}
+                alt=""
+                width={32}
+                height={32}
+                className="h-8 w-auto"
+              />
               <span
                 data-tina-field={tinaField(global, "pageTitle")}
-                className="max-w-1 sm:max-w-full text-lg leading-tight sm:text-2xl text-primary-content font-light"
+                className="text-center text-lg leading-tight sm:text-1xl text-primary-content font-light max-w-96"
               >
                 {global.pageTitle}
               </span>
             </Link>
-          </div>
+          )}
 
           {/* Desktop menu */}
           <div className="hidden lg:flex items-center gap-8">
@@ -159,13 +139,13 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center absolute right-4 top-8">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-primary focus:outline-none"
             >
               <svg
-                className="h-6 w-6"
+                className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

@@ -97,7 +97,7 @@ export default async function RootLayout({
             globalQuery={globalQuery}
           ></Navbar>
           <NoticeAlert {...noticesResponse} />
-          <div className="grow mt-nav">{children}</div>
+          <div className="mt-nav-mobile lg:mt-nav grow">{children}</div>
           <Footer locations={locations} />
         </body>
       </html>

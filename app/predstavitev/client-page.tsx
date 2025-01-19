@@ -17,7 +17,7 @@ export default function ClientAboutUsPage(
   return (
     <div>
       {/* Hero Section */}
-      <div className={`relative ${about.showImageUnderNavbar ? "-mt-nav" : ""}`}>
+      <div className={`relative ${about.showImageUnderNavbar ? "-mt-nav-mobile" : ""}`}>
         <div className="h-[50vh] min-h-[400px] lg:h-[60vh] xl:h-[70vh] 2xl:h-[80vh] relative">
           {about.image && (
             <Image

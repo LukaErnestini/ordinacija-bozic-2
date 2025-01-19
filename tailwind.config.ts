@@ -39,7 +39,8 @@ export default {
         serif: ["var(--font-playfair-display)"]
       },
       spacing: {
-        nav: "3rem"
+        nav: "10rem",
+        "nav-mobile": "6rem"
       },
       screens: {
         xs: "400px"
