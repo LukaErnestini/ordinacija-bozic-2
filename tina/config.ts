@@ -394,36 +394,102 @@ export default defineConfig({
             label: "Body Content",
             description: "Main content of the service page",
             isBody: true,
-            required: true
-          },
-          {
-            type: "object",
-            name: "faq",
-            label: "FAQ Section",
-            list: true,
-            ui: {
-              itemProps: (item) => {
-                return { label: item?.question };
-              }
-            },
-            fields: [
+            required: true,
+            templates: [
               {
-                type: "string",
-                name: "question",
-                label: "Question",
-                required: true
-              },
-              {
-                type: "string",
-                name: "answer",
-                label: "Answer",
-                ui: {
-                  component: "textarea"
-                },
-                required: true
+                name: "FeatureGrid",
+                label: "Feature Grid",
+                fields: [
+                  {
+                    type: "string",
+                    name: "title",
+                    label: "Title"
+                  },
+                  {
+                    type: "string",
+                    name: "item1Title",
+                    label: "Item 1 Title",
+                    required: true
+                  },
+                  { type: "image", name: "item1Image", label: "Item 1 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item1Body",
+                    label: "Item 1 Body",
+                    required: true
+                  },
+                  {
+                    type: "string",
+                    name: "item2Title",
+                    label: "Item 2 Title",
+                    required: true
+                  },
+                  { type: "image", name: "item2Image", label: "Item 2 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item2Body",
+                    label: "Item 2 Body",
+                    required: true
+                  },
+                  {
+                    type: "string",
+                    name: "item3Title",
+                    label: "Item 3 Title",
+                    required: true
+                  },
+                  { type: "image", name: "item3Image", label: "Item 3 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item3Body",
+                    label: "Item 3 Body",
+                    required: true
+                  },
+                  {
+                    type: "string",
+                    name: "item4Title",
+                    label: "Item 4 Title",
+                    required: true
+                  },
+                  { type: "image", name: "item4Image", label: "Item 4 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item4Body",
+                    label: "Item 4 Body",
+                    required: true
+                  }
+                ]
               }
             ]
           }
+          // commented out cause they don't need this and it's not fully implemented.
+          // {
+          //   type: "object",
+          //   name: "faq",
+          //   label: "FAQ Section",
+          //   list: true,
+          //   ui: {
+          //     itemProps: (item) => {
+          //       return { label: item?.question };
+          //     }
+          //   },
+          //   fields: [
+          //     {
+          //       type: "string",
+          //       name: "question",
+          //       label: "Question",
+          //       required: true
+          //     },
+          //     {
+          //       type: "string",
+          //       name: "answer",
+          //       label: "Answer",
+          //       ui: {
+          //         component: "textarea"
+          //       },
+          //       required: true
+          //     }
+          //   ]
+          // }
         ]
       }
     ]

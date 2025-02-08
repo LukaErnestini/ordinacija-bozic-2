@@ -9,6 +9,7 @@ import Image from "next/image";
 import { TinaConnectionClientPageProps, TinaQueryClientPageProps } from "@/tina/utils";
 import { tinaField, useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { generalMdxComponents } from "@/components/mdx-components";
 
 export default function ClientCategoryPage({
   serviceCategoryQuery,
@@ -199,7 +200,10 @@ export default function ClientCategoryPage({
                     className="prose prose-lg mt-8"
                     data-tina-field={tinaField(service, "body")}
                   >
-                    <TinaMarkdown content={body} />
+                    <TinaMarkdown
+                      content={body}
+                      components={generalMdxComponents()}
+                    />
                   </div>
                 )}
               </article>
