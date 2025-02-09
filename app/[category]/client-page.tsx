@@ -84,7 +84,10 @@ export default function ClientCategoryPage({
           data-tina-field={tinaField(serviceCategory, "body")}
           className="prose prose-lg max-w-4xl mx-auto bg-white/50 backdrop-blur-sm rounded-2xl p-4 sm:p-8 shadow-xl"
         >
-          <TinaMarkdown content={serviceCategory.body} />
+          <TinaMarkdown
+            content={serviceCategory.body}
+            components={generalMdxComponents()}
+          />
         </div>
       </div>
       {/* Table of Contents */}

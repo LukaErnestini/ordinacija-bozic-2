@@ -334,7 +334,64 @@ export default defineConfig({
             name: "body",
             label: "Body",
             type: "rich-text",
-            required: true
+            required: true,
+            templates: [
+              {
+                name: "FeatureGrid",
+                label: "Feature Grid",
+                fields: [
+                  {
+                    type: "string",
+                    name: "title",
+                    label: "Title"
+                  },
+                  {
+                    type: "string",
+                    name: "item1Title",
+                    label: "Item 1 Title"
+                  },
+                  { type: "image", name: "item1Image", label: "Item 1 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item1Body",
+                    label: "Item 1 Body"
+                  },
+                  {
+                    type: "string",
+                    name: "item2Title",
+                    label: "Item 2 Title"
+                  },
+                  { type: "image", name: "item2Image", label: "Item 2 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item2Body",
+                    label: "Item 2 Body"
+                  },
+                  {
+                    type: "string",
+                    name: "item3Title",
+                    label: "Item 3 Title"
+                  },
+                  { type: "image", name: "item3Image", label: "Item 3 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item3Body",
+                    label: "Item 3 Body"
+                  },
+                  {
+                    type: "string",
+                    name: "item4Title",
+                    label: "Item 4 Title"
+                  },
+                  { type: "image", name: "item4Image", label: "Item 4 Image" },
+                  {
+                    type: "rich-text",
+                    name: "item4Body",
+                    label: "Item 4 Body"
+                  }
+                ]
+              }
+            ]
           },
           {
             name: "icon",
@@ -408,54 +465,46 @@ export default defineConfig({
                   {
                     type: "string",
                     name: "item1Title",
-                    label: "Item 1 Title",
-                    required: true
+                    label: "Item 1 Title"
                   },
                   { type: "image", name: "item1Image", label: "Item 1 Image" },
                   {
                     type: "rich-text",
                     name: "item1Body",
-                    label: "Item 1 Body",
-                    required: true
+                    label: "Item 1 Body"
                   },
                   {
                     type: "string",
                     name: "item2Title",
-                    label: "Item 2 Title",
-                    required: true
+                    label: "Item 2 Title"
                   },
                   { type: "image", name: "item2Image", label: "Item 2 Image" },
                   {
                     type: "rich-text",
                     name: "item2Body",
-                    label: "Item 2 Body",
-                    required: true
+                    label: "Item 2 Body"
                   },
                   {
                     type: "string",
                     name: "item3Title",
-                    label: "Item 3 Title",
-                    required: true
+                    label: "Item 3 Title"
                   },
                   { type: "image", name: "item3Image", label: "Item 3 Image" },
                   {
                     type: "rich-text",
                     name: "item3Body",
-                    label: "Item 3 Body",
-                    required: true
+                    label: "Item 3 Body"
                   },
                   {
                     type: "string",
                     name: "item4Title",
-                    label: "Item 4 Title",
-                    required: true
+                    label: "Item 4 Title"
                   },
                   { type: "image", name: "item4Image", label: "Item 4 Image" },
                   {
                     type: "rich-text",
                     name: "item4Body",
-                    label: "Item 4 Body",
-                    required: true
+                    label: "Item 4 Body"
                   }
                 ]
               }
