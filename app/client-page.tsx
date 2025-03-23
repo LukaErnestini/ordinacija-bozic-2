@@ -11,7 +11,7 @@ import CategoriesSmall from "@/components/services/categories-small";
 import { tinaField, useTina } from "tinacms/dist/react";
 
 export default function ClientHomePage({
-  categoriesConnectionQuery: categoriesConnectionQuery,
+  categoriesConnectionQuery,
   globalQuery
 }: {
   categoriesConnectionQuery: TinaConnectionClientPageProps<

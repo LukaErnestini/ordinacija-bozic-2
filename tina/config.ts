@@ -267,8 +267,8 @@ export default defineConfig({
         ]
       },
       {
+        label: "Global Settings",
         name: "global",
-        label: "Global",
         path: "content/global",
         format: "json",
         ui: {
@@ -317,6 +317,58 @@ export default defineConfig({
             description: "Description of the site, displayed in the browser tab",
             type: "string",
             required: true
+          },
+          {
+            type: "object",
+            label: "Contact Form Settings",
+            name: "contactForm",
+            required: true,
+            fields: [
+              {
+                type: "object",
+                label: "Preset Messages",
+                name: "presetMessages",
+                list: true,
+                required: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item.label
+                  })
+                },
+                fields: [
+                  {
+                    type: "string",
+                    label: "Label",
+                    name: "label",
+                    required: true
+                  },
+                  {
+                    type: "string",
+                    label: "Value",
+                    name: "value",
+                    required: true
+                  },
+                  {
+                    type: "boolean",
+                    label: "Enabled",
+                    name: "enabled",
+                    required: true
+                  }
+                ]
+              },
+              {
+                type: "string",
+                label: "Header Title",
+                name: "headerTitle",
+                required: true
+              },
+              {
+                type: "string",
+                label: "Header Subtitle",
+                name: "headerSubtitle",
+                required: true
+              }
+            ]
           }
         ]
       },

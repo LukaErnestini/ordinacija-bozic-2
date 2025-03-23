@@ -3,11 +3,14 @@ import ContactUsClientPage from "./client-page";
 
 export default async function ContactPage() {
   const locations = await client.queries.locationConnection();
+  const globalQuery = await client.queries.global({ relativePath: "global.json" });
 
   return (
     <div className="container mx-auto py-12">
-      <h1 className="text-3xl font-bold text-center mb-8">Kontaktirajte nas</h1>
-      <ContactUsClientPage locations={locations}></ContactUsClientPage>
+      <ContactUsClientPage
+        locations={locations}
+        globalQuery={globalQuery}
+      />
     </div>
   );
 }

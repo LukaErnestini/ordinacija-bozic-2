@@ -4,5 +4,61 @@
   "pageTitle": "SPECIALISTIČNA ZOBOZDRAVSTVENA ORDINACIJA BOŽIČ",
   "ourServicesText": "Naše storitve",
   "siteTitle": "Ordinacija Božič | Specialistična zobozdravstvena ordinacija",
-  "siteDescription": "Visoko kvalitetne zobozdravstvene storitve za vso družino. Specialistična diagnostika, preventiva in zdravljenje v prijetnem okolju."
+  "siteDescription": "Visoko kvalitetne zobozdravstvene storitve za vso družino. Specialistična diagnostika, preventiva in zdravljenje v prijetnem okolju.",
+  "contactForm": {
+    "headerTitle": "Kontaktirajte nas!",
+    "headerSubtitle": "Na voljo smo Vam preko telefona, kontaktnega obrazca ali elektronskega sporočila. Kontaktirajte nas in poskrbeli bomo, da se kmalu vidimo.",
+    "presetMessages": [
+      {
+        "label": "Prvi splošni pregled",
+        "value": "prvi_pregled",
+        "enabled": true
+      },
+      {
+        "label": "Bolečinski pregled / imam težavo",
+        "value": "bolecinski_pregled",
+        "enabled": true
+      },
+      {
+        "label": "Invisalign® zobni aparat",
+        "value": "invisalign",
+        "enabled": true
+      },
+      {
+        "label": "Zobni vsadki / implantologija",
+        "value": "zobni_vsadki",
+        "enabled": true
+      },
+      {
+        "label": "Estetsko zobozdravstvo: preobrazba nasmeha, beljenje, luske, bele zalivke, ….",
+        "value": "estetsko_zobozdravstvo",
+        "enabled": true
+      },
+      {
+        "label": "Ustna higiena: čiščenje zobnega kamna, odstranjevanje zabarvanj",
+        "value": "ustna_higiena",
+        "enabled": true
+      },
+      {
+        "label": "Obrazna estetika: anti-ageing, odpravljanje gub, polnila, botulin, …",
+        "value": "obrazna_estetika",
+        "enabled": true
+      },
+      {
+        "label": "Endodontsko zdravljenje zoba",
+        "value": "endodontsko_zdravljenje",
+        "enabled": true
+      },
+      {
+        "label": "Mikro kirurgija: pokrivanje zobnih vratov",
+        "value": "mikro_kirurgija",
+        "enabled": true
+      },
+      {
+        "label": "Drugo",
+        "value": "drugo",
+        "enabled": true
+      }
+    ]
+  }
 }

@@ -16,6 +16,7 @@ const formSchema = z
       .nullish(),
     location: z.string(),
     message: z.string().min(1, "Sporočilo je obvezno"),
+    selectedMessages: z.string(),
     "cf-turnstile-response": z.string()
   })
   .refine((data) => data.email || data.phone, {
@@ -63,6 +64,7 @@ export async function submitContactForm(prevState: FormState, formData: FormData
     phone: formData.get("phone") || null,
     location: formData.get("location"),
     message: formData.get("message"),
+    selectedMessages: formData.get("selectedMessages"),
     "cf-turnstile-response": formData.get("cf-turnstile-response")
   });
 
@@ -85,7 +87,8 @@ export async function submitContactForm(prevState: FormState, formData: FormData
   }
 
   try {
-    const { name, email, phone, location, message } = validatedFields.data;
+    const { name, email, phone, location, message, selectedMessages } = validatedFields.data;
+    const parsedSelectedMessages = JSON.parse(selectedMessages);
 
     // Send email using Resend
     await resend.emails.send({
@@ -98,6 +101,10 @@ export async function submitContactForm(prevState: FormState, formData: FormData
         <p><strong>E-pošta:</strong> ${email || "Ni navedeno"}</p>
         <p><strong>Telefon:</strong> ${phone || "Ni navedeno"}</p>
         <p><strong>Želena lokacija:</strong> ${location}</p>
+        <p><strong>Zanima se za:</strong></p>
+        <ul>
+          ${parsedSelectedMessages.map((msg: string) => `<li>${msg}</li>`).join("")}
+        </ul>
         <p><strong>Sporočilo:</strong></p>
         <p>${message}</p>
       `
