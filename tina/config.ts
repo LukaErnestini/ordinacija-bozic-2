@@ -303,6 +303,20 @@ export default defineConfig({
             label: "Our Services Text",
             type: "string",
             required: true
+          },
+          {
+            name: "siteTitle",
+            label: "Site Title",
+            description: "Title of the site, displayed in the browser tab",
+            type: "string",
+            required: true
+          },
+          {
+            name: "siteDescription",
+            label: "Site Description",
+            description: "Description of the site, displayed in the browser tab",
+            type: "string",
+            required: true
           }
         ]
       },
