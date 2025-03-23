@@ -55,12 +55,12 @@ export default async function RootLayout({
       subItems: serviceItems
     },
     {
-      name: "Ordinacija Portorož",
-      href: "/ordinacija-portoroz"
-    },
-    {
       name: "Ordinacija Štorje",
       href: "/ordinacija-storje"
+    },
+    {
+      name: "Ordinacija Portorož",
+      href: "/ordinacija-portoroz"
     },
     {
       name: "Obvestila",
@@ -69,16 +69,23 @@ export default async function RootLayout({
   ];
 
   const locations =
-    locationsResponse.data.locationConnection.edges?.map((edge) => {
-      const node = edge?.node;
-      return {
-        officeHours: node?.officeHours || null,
-        phone: node?.phone?.filter((p): p is string => p !== null) || [],
-        googleMapsEmbedSrc: node?.googleMapsEmbedSrc || "",
-        name: node?.label || "",
-        email: node?.mail || ""
-      };
-    }) || [];
+    locationsResponse.data.locationConnection.edges
+      ?.map((edge) => {
+        const node = edge?.node;
+        return {
+          officeHours: node?.officeHours || null,
+          phone: node?.phone?.filter((p): p is string => p !== null) || [],
+          googleMapsEmbedSrc: node?.googleMapsEmbedSrc || "",
+          name: node?.label || "",
+          email: node?.mail || ""
+        };
+      })
+      .sort((a, b) => {
+        // Put Štorje first
+        if (a.name.includes("Štorje")) return -1;
+        if (b.name.includes("Štorje")) return 1;
+        return 0;
+      }) || [];
 
   return (
     <>
