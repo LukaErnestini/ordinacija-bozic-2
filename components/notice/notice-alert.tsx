@@ -66,48 +66,52 @@ export default function NoticeAlert(
   };
 
   return (
-    <div
-      role="alert"
-      className="alert shadow-lg max-w-4xl mx-auto mb-4 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-accent border-accent"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        className="stroke-black h-6 w-6 shrink-0"
+    <>
+      {/* Add overlay with blur effect */}
+      <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
+      <div
+        role="alert"
+        className="alert shadow-lg max-w-4xl mx-auto mb-4 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-50"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        ></path>
-      </svg>
-      <div className="flex-1">
-        <h3 className="font-bold">{currentNotice.title}</h3>
-        <div className="prose text-sm">
-          {currentNotice.optionalAlertText.children.length ? (
-            <TinaMarkdown content={currentNotice.optionalAlertText} />
-          ) : (
-            <TinaMarkdown content={currentNotice.alertBody} />
-          )}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          className="stroke-black h-6 w-6 shrink-0"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <div className="flex-1">
+          <h3 className="font-bold">{currentNotice.title}</h3>
+          <div className="prose text-sm">
+            {currentNotice.optionalAlertText.children.length ? (
+              <TinaMarkdown content={currentNotice.optionalAlertText} />
+            ) : (
+              <TinaMarkdown content={currentNotice.alertBody} />
+            )}
+          </div>
+        </div>
+        <div className="flex gap-2">
+          <button
+            className="btn btn-sm"
+            onClick={acknowledgeNotice}
+          >
+            Razumem
+          </button>
+          <Link
+            href="/obvestila"
+            className="btn btn-sm btn-primary"
+            onClick={acknowledgeAllNotices}
+          >
+            Več
+          </Link>
         </div>
       </div>
-      <div className="flex gap-2">
-        <button
-          className="btn btn-sm"
-          onClick={acknowledgeNotice}
-        >
-          Razumem
-        </button>
-        <Link
-          href="/obvestila"
-          className="btn btn-sm btn-primary"
-          onClick={acknowledgeAllNotices}
-        >
-          Več
-        </Link>
-      </div>
-    </div>
+    </>
   );
 }
