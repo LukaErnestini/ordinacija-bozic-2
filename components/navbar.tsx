@@ -43,12 +43,12 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
       <div className="absolute left-0 right-0 bottom-0 h-0.5 backdrop-blur-md brightness-95 bg-white/10 translate-y-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex flex-col items-center  gap-2 lg:gap-4 pt-2 pb-2">
+        <div className="flex flex-col items-center  gap-2 lg:gap-10 pt-4 pb-4">
           {/* Logo and title section */}
           {global.logo && (
             <Link
               href="/"
-              className="flex flex-col gap-2 items-center"
+              className="flex flex-col gap-4 items-center"
             >
               <Image
                 data-tina-field={tinaField(global, "logo")}
@@ -60,7 +60,7 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
               />
               <span
                 data-tina-field={tinaField(global, "pageTitle")}
-                className="text-center text-lg leading-tight sm:text-1xl text-primary-content font-light max-w-96"
+                className="text-center text-2xl leading-tight sm:text-1xl text-primary-content font-light "
               >
                 {global.pageTitle}
               </span>
