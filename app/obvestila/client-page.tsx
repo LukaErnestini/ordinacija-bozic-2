@@ -24,49 +24,53 @@ export default function ClientObvestilaPage(
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Obvestila</h1>
-      <ul className="space-y-4">
-        {sortedNotices.map((noticeData) => {
-          const notice = noticeData!.node!;
-          const { alertBody, createdAt, id, title, activeFrom, activeTo, optionalAlertText } = notice;
+      {sortedNotices.length === 0 ? (
+        <p className="text-gray-500">Trenutno ni objavljenih obvestil.</p>
+      ) : (
+        <ul className="space-y-4">
+          {sortedNotices.map((noticeData) => {
+            const notice = noticeData!.node!;
+            const { alertBody, createdAt, id, title, activeFrom, activeTo, optionalAlertText } = notice;
 
-          return (
-            <li
-              key={id}
-              className="border bg-white rounded-lg p-4 shadow-sm"
-            >
-              <h2 className="text-xl font-semibold mb-2">{title}</h2>
-              {(activeFrom || activeTo) && (
-                <p className="text-sm text-gray-500 mb-2">
-                  {activeFrom && `Od ${new Date(activeFrom).toLocaleDateString("sl-SI")}`}
-                  {activeFrom && activeTo && " do "}
-                  {activeTo && new Date(activeTo).toLocaleDateString("sl-SI")}
+            return (
+              <li
+                key={id}
+                className="border bg-white rounded-lg p-4 shadow-sm"
+              >
+                <h2 className="text-xl font-semibold mb-2">{title}</h2>
+                {(activeFrom || activeTo) && (
+                  <p className="text-sm text-gray-500 mb-2">
+                    {activeFrom && `Od ${new Date(activeFrom).toLocaleDateString("sl-SI")}`}
+                    {activeFrom && activeTo && " do "}
+                    {activeTo && new Date(activeTo).toLocaleDateString("sl-SI")}
+                  </p>
+                )}
+                <div className="prose mb-2">
+                  <TinaMarkdown content={alertBody} />
+                </div>
+                {!!optionalAlertText.children.length && (
+                  <>
+                    <button
+                      onClick={() => toggleNotice(id)}
+                      className="text-primary hover:underline focus:outline-none"
+                    >
+                      {expandedNotice === id ? "Prikaži manj" : "Prikaži več"}
+                    </button>
+                    {expandedNotice === id && (
+                      <div className="mt-2 p-2 bg-gray-50 rounded prose">
+                        <TinaMarkdown content={optionalAlertText} />
+                      </div>
+                    )}
+                  </>
+                )}
+                <p className="text-xs text-gray-400 mt-2">
+                  Objavljeno: {new Date(createdAt).toLocaleDateString("sl-SI")}
                 </p>
-              )}
-              <div className="prose mb-2">
-                <TinaMarkdown content={alertBody} />
-              </div>
-              {!!optionalAlertText.children.length && (
-                <>
-                  <button
-                    onClick={() => toggleNotice(id)}
-                    className="text-primary hover:underline focus:outline-none"
-                  >
-                    {expandedNotice === id ? "Prikaži manj" : "Prikaži več"}
-                  </button>
-                  {expandedNotice === id && (
-                    <div className="mt-2 p-2 bg-gray-50 rounded prose">
-                      <TinaMarkdown content={optionalAlertText} />
-                    </div>
-                  )}
-                </>
-              )}
-              <p className="text-xs text-gray-400 mt-2">
-                Objavljeno: {new Date(createdAt).toLocaleDateString("sl-SI")}
-              </p>
-            </li>
-          );
-        })}
-      </ul>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

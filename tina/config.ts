@@ -430,6 +430,13 @@ export default defineConfig({
         },
         fields: [
           {
+            type: "number",
+            name: "order",
+            label: "Order",
+            description:
+              "Order of the service in the category, when displayed in a list. Can use negative numbers to display services or decimal numbers to display services in between. Clunky but it works."
+          },
+          {
             type: "reference",
             name: "category",
             label: "Category",

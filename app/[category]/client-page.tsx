@@ -21,7 +21,19 @@ export default function ClientCategoryPage({
   const { data: serviceCategoryData } = useTina(serviceCategoryQuery);
   const { serviceCategory } = serviceCategoryData;
   const { data: servicesData } = useTina(servicesConnection);
-  const services = servicesData.servicesConnection.edges?.map((service) => service?.node);
+  const services = servicesData.servicesConnection.edges
+    ?.map((service) => service?.node)
+    .sort((a, b) => {
+      // Sort by order, fallback to title if order is not set
+      if (a?.order && b?.order) {
+        return a.order - b.order;
+      }
+      // If only one has order, prioritize it
+      if (a?.order) return -1;
+      if (b?.order) return 1;
+      // Fallback to alphabetical sort by title
+      return (a?.title || "").localeCompare(b?.title || "");
+    });
 
   return (
     <div>
