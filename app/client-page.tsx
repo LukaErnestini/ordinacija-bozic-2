@@ -36,7 +36,7 @@ export default function ClientHomePage({
       <h2
         id="our-services"
         data-tina-field={tinaField(global, "ourServicesText")}
-        className="text-center text-4xl font-semibold capitalize mb-8"
+        className="text-center text-4xl font-semibold mb-8"
       >
         {global.ourServicesText}
       </h2>
