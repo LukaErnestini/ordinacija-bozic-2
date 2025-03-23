@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Components, TinaMarkdownContent } from "tinacms/dist/rich-text";
 import Image from "next/image";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { Video } from "./ui/video";
 
 export interface StaffPrefetchedData {
   [key: string]: StaffQuery["staff"];
@@ -50,6 +51,11 @@ export const generalMdxComponents = (): Components<{
     item4Image: string;
     item4Body: TinaMarkdownContent;
   };
+  Video: {
+    url: string;
+    autoPlay?: boolean;
+    controls?: boolean;
+  };
 }> => ({
   FeatureGrid(props) {
     const items = [
@@ -88,5 +94,6 @@ export const generalMdxComponents = (): Components<{
         </div>
       </div>
     );
-  }
+  },
+  Video: Video
 });

@@ -403,6 +403,30 @@ export default defineConfig({
             required: true,
             templates: [
               {
+                name: "Video",
+                label: "Video",
+                fields: [
+                  {
+                    name: "url",
+                    label: "Video URL",
+                    type: "string",
+                    required: true
+                  },
+                  {
+                    name: "autoPlay",
+                    label: "Auto Play",
+                    type: "boolean",
+                    required: false
+                  },
+                  {
+                    name: "controls",
+                    label: "Show Controls",
+                    type: "boolean",
+                    required: false
+                  }
+                ]
+              },
+              {
                 name: "FeatureGrid",
                 label: "Feature Grid",
                 fields: [
