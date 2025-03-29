@@ -38,18 +38,8 @@
         "enabled": true
       },
       {
-        "label": "Obrazna estetika: anti-ageing, odpravljanje gub, polnila, botulin, …",
-        "value": "obrazna_estetika",
-        "enabled": true
-      },
-      {
         "label": "Endodontsko zdravljenje zoba",
         "value": "endodontsko_zdravljenje",
-        "enabled": true
-      },
-      {
-        "label": "Mikro kirurgija: pokrivanje zobnih vratov",
-        "value": "mikro_kirurgija",
         "enabled": true
       },
       {
