@@ -1,13 +1,11 @@
 {
-  "landingImage": "/background2.png",
+  "landingImage": "/belobg.png",
   "logo": "/logo2_crn.png",
   "pageTitle": "SPECIALISTIČNA ZOBOZDRAVSTVENA ORDINACIJA BOŽIČ",
   "ourServicesText": "Naše storitve",
   "siteTitle": "Ordinacija Božič | Specialistična zobozdravstvena ordinacija",
   "siteDescription": "Visoko kvalitetne zobozdravstvene storitve za vso družino. Specialistična diagnostika, preventiva in zdravljenje v prijetnem okolju.",
   "contactForm": {
-    "headerTitle": "Kontaktirajte nas!",
-    "headerSubtitle": "Na voljo smo Vam preko telefona, kontaktnega obrazca ali elektronskega sporočila. Kontaktirajte nas in poskrbeli bomo, da se kmalu vidimo.",
     "presetMessages": [
       {
         "label": "Prvi splošni pregled",
@@ -59,6 +57,8 @@
         "value": "drugo",
         "enabled": true
       }
-    ]
+    ],
+    "headerTitle": "Kontaktirajte nas!",
+    "headerSubtitle": "Na voljo smo Vam preko telefona, kontaktnega obrazca ali elektronskega sporočila. Kontaktirajte nas in poskrbeli bomo, da se kmalu vidimo."
   }
 }
