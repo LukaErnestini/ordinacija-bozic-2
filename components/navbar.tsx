@@ -60,7 +60,7 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
               />
               <span
                 data-tina-field={tinaField(global, "pageTitle")}
-                className="text-center text-xl lg:text-2xl leading-tight sm:text-1xl text-primary-content"
+                className="text-center text-xl lg:text-3xl leading-tight sm:text-1xl text-primary-content"
               >
                 {global.pageTitle}
               </span>
