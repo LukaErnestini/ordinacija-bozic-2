@@ -9,63 +9,72 @@ import { Metadata } from "next";
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
-  display: "swap"
+  display: "swap",
 });
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair-display",
-  display: "swap"
+  display: "swap",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const globalQuery = await client.queries.global({ relativePath: "global.json" });
+  const globalQuery = await client.queries.global({
+    relativePath: "global.json",
+  });
   return {
     title: globalQuery.data.global.siteTitle,
-    description: globalQuery.data.global.siteDescription
+    description: globalQuery.data.global.siteDescription,
   };
 }
 
 export default async function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [locationsResponse, noticesResponse, serviceCategoriesResponse, globalQuery] = await Promise.all([
+  const [
+    locationsResponse,
+    noticesResponse,
+    serviceCategoriesResponse,
+    globalQuery,
+  ] = await Promise.all([
     client.queries.locationConnection(),
     client.queries.noticeConnection(),
     client.queries.serviceCategoryConnection(),
-    client.queries.global({ relativePath: "global.json" })
+    client.queries.global({ relativePath: "global.json" }),
   ]);
 
   // Transform service categories data into navigation structure
   const serviceItems =
-    serviceCategoriesResponse.data?.serviceCategoryConnection.edges?.map((edge) => ({
-      name: edge?.node?.title || "",
-      href: `/${edge?.node?._sys.filename}`
-    })) || [];
+    serviceCategoriesResponse.data?.serviceCategoryConnection.edges?.map(
+      (edge) => ({
+        name: edge?.node?.title || "",
+        href: `/${edge?.node?._sys.filename}`,
+      }),
+    ) || [];
 
   const navigationItems = [
     {
       name: "Predstavitev",
-      href: "/predstavitev"
+      href: "/predstavitev",
     },
     {
       name: "Storitve",
-      subItems: serviceItems
+      subItems: serviceItems,
     },
     {
       name: "Ordinacija Štorje",
-      href: "/ordinacija-storje"
+      href: "/ordinacija-storje",
     },
     {
       name: "Ordinacija Portorož",
-      href: "/ordinacija-portoroz"
+      href: "/ordinacija-portoroz",
     },
     {
       name: "Obvestila",
-      href: "/obvestila"
-    }
+      href: "/obvestila",
+    },
   ];
 
   const locations =
@@ -77,7 +86,7 @@ export default async function RootLayout({
           phone: node?.phone?.filter((p): p is string => p !== null) || [],
           googleMapsEmbedSrc: node?.googleMapsEmbedSrc || "",
           name: node?.label || "",
-          email: node?.mail || ""
+          email: node?.mail || "",
         };
       })
       .sort((a, b) => {
@@ -102,10 +111,7 @@ export default async function RootLayout({
           ></script>
         </head>
         <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
-          <Navbar
-            items={navigationItems}
-            globalQuery={globalQuery}
-          ></Navbar>
+          <Navbar items={navigationItems} globalQuery={globalQuery}></Navbar>
           <NoticeAlert {...noticesResponse} />
           <div className="mt-nav-mobile lg:mt-nav grow">{children}</div>
           <Footer locations={locations} />

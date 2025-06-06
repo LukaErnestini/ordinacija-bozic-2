@@ -1,19 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { ServiceCategoryConnectionQuery, ServiceCategoryConnectionQueryVariables } from "@/tina/__generated__/types";
+import {
+  ServiceCategoryConnectionQuery,
+  ServiceCategoryConnectionQueryVariables,
+} from "@/tina/__generated__/types";
 import { tinaField, useTina } from "tinacms/dist/react";
 import Link from "next/link";
 import { TinaConnectionClientPageProps } from "@/tina/utils";
 
 export default function CategoriesSmall(
-  props: TinaConnectionClientPageProps<ServiceCategoryConnectionQuery, ServiceCategoryConnectionQueryVariables>
+  props: TinaConnectionClientPageProps<
+    ServiceCategoryConnectionQuery,
+    ServiceCategoryConnectionQueryVariables
+  >,
 ) {
   const { data } = useTina(props);
 
   return (
     <section className="pb-12">
-      <div className="container mx-auto px-2">
+      <div className="container mx-auto px-2 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
           {data?.serviceCategoryConnection.edges?.map((categoryData) => {
             const category = categoryData!.node!;
@@ -37,7 +43,10 @@ export default function CategoriesSmall(
                   {category.title}
                 </h3>
                 <p
-                  data-tina-field={tinaField(categoryData?.node, "shortDescription")}
+                  data-tina-field={tinaField(
+                    categoryData?.node,
+                    "shortDescription",
+                  )}
                   className="text-gray-600 text-sm font-normal line-clamp-4"
                 >
                   {category.shortDescription}

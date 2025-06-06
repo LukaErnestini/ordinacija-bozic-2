@@ -4,15 +4,20 @@ import Image from "next/image";
 import {
   GlobalQuery,
   ServiceCategoryConnectionQuery,
-  ServiceCategoryConnectionQueryVariables
+  ServiceCategoryConnectionQueryVariables,
 } from "@/tina/__generated__/types";
-import { TinaConnectionClientPageProps, TinaQueryClientPageProps } from "@/tina/utils";
+import {
+  TinaConnectionClientPageProps,
+  TinaQueryClientPageProps,
+} from "@/tina/utils";
 import CategoriesSmall from "@/components/services/categories-small";
 import { tinaField, useTina } from "tinacms/dist/react";
+import EmblaCarousel from "@/components/EmblaCarousel";
+import Link from "next/link";
 
 export default function ClientHomePage({
   categoriesConnectionQuery,
-  globalQuery
+  globalQuery,
 }: {
   categoriesConnectionQuery: TinaConnectionClientPageProps<
     ServiceCategoryConnectionQuery,
@@ -21,26 +26,75 @@ export default function ClientHomePage({
   globalQuery: TinaQueryClientPageProps<GlobalQuery>;
 }) {
   const { global } = useTina(globalQuery).data;
+
+  const carouselSlides = [
+    {
+      src: global.landingImage,
+      alt: "",
+      tinaField: tinaField(global, "landingImage"),
+    },
+    {
+      src: global.landingImage,
+      alt: "",
+      tinaField: tinaField(global, "landingImage"),
+    },
+    {
+      src: global.landingImage,
+      alt: "",
+      tinaField: tinaField(global, "landingImage"),
+    },
+  ];
+
   return (
-    <div className="-mt-nav-mobile mx-auto flex flex-col gap-12">
-      <div className="relative h-[100vh]">
-        <Image
-          data-tina-field={tinaField(global, "landingImage")}
-          className="mx-auto object-cover"
-          src={global.landingImage}
-          alt=""
-          sizes="100vw"
-          fill
-        />
-      </div>
-      <h2
-        id="our-services"
-        data-tina-field={tinaField(global, "ourServicesText")}
-        className="text-center text-4xl font-semibold mb-8"
-      >
-        {global.ourServicesText}
-      </h2>
-      <CategoriesSmall {...categoriesConnectionQuery}></CategoriesSmall>
+    <div className="mx-auto flex flex-col">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-12 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Hero Text */}
+          <div className="order-2 lg:order-1 space-y-6">
+            <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+              Specialistična
+              <span className="block text-primary">Zobozdravstvena</span>
+              <span className="block">Ordinacija</span>
+            </h1>
+            <p className="text-lg lg:text-xl text-secondary leading-relaxed">
+              Zagotavljamo vrhunsko zobozdravstveno oskrbo z najnovejšimi tehnologijami 
+              in osebnim pristopom k vsakemu pacientu.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link 
+                href="#kontakt" 
+                className="btn btn-primary btn-lg px-8 py-3 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+              >
+                Kontaktiraj Nas
+              </Link>
+              <Link 
+                href="#our-services" 
+                className="btn btn-outline btn-lg px-8 py-3 font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+              >
+                Naše Storitve
+              </Link>
+            </div>
+          </div>
+          
+          {/* Carousel */}
+          <div className="order-1 lg:order-2">
+            <EmblaCarousel slides={carouselSlides}></EmblaCarousel>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="container mx-auto px-4 py-12">
+        <h2
+          id="our-services"
+          data-tina-field={tinaField(global, "ourServicesText")}
+          className="text-center text-4xl font-semibold mb-12"
+        >
+          {global.ourServicesText}
+        </h2>
+        <CategoriesSmall {...categoriesConnectionQuery}></CategoriesSmall>
+      </section>
     </div>
   );
 }

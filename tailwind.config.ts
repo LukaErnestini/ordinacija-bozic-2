@@ -15,15 +15,15 @@ export default {
           info: "#00aeff",
           success: "#009257",
           warning: "#ffa400",
-          error: "#C1360F"
-        }
-      }
-    ]
+          error: "#C1360F",
+        },
+      },
+    ],
   },
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}"
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -32,20 +32,20 @@ export default {
         foreground: "rgb(var(--foreground))",
         primary: "rgb(var(--primary))",
         secondary: "rgb(var(--secondary))",
-        accent: "rgb(var(--accent))"
+        accent: "rgb(var(--accent))",
       },
       fontFamily: {
         sans: ["var(--font-montserrat)"],
-        serif: ["var(--font-playfair-display)"]
+        serif: ["var(--font-playfair-display)"],
       },
       spacing: {
-        nav: "10rem",
-        "nav-mobile": "6rem"
+        nav: "12rem",
+        "nav-mobile": "8rem",
       },
       screens: {
-        xs: "400px"
-      }
-    }
+        xs: "400px",
+      },
+    },
   },
-  plugins: [daisyui, typography]
+  plugins: [daisyui, typography],
 } satisfies Config;
