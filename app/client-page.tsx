@@ -57,26 +57,29 @@ export default function ClientHomePage({
               <span className="block text-primary">Zobozdravstvena</span>
               <span className="block">Ordinacija</span>
             </h1>
-            <p className="text-lg lg:text-xl text-secondary leading-relaxed">
-              Zagotavljamo vrhunsko zobozdravstveno oskrbo z najnovejšimi tehnologijami 
-              in osebnim pristopom k vsakemu pacientu.
+            <p
+              className="text-lg lg:text-xl text-secondary leading-relaxed"
+              id="hero-subtext"
+              data-tina-field={tinaField(global, "heroSubtext")}
+            >
+              {global.heroSubtext}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                href="#kontakt" 
+              <Link
+                href="/kontaktiraj-nas"
                 className="btn btn-primary btn-lg px-8 py-3 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
               >
                 Kontaktiraj Nas
               </Link>
-              <Link 
-                href="#our-services" 
+              <Link
+                href="#our-services"
                 className="btn btn-outline btn-lg px-8 py-3 font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
               >
                 Naše Storitve
               </Link>
             </div>
           </div>
-          
+
           {/* Carousel */}
           <div className="order-1 lg:order-2">
             <EmblaCarousel slides={carouselSlides}></EmblaCarousel>

@@ -1,7 +1,11 @@
 import { defineConfig } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
-const branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
+const branch =
+  process.env.GITHUB_BRANCH ||
+  process.env.VERCEL_GIT_COMMIT_REF ||
+  process.env.HEAD ||
+  "main";
 
 // Add these utility functions at the top of the file
 const sanitizeFilename = (filename: string) => {
@@ -30,13 +34,13 @@ export default defineConfig({
 
   build: {
     outputFolder: "admin",
-    publicFolder: "public"
+    publicFolder: "public",
   },
   media: {
     tina: {
       mediaRoot: "",
-      publicFolder: "public"
-    }
+      publicFolder: "public",
+    },
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
@@ -51,91 +55,91 @@ export default defineConfig({
           allowedActions: {
             create: false,
             createNestedFolder: false,
-            delete: false
-          }
+            delete: false,
+          },
         },
         fields: [
           {
             name: "label",
             label: "Label",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "address",
             label: "Address",
             type: "rich-text",
-            required: true
+            required: true,
           },
           {
             name: "googleMapsEmbedSrc",
             label: "GoogleMapsEmbedSrc",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "phone",
             label: "Phone",
             type: "string",
             list: true,
-            required: true
+            required: true,
           },
           {
             name: "mail",
             label: "Mail",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "about",
             label: "About",
             type: "rich-text",
-            required: true
+            required: true,
           },
           {
             name: "officeHours",
             label: "Office Hours",
             type: "rich-text",
-            required: true
+            required: true,
           },
           {
             name: "images",
             label: "Images",
             type: "image",
-            list: true
-          }
-        ]
+            list: true,
+          },
+        ],
       },
       {
         name: "notice",
         label: "Notice",
         path: "content/notice",
         ui: {
-          router: () => "/obvestila"
+          router: () => "/obvestila",
         },
         format: "mdx",
         defaultItem: () => ({
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString(),
         }),
         fields: [
           {
             name: "title",
             label: "Title",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "alertBody",
             label: "Alert Body",
             type: "rich-text",
-            required: true
+            required: true,
           },
           {
             name: "optionalAlertText",
             label: "Optional Alert Text",
             type: "rich-text",
             description:
-              "In case Alert Body is too large to display in the alert popup, this will be displayed instead."
+              "In case Alert Body is too large to display in the alert popup, this will be displayed instead.",
           },
           {
             name: "activeFrom",
@@ -147,8 +151,8 @@ export default defineConfig({
                 if (data.activeTo && !value) {
                   return "Active From must be set if Active To is set";
                 }
-              }
-            }
+              },
+            },
           },
           {
             name: "activeTo",
@@ -161,19 +165,23 @@ export default defineConfig({
                   return "Active To must be set if Active From is set";
                 }
 
-                if (value && data.activeFrom && new Date(value) <= new Date(data.activeFrom)) {
+                if (
+                  value &&
+                  data.activeFrom &&
+                  new Date(value) <= new Date(data.activeFrom)
+                ) {
                   return "Active To must be after Active From";
                 }
-              }
-            }
+              },
+            },
           },
           {
             name: "createdAt",
             label: "Created At",
             type: "datetime",
-            required: true
-          }
-        ]
+            required: true,
+          },
+        ],
       },
       {
         name: "about",
@@ -182,29 +190,33 @@ export default defineConfig({
         format: "mdx",
         ui: {
           router: () => `/predstavitev`,
-          allowedActions: { create: false, createNestedFolder: false, delete: false }
+          allowedActions: {
+            create: false,
+            createNestedFolder: false,
+            delete: false,
+          },
         },
         fields: [
           {
             name: "image",
             label: "Image",
-            type: "image"
+            type: "image",
           },
           {
             name: "showImageUnderNavbar",
             label: "Show Image Under Navbar",
-            type: "boolean"
+            type: "boolean",
           },
           {
             name: "title",
             label: "Title",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "subtitle",
             label: "Subtitle",
-            type: "string"
+            type: "string",
           },
           {
             name: "body",
@@ -221,13 +233,13 @@ export default defineConfig({
                     name: "staff",
                     label: "Staff",
                     type: "reference",
-                    collections: ["staff"]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                    collections: ["staff"],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         name: "staff",
@@ -235,20 +247,20 @@ export default defineConfig({
         path: "content/staff",
         format: "mdx",
         ui: {
-          router: ({ document }) => `/predstavitev/${document._sys.filename}`
+          router: ({ document }) => `/predstavitev/${document._sys.filename}`,
         },
         fields: [
           {
             name: "name",
             label: "Name",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "title",
             label: "Title",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "bio",
@@ -256,15 +268,15 @@ export default defineConfig({
             description: "Biography of the staff member",
             type: "rich-text",
             isBody: true,
-            required: true
+            required: true,
           },
           {
             name: "image",
             label: "Image",
             type: "image",
-            required: true
-          }
-        ]
+            required: true,
+          },
+        ],
       },
       {
         label: "Global Settings",
@@ -275,48 +287,55 @@ export default defineConfig({
           allowedActions: {
             create: false,
             createNestedFolder: false,
-            delete: false
+            delete: false,
           },
-          router: () => `/`
+          router: () => `/`,
         },
         fields: [
           {
             name: "landingImage",
             label: "Landing Image",
             type: "image",
-            required: true
+            required: true,
           },
           {
             name: "logo",
             label: "Logo",
             type: "image",
-            required: true
+            required: true,
           },
           {
             name: "pageTitle",
             label: "Page Title",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "ourServicesText",
             label: "Our Services Text",
             type: "string",
-            required: true
+            required: true,
+          },
+          {
+            name: "heroSubtext",
+            label: "Hero Subtext",
+            type: "string",
+            required: true,
           },
           {
             name: "siteTitle",
             label: "Site Title",
             description: "Title of the site, displayed in the browser tab",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "siteDescription",
             label: "Site Description",
-            description: "Description of the site, displayed in the browser tab",
+            description:
+              "Description of the site, displayed in the browser tab",
             type: "string",
-            required: true
+            required: true,
           },
           {
             type: "object",
@@ -332,45 +351,45 @@ export default defineConfig({
                 required: true,
                 ui: {
                   itemProps: (item) => ({
-                    label: item.label
-                  })
+                    label: item.label,
+                  }),
                 },
                 fields: [
                   {
                     type: "string",
                     label: "Label",
                     name: "label",
-                    required: true
+                    required: true,
                   },
                   {
                     type: "string",
                     label: "Value",
                     name: "value",
-                    required: true
+                    required: true,
                   },
                   {
                     type: "boolean",
                     label: "Enabled",
                     name: "enabled",
-                    required: true
-                  }
-                ]
+                    required: true,
+                  },
+                ],
               },
               {
                 type: "string",
                 label: "Header Title",
                 name: "headerTitle",
-                required: true
+                required: true,
               },
               {
                 type: "string",
                 label: "Header Subtitle",
                 name: "headerSubtitle",
-                required: true
-              }
-            ]
-          }
-        ]
+                required: true,
+              },
+            ],
+          },
+        ],
       },
       {
         name: "serviceCategory",
@@ -381,20 +400,20 @@ export default defineConfig({
           router: ({ document }) => {
             console.log(document);
             return `/${document._sys.filename}`;
-          }
+          },
         },
         fields: [
           {
             name: "title",
             label: "Title",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "shortDescription",
             label: "Short Description",
             type: "string",
-            required: true
+            required: true,
           },
           {
             name: "body",
@@ -410,21 +429,21 @@ export default defineConfig({
                     name: "url",
                     label: "Video URL",
                     type: "string",
-                    required: true
+                    required: true,
                   },
                   {
                     name: "autoPlay",
                     label: "Auto Play",
                     type: "boolean",
-                    required: false
+                    required: false,
                   },
                   {
                     name: "controls",
                     label: "Show Controls",
                     type: "boolean",
-                    required: false
-                  }
-                ]
+                    required: false,
+                  },
+                ],
               },
               {
                 name: "FeatureGrid",
@@ -433,63 +452,63 @@ export default defineConfig({
                   {
                     type: "string",
                     name: "title",
-                    label: "Title"
+                    label: "Title",
                   },
                   {
                     type: "string",
                     name: "item1Title",
-                    label: "Item 1 Title"
+                    label: "Item 1 Title",
                   },
                   { type: "image", name: "item1Image", label: "Item 1 Image" },
                   {
                     type: "rich-text",
                     name: "item1Body",
-                    label: "Item 1 Body"
+                    label: "Item 1 Body",
                   },
                   {
                     type: "string",
                     name: "item2Title",
-                    label: "Item 2 Title"
+                    label: "Item 2 Title",
                   },
                   { type: "image", name: "item2Image", label: "Item 2 Image" },
                   {
                     type: "rich-text",
                     name: "item2Body",
-                    label: "Item 2 Body"
+                    label: "Item 2 Body",
                   },
                   {
                     type: "string",
                     name: "item3Title",
-                    label: "Item 3 Title"
+                    label: "Item 3 Title",
                   },
                   { type: "image", name: "item3Image", label: "Item 3 Image" },
                   {
                     type: "rich-text",
                     name: "item3Body",
-                    label: "Item 3 Body"
+                    label: "Item 3 Body",
                   },
                   {
                     type: "string",
                     name: "item4Title",
-                    label: "Item 4 Title"
+                    label: "Item 4 Title",
                   },
                   { type: "image", name: "item4Image", label: "Item 4 Image" },
                   {
                     type: "rich-text",
                     name: "item4Body",
-                    label: "Item 4 Body"
-                  }
-                ]
-              }
-            ]
+                    label: "Item 4 Body",
+                  },
+                ],
+              },
+            ],
           },
           {
             name: "icon",
             label: "Icon",
             type: "image",
-            required: true
-          }
-        ]
+            required: true,
+          },
+        ],
       },
       {
         name: "services",
@@ -501,8 +520,8 @@ export default defineConfig({
           router: ({ document }) => `/storitve/${document._sys.filename}`,
           filename: {
             readonly: false,
-            slugify: (values) => sanitizeFilename(values?.title || "")
-          }
+            slugify: (values) => sanitizeFilename(values?.title || ""),
+          },
         },
         fields: [
           {
@@ -510,37 +529,37 @@ export default defineConfig({
             name: "order",
             label: "Order",
             description:
-              "Order of the service in the category, when displayed in a list. Can use negative numbers to display services or decimal numbers to display services in between. Clunky but it works."
+              "Order of the service in the category, when displayed in a list. Can use negative numbers to display services or decimal numbers to display services in between. Clunky but it works.",
           },
           {
             type: "reference",
             name: "category",
             label: "Category",
             required: true,
-            collections: ["serviceCategory"]
+            collections: ["serviceCategory"],
           },
           {
             type: "string",
             name: "title",
             label: "Title",
             required: true,
-            isTitle: true
+            isTitle: true,
           },
           {
             type: "string",
             name: "subtitle",
-            label: "Subtitle"
+            label: "Subtitle",
           },
           {
             type: "image",
             name: "heroImage",
-            label: "Hero Image"
+            label: "Hero Image",
           },
           {
             type: "image",
             name: "icon",
             label: "Service Icon",
-            required: true
+            required: true,
           },
           {
             type: "rich-text",
@@ -557,56 +576,56 @@ export default defineConfig({
                   {
                     type: "string",
                     name: "title",
-                    label: "Title"
+                    label: "Title",
                   },
                   {
                     type: "string",
                     name: "item1Title",
-                    label: "Item 1 Title"
+                    label: "Item 1 Title",
                   },
                   { type: "image", name: "item1Image", label: "Item 1 Image" },
                   {
                     type: "rich-text",
                     name: "item1Body",
-                    label: "Item 1 Body"
+                    label: "Item 1 Body",
                   },
                   {
                     type: "string",
                     name: "item2Title",
-                    label: "Item 2 Title"
+                    label: "Item 2 Title",
                   },
                   { type: "image", name: "item2Image", label: "Item 2 Image" },
                   {
                     type: "rich-text",
                     name: "item2Body",
-                    label: "Item 2 Body"
+                    label: "Item 2 Body",
                   },
                   {
                     type: "string",
                     name: "item3Title",
-                    label: "Item 3 Title"
+                    label: "Item 3 Title",
                   },
                   { type: "image", name: "item3Image", label: "Item 3 Image" },
                   {
                     type: "rich-text",
                     name: "item3Body",
-                    label: "Item 3 Body"
+                    label: "Item 3 Body",
                   },
                   {
                     type: "string",
                     name: "item4Title",
-                    label: "Item 4 Title"
+                    label: "Item 4 Title",
                   },
                   { type: "image", name: "item4Image", label: "Item 4 Image" },
                   {
                     type: "rich-text",
                     name: "item4Body",
-                    label: "Item 4 Body"
-                  }
-                ]
-              }
-            ]
-          }
+                    label: "Item 4 Body",
+                  },
+                ],
+              },
+            ],
+          },
           // commented out cause they don't need this and it's not fully implemented.
           // {
           //   type: "object",
@@ -636,8 +655,8 @@ export default defineConfig({
           //     }
           //   ]
           // }
-        ]
-      }
-    ]
-  }
+        ],
+      },
+    ],
+  },
 });
