@@ -14,22 +14,23 @@ interface FooterProps {
 
 export default function Footer({ locations }: FooterProps) {
   return (
-    <footer className="bg-neutral-800 text-white pb-16 pt-8">
+    <footer className="bg-neutral-800 text-white pb-8 pt-8">
       <div className="max-w-7xl mx-auto">
         <div className="container mx-auto px-6">
           {locations.map((location, locationIndex) => (
-            <div
-              key={locationIndex}
-              className="pb-6"
-            >
-              <div className="divider divider-primary uppercase">{location.name}</div>
+            <div key={locationIndex} className="pb-6">
+              <div className="divider divider-primary uppercase">
+                {location.name}
+              </div>
               <div className="flex flex-wrap gap-8">
                 {/* Office Hours Section */}
                 <div className="flex flex-wrap xs:flex-nowrap flex-row justify-around grow gap-4">
                   <div className="min-h-min grow sm:grow-0 basis-1/2">
                     <h2 className="text-2xl font-bold mb-4">Urnik</h2>
                     <div className="space-y-2">
-                      {location.officeHours && <TinaMarkdown content={location.officeHours} />}
+                      {location.officeHours && (
+                        <TinaMarkdown content={location.officeHours} />
+                      )}
                     </div>
                   </div>
 
@@ -38,10 +39,7 @@ export default function Footer({ locations }: FooterProps) {
                     <h2 className="text-2xl font-bold mb-4">Kontakt</h2>
                     <div className="space-y-2 flex flex-col">
                       {location.phone.map((phone, index) => (
-                        <a
-                          href={`tel:${phone}`}
-                          key={index}
-                        >
+                        <a href={`tel:${phone}`} key={index}>
                           {phone}
                         </a>
                       ))}
@@ -74,19 +72,15 @@ export default function Footer({ locations }: FooterProps) {
         {/* Copyright Section */}
         <div className="container mx-auto mt-8 pt-8 border-t border-neutral-700 px-6">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-neutral-400">
-            <p>© {new Date().getFullYear()} ORDINACIJA BOZIC. ALL RIGHT RESERVED</p>
+            <p>
+              © {new Date().getFullYear()} ORDINACIJA BOZIC. ALL RIGHT RESERVED
+            </p>
             <div className="flex gap-4 mt-4 md:mt-0">
-              <a
-                href="#"
-                className="hover:text-white"
-              >
+              <a href="#" className="hover:text-white">
                 ACCESSIBILITY STATEMENT
               </a>
               <span>|</span>
-              <a
-                href="#"
-                className="hover:text-white"
-              >
+              <a href="#" className="hover:text-white">
                 SITE DESIGN: 43SOFT
               </a>
             </div>
