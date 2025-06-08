@@ -118,7 +118,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
           return (
             <button
               key={`dot-${item.id}`}
-              onClick={() => handleDotClick(item.id, index)}
+              onClick={() => handleDotClick(item.id)}
               className={`
                 w-3 h-3 rounded-full transition-all duration-300 relative
                 hover:scale-125 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2
@@ -217,4 +217,3 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
 };
 
 export default FloatingTOC;
-
