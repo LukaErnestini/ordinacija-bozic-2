@@ -139,7 +139,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
         transition-all duration-500 ease-out overflow-hidden
         ${isExpanded ? 'w-72 opacity-100 pointer-events-auto' : 'w-0 opacity-0 pointer-events-none'}
       `}>
-        <div className="p-6">
+        <div className="p-6 w-72">
           <h3 className="text-sm font-semibold text-primary mb-4 uppercase tracking-wider">
             Kazalo
           </h3>
@@ -161,14 +161,20 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
                     transition-all duration-300 ease-out relative
                     hover:bg-primary/5 hover:text-primary group
                     ${isCurrent 
-                      ? 'bg-primary/10 text-primary font-semibold transform scale-105 shadow-sm' 
+                      ? 'bg-primary/10 text-primary font-semibold' 
                       : 'text-gray-700'
                     }
                   `}
+                  style={{
+                    transform: isCurrent ? 'scale(1.05)' : 'scale(1)',
+                    transformOrigin: 'left center'
+                  }}
                 >
-                  <span className={`block transition-all duration-300 ${
+                  <span className={`block whitespace-nowrap overflow-hidden text-ellipsis transition-all duration-300 ${
                     isCurrent ? 'text-base' : 'text-sm'
-                  }`}>
+                  }`}
+                  style={{ width: '100%' }}
+                  >
                     {item.title}
                   </span>
                   
@@ -185,7 +191,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
           
           {/* Close hint */}
           <div className="mt-4 pt-3 border-t border-primary/10">
-            <p className="text-xs text-gray-500 text-center">
+            <p className="text-xs text-gray-500 text-center whitespace-nowrap">
               Kliknite naslov ali kje koli drugje za zapiranje
             </p>
           </div>
