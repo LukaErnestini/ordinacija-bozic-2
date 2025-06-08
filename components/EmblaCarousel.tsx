@@ -8,7 +8,7 @@ import Image from "next/image";
 type SlideImage = {
   src: string;
   alt: string;
-  tinaField?: any;
+  tinaField?: string;
 };
 
 type PropType = {
@@ -42,8 +42,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="overflow-hidden rounded-2xl shadow-xl" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom -ml-4">
           {slides.map((slide, index) => (
-            <div 
-              className="flex-none min-w-0 pl-4 transform-gpu translate-z-0" 
+            <div
+              className="flex-none min-w-0 pl-4 transform-gpu translate-z-0"
               key={index}
               style={{ flexBasis: "100%" }}
             >
@@ -69,8 +69,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               key={index}
               onClick={() => onDotButtonClick(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === selectedIndex 
-                  ? "bg-primary shadow-lg scale-110" 
+                index === selectedIndex
+                  ? "bg-primary shadow-lg scale-110"
                   : "bg-neutral hover:bg-secondary"
               }`}
             />
