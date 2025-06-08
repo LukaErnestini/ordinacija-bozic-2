@@ -21,7 +21,21 @@ const nextConfig: NextConfig = {
         destination: "/admin/index.html"
       }
     ];
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: "/specialisticna-ordinacija-storje/:path*",
+        destination: "/ordinacija-storje/:path*",
+        permanent: true,
+      },
+      {
+        source: "/specialisticna-ordinacija-portoroz/:path*",
+        destination: "/ordinacija-portoroz/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
