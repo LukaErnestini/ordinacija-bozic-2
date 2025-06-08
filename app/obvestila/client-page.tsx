@@ -1,13 +1,19 @@
 "use client";
 
-import { NoticeConnectionQuery, NoticeConnectionQueryVariables } from "@/tina/__generated__/types";
+import {
+  NoticeConnectionQuery,
+  NoticeConnectionQueryVariables,
+} from "@/tina/__generated__/types";
 import { TinaConnectionClientPageProps } from "@/tina/utils";
 import { useTina } from "tinacms/dist/react";
 import { useState } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 export default function ClientObvestilaPage(
-  props: TinaConnectionClientPageProps<NoticeConnectionQuery, NoticeConnectionQueryVariables>
+  props: TinaConnectionClientPageProps<
+    NoticeConnectionQuery,
+    NoticeConnectionQueryVariables
+  >,
 ) {
   const { data } = useTina({ ...props });
   const [expandedNotice, setExpandedNotice] = useState<string | null>(null);
@@ -18,29 +24,40 @@ export default function ClientObvestilaPage(
 
   // Sort notices by createdAt in descending order
   const sortedNotices = [...data.noticeConnection.edges!].sort((a, b) => {
-    return new Date(b!.node!.createdAt).getTime() - new Date(a!.node!.createdAt).getTime();
+    return (
+      new Date(b!.node!.createdAt).getTime() -
+      new Date(a!.node!.createdAt).getTime()
+    );
   });
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Obvestila</h1>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">Obvestila</h1>
       {sortedNotices.length === 0 ? (
-        <p className="text-gray-500">Trenutno ni objavljenih obvestil.</p>
+        <p className="text-gray-500 text-center">
+          Trenutno ni objavljenih obvestil.
+        </p>
       ) : (
         <ul className="space-y-4">
           {sortedNotices.map((noticeData) => {
             const notice = noticeData!.node!;
-            const { alertBody, createdAt, id, title, activeFrom, activeTo, optionalAlertText } = notice;
+            const {
+              alertBody,
+              createdAt,
+              id,
+              title,
+              activeFrom,
+              activeTo,
+              optionalAlertText,
+            } = notice;
 
             return (
-              <li
-                key={id}
-                className="border bg-white rounded-lg p-4 shadow-sm"
-              >
+              <li key={id} className="border bg-white rounded-lg p-4 shadow-sm">
                 <h2 className="text-xl font-semibold mb-2">{title}</h2>
                 {(activeFrom || activeTo) && (
                   <p className="text-sm text-gray-500 mb-2">
-                    {activeFrom && `Od ${new Date(activeFrom).toLocaleDateString("sl-SI")}`}
+                    {activeFrom &&
+                      `Od ${new Date(activeFrom).toLocaleDateString("sl-SI")}`}
                     {activeFrom && activeTo && " do "}
                     {activeTo && new Date(activeTo).toLocaleDateString("sl-SI")}
                   </p>
