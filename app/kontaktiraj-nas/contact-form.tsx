@@ -29,11 +29,16 @@ interface ContactFormProps {
 }
 
 export default function ContactForm(props: ContactFormProps) {
-  const [state, formAction] = useActionState<FormState, FormData>(submitContactForm, {
-    success: false,
-    errors: {}
-  });
-  const [contactMethod, setContactMethod] = useState<"email" | "phone">("email");
+  const [state, formAction] = useActionState<FormState, FormData>(
+    submitContactForm,
+    {
+      success: false,
+      errors: {},
+    },
+  );
+  const [contactMethod, setContactMethod] = useState<"email" | "phone">(
+    "email",
+  );
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [selectedMessages, setSelectedMessages] = useState<string[]>([]);
@@ -54,17 +59,14 @@ export default function ContactForm(props: ContactFormProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto w-fit">
       {/* Header */}
-      <div className="text-center mb-12">
+      <div className="mb-12 max-w-xl">
         <h1 className="text-4xl font-bold mb-4">{props.headerTitle}</h1>
         <p className="text-lg text-gray-600">{props.headerSubtitle}</p>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-6 max-w-md mx-auto p-6"
-      >
+      <form onSubmit={handleSubmit} className="space-y-6 max-w-md">
         {/* Name Field */}
         <div className="form-control">
           <label className="label">
@@ -78,7 +80,9 @@ export default function ContactForm(props: ContactFormProps) {
           />
           {state.errors?.name && (
             <label className="label">
-              <span className="label-text-alt text-error">{state.errors.name[0]}</span>
+              <span className="label-text-alt text-error">
+                {state.errors.name[0]}
+              </span>
             </label>
           )}
         </div>
@@ -128,7 +132,9 @@ export default function ContactForm(props: ContactFormProps) {
             />
             {state.errors?.email && (
               <label className="label">
-                <span className="label-text-alt text-error">{state.errors.email[0]}</span>
+                <span className="label-text-alt text-error">
+                  {state.errors.email[0]}
+                </span>
               </label>
             )}
           </div>
@@ -147,7 +153,9 @@ export default function ContactForm(props: ContactFormProps) {
             />
             {state.errors?.phone && (
               <label className="label">
-                <span className="label-text-alt text-error">{state.errors.phone[0]}</span>
+                <span className="label-text-alt text-error">
+                  {state.errors.phone[0]}
+                </span>
               </label>
             )}
           </div>
@@ -158,15 +166,9 @@ export default function ContactForm(props: ContactFormProps) {
           <label className="label">
             <span className="label-text">Lokacija</span>
           </label>
-          <select
-            name="location"
-            className="select select-bordered w-full"
-          >
+          <select name="location" className="select select-bordered w-full">
             {props.locations.map((location) => (
-              <option
-                key={location}
-                value={location}
-              >
+              <option key={location} value={location}>
                 {location}
               </option>
             ))}
@@ -174,7 +176,9 @@ export default function ContactForm(props: ContactFormProps) {
           </select>
           {state.errors?.location && (
             <label className="label">
-              <span className="label-text-alt text-error">{state.errors.location[0]}</span>
+              <span className="label-text-alt text-error">
+                {state.errors.location[0]}
+              </span>
             </label>
           )}
         </div>
@@ -184,13 +188,13 @@ export default function ContactForm(props: ContactFormProps) {
           <label className="label">
             <span className="label-text">Zanimam se za:</span>
           </label>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {props.presetMessages
               .filter((msg) => msg.enabled)
               .map((msg) => (
                 <label
                   key={msg.value}
-                  className="flex items-start gap-2 cursor-pointer"
+                  className="flex items-center gap-4 cursor-pointer"
                 >
                   <input
                     type="checkbox"
@@ -201,11 +205,13 @@ export default function ContactForm(props: ContactFormProps) {
                       if (e.target.checked) {
                         setSelectedMessages([...selectedMessages, msg.value]);
                       } else {
-                        setSelectedMessages(selectedMessages.filter((m) => m !== msg.value));
+                        setSelectedMessages(
+                          selectedMessages.filter((m) => m !== msg.value),
+                        );
                       }
                     }}
                   />
-                  <span className="label-text">{msg.label}</span>
+                  <span className="label-text pt-1">{msg.label}</span>
                 </label>
               ))}
           </div>
@@ -223,7 +229,9 @@ export default function ContactForm(props: ContactFormProps) {
           />
           {state.errors?.message && (
             <label className="label">
-              <span className="label-text-alt text-error">{state.errors.message[0]}</span>
+              <span className="label-text-alt text-error">
+                {state.errors.message[0]}
+              </span>
             </label>
           )}
         </div>
@@ -238,15 +246,18 @@ export default function ContactForm(props: ContactFormProps) {
               onChange={(e) => setGdprConsent(e.target.checked)}
               required
             />
-            <span className="label-text ml-2 flex-1">
-              Strinjam se, da se podatki uporabijo za povratno komunikacijo. Hranijo se v skladu z GDPR.
+            <span className="label-text ml-4 flex-1">
+              Strinjam se, da se podatki uporabijo za povratno komunikacijo.
+              Hranijo se v skladu z GDPR.
             </span>
           </label>
         </div>
 
         {/* Status Messages */}
         {state.message && (
-          <div className={`alert ${state.success ? "alert-success" : "alert-error"}`}>
+          <div
+            className={`alert ${state.success ? "alert-success" : "alert-error"}`}
+          >
             <span>{state.message}</span>
             {!state.success && (
               <div className="mt-2 text-sm">
@@ -275,7 +286,9 @@ export default function ContactForm(props: ContactFormProps) {
             }}
           />
           {!turnstileToken && state.message && (
-            <span className="text-sm text-error">Prosimo, potrdite, da niste robot.</span>
+            <span className="text-sm text-error">
+              Prosimo, potrdite, da niste robot.
+            </span>
           )}
         </div>
 
