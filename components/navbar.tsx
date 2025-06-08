@@ -60,7 +60,7 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
       <div className="absolute left-0 right-0 bottom-0 h-0.5 backdrop-blur-md brightness-95 bg-white/10 translate-y-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className={`flex transition-all duration-500 ease-out ${
+        <div className={`flex transition-all duration-500 ease-out mr-6 ${
           scrolled 
             ? 'flex-row items-center justify-between py-2' 
             : 'flex-col items-center gap-3 pt-4 pb-3'
@@ -72,23 +72,25 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
               href="/" 
               className={`flex items-center transition-all duration-500 ease-out ${
                 scrolled 
-                  ? 'flex-row gap-3 transform' 
-                  : 'flex-col gap-2 transform'
+                  ? 'flex-row gap-3' 
+                  : 'flex-col gap-2'
               }`}
             >
-              <div className={`transition-all duration-500 ease-out ${
+              <div className={`flex-shrink-0 transition-all duration-500 ease-out ${
                 scrolled 
-                  ? 'transform scale-75 translate-x-0' 
-                  : 'transform scale-100 translate-x-0'
+                  ? 'py-1' 
+                  : 'py-2'
               }`}>
                 <Image
                   data-tina-field={tinaField(global, "logo")}
                   src={global.logo}
                   alt=""
-                  width={32}
-                  height={32}
-                  className={`transition-all duration-500 ease-out ${
-                    scrolled ? 'h-6 w-auto' : 'h-8 w-auto'
+                  width={64}
+                  height={64}
+                  className={`object-contain transition-all duration-500 ease-out ${
+                    scrolled 
+                      ? 'h-8 w-auto max-w-none' 
+                      : 'h-12 w-auto max-w-none'
                   }`}
                 />
               </div>
