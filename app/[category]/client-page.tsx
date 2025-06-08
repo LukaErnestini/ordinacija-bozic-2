@@ -10,6 +10,7 @@ import { TinaConnectionClientPageProps, TinaQueryClientPageProps } from "@/tina/
 import { tinaField, useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { generalMdxComponents } from "@/components/mdx-components";
+import FloatingTOC from "@/components/FloatingTOC";
 
 export default function ClientCategoryPage({
   serviceCategoryQuery,
@@ -35,8 +36,17 @@ export default function ClientCategoryPage({
       return (a?.title || "").localeCompare(b?.title || "");
     });
 
+  // Prepare TOC items for the floating TOC
+  const tocItems = services?.filter(service => service).map(service => ({
+    id: service!._sys.filename,
+    title: service!.title
+  })) || [];
+
   return (
     <div>
+      {/* Floating Table of Contents */}
+      <FloatingTOC items={tocItems} />
+      
       {/* <pre>{JSON.stringify(servicesConnection.data.servicesConnection, null, 2)}</pre> */}
       {/* Hero Section with stronger gradient and shadow effects */}
       <div className="relative bg-gradient-to-b from-secondary/30 via-background to-background">
