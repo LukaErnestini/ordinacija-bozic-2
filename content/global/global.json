@@ -1,5 +1,10 @@
 {
   "landingImage": "/2.jpg",
+  "heroImages": [
+    "/ARI_0234.jpg",
+    "/2.jpg",
+    "/1.jpg"
+  ],
   "logo": "/logo2_crn.png",
   "pageTitle": "SPECIALISTIČNA ZOBOZDRAVSTVENA ORDINACIJA BOŽIČ",
   "ourServicesText": "Naše storitve",
@@ -53,4 +58,3 @@
     "headerSubtitle": "Na voljo smo Vam preko telefona, kontaktnega obrazca ali elektronskega sporočila. Kontaktirajte nas in poskrbeli bomo, da se kmalu vidimo."
   }
 }
-

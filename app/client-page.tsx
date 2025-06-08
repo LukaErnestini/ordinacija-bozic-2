@@ -27,23 +27,12 @@ export default function ClientHomePage({
 }) {
   const { global } = useTina(globalQuery).data;
 
-  const carouselSlides = [
-    {
-      src: global.landingImage,
+  const carouselSlides =
+    global.heroImages?.map((i) => ({
+      src: i as string,
       alt: "",
-      tinaField: tinaField(global, "landingImage"),
-    },
-    {
-      src: global.landingImage,
-      alt: "",
-      tinaField: tinaField(global, "landingImage"),
-    },
-    {
-      src: global.landingImage,
-      alt: "",
-      tinaField: tinaField(global, "landingImage"),
-    },
-  ];
+      tinaField: tinaField(global, "heroImages"),
+    })) ?? [];
 
   return (
     <div className="mx-auto flex flex-col">

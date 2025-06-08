@@ -293,10 +293,10 @@ export default defineConfig({
         },
         fields: [
           {
-            name: "landingImage",
-            label: "Landing Image",
             type: "image",
-            required: true,
+            name: "heroImages",
+            label: "Hero Images",
+            list: true,
           },
           {
             name: "logo",
