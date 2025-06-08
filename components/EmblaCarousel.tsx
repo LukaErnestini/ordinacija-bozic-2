@@ -50,7 +50,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div className="relative h-64 lg:h-80 overflow-hidden select-none bg-neutral-100">
                 <Image
                   data-tina-field={slide.tinaField}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   src={slide.src}
                   alt={slide.alt}
                   sizes="(max-width: 768px) 100vw, 50vw"
