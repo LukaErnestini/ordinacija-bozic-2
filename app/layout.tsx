@@ -2,6 +2,7 @@ import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import BackToTopButton from "@/components/BackToTopButton";
 import client from "@/tina/__generated__/client";
 import NoticeAlert from "@/components/notice/notice-alert";
 import { Metadata } from "next";
@@ -220,6 +221,7 @@ export default async function RootLayout({
           <NoticeAlert {...noticesResponse} />
           <div className="mt-nav-mobile lg:mt-nav grow">{children}</div>
           <Footer locations={locations} />
+          <BackToTopButton />
         </body>
       </html>
     </>
