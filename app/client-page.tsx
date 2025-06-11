@@ -79,12 +79,17 @@ export default function ClientHomePage({
       <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4">
-              Zakaj izbrati Ordinacijo Božić?
+            <h2 
+              className="text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4"
+              data-tina-field={tinaField(global, "homePage", "whyChooseUsTitle")}
+            >
+              {global.homePage?.whyChooseUsTitle}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Z več kot 30 leti izkušenj in najsodobnejšo opremo zagotavljamo
-              vrhunsko zobozdravstveno oskrbo.
+            <p 
+              className="text-lg text-gray-600 max-w-2xl mx-auto"
+              data-tina-field={tinaField(global, "homePage", "whyChooseUsSubtitle")}
+            >
+              {global.homePage?.whyChooseUsSubtitle}
             </p>
           </div>
 
@@ -105,12 +110,17 @@ export default function ClientHomePage({
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif font-bold text-gray-800 mb-2">
-                Izkušenost
+              <h3 
+                className="text-xl font-serif font-bold text-gray-800 mb-2"
+                data-tina-field={tinaField(global, "homePage", "experienceTitle")}
+              >
+                {global.homePage?.experienceTitle}
               </h3>
-              <p className="text-gray-600">
-                Več kot 30 let strokovne prakse in neprestano izpopolnjevanje
-                znanja
+              <p 
+                className="text-gray-600"
+                data-tina-field={tinaField(global, "homePage", "experienceDescription")}
+              >
+                {global.homePage?.experienceDescription}
               </p>
             </div>
 
@@ -130,11 +140,17 @@ export default function ClientHomePage({
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif font-bold text-gray-800 mb-2">
-                Moderna oprema
+              <h3 
+                className="text-xl font-serif font-bold text-gray-800 mb-2"
+                data-tina-field={tinaField(global, "homePage", "modernEquipmentTitle")}
+              >
+                {global.homePage?.modernEquipmentTitle}
               </h3>
-              <p className="text-gray-600">
-                Najsodobnejša tehnologija za natančno diagnostiko in zdravljenje
+              <p 
+                className="text-gray-600"
+                data-tina-field={tinaField(global, "homePage", "modernEquipmentDescription")}
+              >
+                {global.homePage?.modernEquipmentDescription}
               </p>
             </div>
 
@@ -154,11 +170,17 @@ export default function ClientHomePage({
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif font-bold text-gray-800 mb-2">
-                Osebna oskrba
+              <h3 
+                className="text-xl font-serif font-bold text-gray-800 mb-2"
+                data-tina-field={tinaField(global, "homePage", "personalCareTitle")}
+              >
+                {global.homePage?.personalCareTitle}
               </h3>
-              <p className="text-gray-600">
-                Individualen pristop in prijazno okolje za vse generacije
+              <p 
+                className="text-gray-600"
+                data-tina-field={tinaField(global, "homePage", "personalCareDescription")}
+              >
+                {global.homePage?.personalCareDescription}
               </p>
             </div>
           </div>
@@ -170,29 +192,59 @@ export default function ClientHomePage({
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white">
             <div>
-              <div className="text-3xl lg:text-4xl font-bold font-serif mb-2">
-                30+
+              <div 
+                className="text-3xl lg:text-4xl font-bold font-serif mb-2"
+                data-tina-field={tinaField(global, "homePage", "yearsExperienceStat")}
+              >
+                {global.homePage?.yearsExperienceStat}
               </div>
-              <div className="text-primary-content/80">Let izkušenj</div>
+              <div 
+                className="text-primary-content/80"
+                data-tina-field={tinaField(global, "homePage", "yearsExperienceLabel")}
+              >
+                {global.homePage?.yearsExperienceLabel}
+              </div>
             </div>
             <div>
-              <div className="text-3xl lg:text-4xl font-bold font-serif mb-2">
-                2
+              <div 
+                className="text-3xl lg:text-4xl font-bold font-serif mb-2"
+                data-tina-field={tinaField(global, "homePage", "locationsStat")}
+              >
+                {global.homePage?.locationsStat}
               </div>
-              <div className="text-primary-content/80">Lokaciji</div>
+              <div 
+                className="text-primary-content/80"
+                data-tina-field={tinaField(global, "homePage", "locationsLabel")}
+              >
+                {global.homePage?.locationsLabel}
+              </div>
             </div>
             <div>
-              <div className="text-3xl lg:text-4xl font-bold font-serif mb-2">
-                100%
+              <div 
+                className="text-3xl lg:text-4xl font-bold font-serif mb-2"
+                data-tina-field={tinaField(global, "homePage", "satisfactionStat")}
+              >
+                {global.homePage?.satisfactionStat}
               </div>
-              <div className="text-primary-content/80">Zadovoljni pacienti</div>
+              <div 
+                className="text-primary-content/80"
+                data-tina-field={tinaField(global, "homePage", "satisfactionLabel")}
+              >
+                {global.homePage?.satisfactionLabel}
+              </div>
             </div>
             <div>
-              <div className="text-3xl lg:text-4xl font-bold font-serif mb-2">
-                24/7
+              <div 
+                className="text-3xl lg:text-4xl font-bold font-serif mb-2"
+                data-tina-field={tinaField(global, "homePage", "emergencyHelpStat")}
+              >
+                {global.homePage?.emergencyHelpStat}
               </div>
-              <div className="text-primary-content/80">
-                Pomoč v nujnih primerih
+              <div 
+                className="text-primary-content/80"
+                data-tina-field={tinaField(global, "homePage", "emergencyHelpLabel")}
+              >
+                {global.homePage?.emergencyHelpLabel}
               </div>
             </div>
           </div>
@@ -208,9 +260,11 @@ export default function ClientHomePage({
         >
           {global.ourServicesText}
         </h2>
-        <p className="text-center text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
-          Specializirani smo za vsa področja zobozdravstva - od preventive do
-          najzahtevnejših posegov.
+        <p 
+          className="text-center text-lg text-gray-600 mb-12 max-w-2xl mx-auto"
+          data-tina-field={tinaField(global, "homePage", "servicesSubtitle")}
+        >
+          {global.homePage?.servicesSubtitle}
         </p>
         <CategoriesSmall {...categoriesConnectionQuery}></CategoriesSmall>
       </section>
@@ -219,12 +273,17 @@ export default function ClientHomePage({
       <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4">
-              Spoznajte naš tim
+            <h2 
+              className="text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4"
+              data-tina-field={tinaField(global, "homePage", "teamTitle")}
+            >
+              {global.homePage?.teamTitle}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Naša družina strokovnjakov je predana zagotavljanju najboljše
-              možne oskrbe za vaše zdravje zob.
+            <p 
+              className="text-lg text-gray-600 max-w-2xl mx-auto"
+              data-tina-field={tinaField(global, "homePage", "teamSubtitle")}
+            >
+              {global.homePage?.teamSubtitle}
             </p>
           </div>
 
@@ -311,7 +370,9 @@ export default function ClientHomePage({
               href="/predstavitev"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors font-medium"
             >
-              Spoznajte celoten tim
+              <span data-tina-field={tinaField(global, "homePage", "teamLinkText")}>
+                {global.homePage?.teamLinkText}
+              </span>
               <svg
                 className="w-4 h-4"
                 fill="none"
@@ -334,11 +395,17 @@ export default function ClientHomePage({
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4">
-              Naše lokacije
+            <h2 
+              className="text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4"
+              data-tina-field={tinaField(global, "homePage", "locationsTitle")}
+            >
+              {global.homePage?.locationsTitle}
             </h2>
-            <p className="text-lg text-gray-600">
-              Izberite najbližjo lokacijo in se naročite na pregled
+            <p 
+              className="text-lg text-gray-600"
+              data-tina-field={tinaField(global, "homePage", "locationsSubtitle")}
+            >
+              {global.homePage?.locationsSubtitle}
             </p>
           </div>
 
@@ -370,14 +437,19 @@ export default function ClientHomePage({
                   Štorje
                 </h3>
               </div>
-              <p className="text-gray-600 mb-4">
-                Glavna ordinacija z najširšo ponudbo storitev
+              <p 
+                className="text-gray-600 mb-4"
+                data-tina-field={tinaField(global, "homePage", "storjeDescription")}
+              >
+                {global.homePage?.storjeDescription}
               </p>
               <Link
                 href="/ordinacija-storje"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
               >
-                Več informacij
+                <span data-tina-field={tinaField(global, "homePage", "moreInfoText")}>
+                  {global.homePage?.moreInfoText}
+                </span>
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -421,14 +493,19 @@ export default function ClientHomePage({
                   Portorož
                 </h3>
               </div>
-              <p className="text-gray-600 mb-4">
-                Ordinacija na obali za vaše poletne potrebe
+              <p 
+                className="text-gray-600 mb-4"
+                data-tina-field={tinaField(global, "homePage", "portorozDescription")}
+              >
+                {global.homePage?.portorozDescription}
               </p>
               <Link
                 href="/ordinacija-portoroz"
                 className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-medium"
               >
-                Več informacij
+                <span data-tina-field={tinaField(global, "homePage", "moreInfoText")}>
+                  {global.homePage?.moreInfoText}
+                </span>
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -451,12 +528,17 @@ export default function ClientHomePage({
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-primary to-primary/90">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white mb-4">
-            Pripravljen za svoj nasmeh?
+          <h2 
+            className="text-3xl lg:text-4xl font-serif font-bold text-white mb-4"
+            data-tina-field={tinaField(global, "homePage", "ctaTitle")}
+          >
+            {global.homePage?.ctaTitle}
           </h2>
-          <p className="text-xl text-primary-content/90 mb-8 max-w-2xl mx-auto">
-            Naročite se na brezplačen posvet in odkrijte, kako lahko izboljšamo
-            vaše zobje.
+          <p 
+            className="text-xl text-primary-content/90 mb-8 max-w-2xl mx-auto"
+            data-tina-field={tinaField(global, "homePage", "ctaSubtitle")}
+          >
+            {global.homePage?.ctaSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -476,10 +558,12 @@ export default function ClientHomePage({
                   d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                 />
               </svg>
-              Kontaktirajte nas
+              <span data-tina-field={tinaField(global, "homePage", "contactButtonText")}>
+                {global.homePage?.contactButtonText}
+              </span>
             </Link>
             <a
-              href="tel:+38641234567"
+              href={`tel:${global.homePage?.callButtonPhone}`}
               className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl hover:bg-white hover:text-primary transition-colors font-medium text-lg"
             >
               <svg
@@ -495,7 +579,9 @@ export default function ClientHomePage({
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              Pokličite zdaj
+              <span data-tina-field={tinaField(global, "homePage", "callButtonText")}>
+                {global.homePage?.callButtonText}
+              </span>
             </a>
           </div>
         </div>
