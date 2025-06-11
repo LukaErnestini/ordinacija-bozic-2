@@ -18,21 +18,6 @@ export default function StoritevClientPage(props: StoritevClientPageProps) {
   const { data } = useTina({ ...props });
   const service = data.services;
 
-  // const faqs = service.faq?.map((faq) => (
-  //   <li
-  //     key={faq?.question}
-  //     className="collapse collapse-arrow bg-white/50 backdrop-blur-sm rounded-xl shadow-lg mb-4"
-  //   >
-  //     <input
-  //       type="checkbox"
-  //       name="my-accordion-2"
-  //     />
-  //     <div className="collapse-title text-xl font-medium">{faq?.question}</div>
-  //     <div className="collapse-content prose">
-  //       <p>{faq?.answer}</p>
-  //     </div>
-  //   </li>
-  // ));
 
   return (
     <>
@@ -83,16 +68,6 @@ export default function StoritevClientPage(props: StoritevClientPageProps) {
               components={generalMdxComponents()}
             ></TinaMarkdown>
           </div>
-          {/* commented out FAQ, not used */}
-          {/* {faqs && (
-            <div
-              data-tina-field={tinaField(service, "faq")}
-              className="max-w-4xl mx-auto mt-16"
-            >
-              <h2 className="text-3xl font-serif font-bold mb-8 text-center">FAQ</h2>
-              <ul className="space-y-4">{faqs}</ul>
-            </div>
-          )} */}
         </div>
       </section>
     </>

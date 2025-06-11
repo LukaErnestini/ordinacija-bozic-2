@@ -2,7 +2,6 @@ import client from "@/tina/__generated__/client";
 import ClientHomePage from "./client-page";
 
 export default async function Home() {
-  // const services = await client.queries.servicesConnection();
   const categories = await client.queries.serviceCategoryConnection();
   const globalQuery = await client.queries.global({ relativePath: "global.json" });
 

@@ -18,11 +18,6 @@ const sanitizeFilename = (filename: string) => {
     .replace(/[^a-z0-9-]/g, "");
 };
 
-// const validateFilename = (filename: string) => {
-//   if (filename !== sanitizeFilename(filename)) {
-//     return "Filename contains invalid characters. Please use only lowercase letters, numbers, and hyphens.";
-//   }
-// };
 
 export default defineConfig({
   branch,
@@ -626,35 +621,6 @@ export default defineConfig({
               },
             ],
           },
-          // commented out cause they don't need this and it's not fully implemented.
-          // {
-          //   type: "object",
-          //   name: "faq",
-          //   label: "FAQ Section",
-          //   list: true,
-          //   ui: {
-          //     itemProps: (item) => {
-          //       return { label: item?.question };
-          //     }
-          //   },
-          //   fields: [
-          //     {
-          //       type: "string",
-          //       name: "question",
-          //       label: "Question",
-          //       required: true
-          //     },
-          //     {
-          //       type: "string",
-          //       name: "answer",
-          //       label: "Answer",
-          //       ui: {
-          //         component: "textarea"
-          //       },
-          //       required: true
-          //     }
-          //   ]
-          // }
         ],
       },
     ],

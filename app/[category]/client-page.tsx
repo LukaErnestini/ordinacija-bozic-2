@@ -47,7 +47,6 @@ export default function ClientCategoryPage({
       {/* Floating Table of Contents */}
       <FloatingTOC items={tocItems} />
       
-      {/* <pre>{JSON.stringify(servicesConnection.data.servicesConnection, null, 2)}</pre> */}
       {/* Hero Section with stronger gradient and shadow effects */}
       <div className="relative bg-gradient-to-b from-secondary/30 via-background to-background">
         <div className="absolute inset-0 bg-primary/5 backdrop-blur-[2px]" />
