@@ -333,6 +333,13 @@ export default defineConfig({
             required: true,
           },
           {
+            name: "backgroundEffect",
+            label: "Background Effect",
+            description: "Enable decorative background effect",
+            type: "boolean",
+            required: true,
+          },
+          {
             type: "object",
             label: "Contact Form Settings",
             name: "contactForm",

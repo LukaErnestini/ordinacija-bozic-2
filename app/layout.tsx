@@ -216,7 +216,7 @@ export default async function RootLayout({
             }}
           />
         </head>
-        <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
+        <body className={`font-montserrat min-h-dvh flex flex-col min-w-80 ${globalQuery.data.global.backgroundEffect ? 'with-background' : ''}`}>
           <Navbar items={navigationItems} globalQuery={globalQuery}></Navbar>
           <NoticeAlert {...noticesResponse} />
           <div className="mt-nav-mobile lg:mt-nav grow">{children}</div>
