@@ -25,12 +25,12 @@ export default function NotFound() {
 
           {/* Main Message */}
           <h1 className="text-4xl font-serif font-bold text-gray-800 mb-4">
-            Ups! Stran ne obstaja
+            Ojoj, zašli ste s poti
           </h1>
           
           <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-            Oprostite, a iskana stran ni na voljo. Morda je bila prestavljena ali pa ste 
-            vnesli napačen naslov. Ne skrbite - pomagali vam bomo najti pravo pot!
+            Videti je, da stran, ki jo iščete, trenutno ni dosegljiva. Nič hudega - 
+            z veseljem vam pomagamo najti, kar potrebujete!
           </p>
 
           {/* Helpful Suggestions */}
@@ -84,8 +84,8 @@ export default function NotFound() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">Kontaktirajte nas</h3>
-                  <p className="text-sm text-gray-600">Potrebujete pomoč? Pišite nam sporočilo</p>
+                  <h3 className="font-semibold text-gray-800 mb-1">Vprašajte nas</h3>
+                  <p className="text-sm text-gray-600">Z veseljem vam pomagamo - pišite ali pokličite</p>
                 </div>
               </div>
             </div>
@@ -110,7 +110,7 @@ export default function NotFound() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
               </svg>
-              Naše storitve
+              Kako vam pomagamo
             </Link>
 
             <Link 
@@ -127,7 +127,7 @@ export default function NotFound() {
           {/* Bottom helpful note */}
           <div className="mt-12 p-4 bg-blue-50 rounded-xl border border-blue-100">
             <p className="text-sm text-blue-800">
-              <strong>💡 Nasvet:</strong> Dodajte našo stran med zaznamke, da nas boste lažje našli!
+              <strong>💡 Namig:</strong> Shranite si našo stran med priljubljene za hitrejši dostop!
             </p>
           </div>
         </div>

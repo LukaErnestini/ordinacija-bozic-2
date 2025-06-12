@@ -1,91 +1,94 @@
 {
   "landingImage": "/2.jpg",
-  "heroImages": ["/ARI_0234.jpg", "/2.jpg", "/1.jpg"],
+  "backgroundStyle": "organic",
+  "heroImages": [
+    "/ARI_0234.jpg",
+    "/2.jpg",
+    "/1.jpg"
+  ],
   "logo": "/logo2_crn.png",
   "pageTitle": "SPECIALISTIČNA ZOBOZDRAVSTVENA ORDINACIJA BOŽIČ",
-  "ourServicesText": "Naše storitve",
-  "heroSubtext": "Zagotavljamo vrhunsko zobozdravstveno oskrbo z najnovejšimi tehnologijami in osebnim pristopom k vsakemu pacientu.",
-  "siteTitle": "Ordinacija Božič | Specialistična zobozdravstvena ordinacija",
-  "siteDescription": "Visoko kvalitetne zobozdravstvene storitve za vso družino. Specialistična diagnostika, preventiva in zdravljenje v prijetnem okolju.",
-  "backgroundStyle": "organic",
+  "ourServicesText": "Kako vam lahko pomagamo",
+  "heroSubtext": "Vaš nasmeh je naša strast. Z najsodobnejšo tehnologijo in pristnim človeških odnosom ustvarjamo zdravo in samozavestno prihodnost za vaše zobe.",
+  "siteTitle": "Ordinacija Božič | Vaš partner za zdrav in lep nasmeh",
+  "siteDescription": "Odkrijte brezskrbno zobozdravstveno izkušnjo za vso družino. Brez bolečin, z razumevanjem in vrhunskimi rezultati v sproščenem okolju.",
   "backgroundEffect": true,
   "homePage": {
-    "whyChooseUsTitle": "Zakaj izbrati Ordinacijo Božić?",
-    "whyChooseUsSubtitle": "Z več kot 30 leti izkušenj in najsodobnejšo opremo zagotavljamo vrhunsko zobozdravstveno oskrbo.",
-    "experienceTitle": "Izkušenost",
-    "experienceDescription": "Več kot 30 let strokovne prakse in neprestano izpopolnjevanje znanja",
-    "modernEquipmentTitle": "Moderna oprema",
-    "modernEquipmentDescription": "Najsodobnejša tehnologija za natančno diagnostiko in zdravljenje",
-    "personalCareTitle": "Osebna oskrba",
-    "personalCareDescription": "Individualen pristop in prijazno okolje za vse generacije",
+    "whyChooseUsTitle": "Vaše udobje je naša prioriteta",
+    "whyChooseUsSubtitle": "Združujemo 30-letno tradicijo zaupanja s sodobnimi pristopi za vašo varnost in zadovoljstvo.",
+    "experienceTitle": "Zaupanje skozi generacije",
+    "experienceDescription": "30+ let izkušenj pomeni, da razumemo vaše potrebe in strahove",
+    "modernEquipmentTitle": "Nežnejši postopki",
+    "modernEquipmentDescription": "Sodobna tehnologija omogoča hitrejše, učinkovitejše in manj boleče zdravljenje",
+    "personalCareTitle": "Vi ste v središču",
+    "personalCareDescription": "Vsak pacient je zgodba - prisluhnemo, razumemo in skupaj najdemo pravo rešitev",
     "yearsExperienceStat": "30+",
-    "yearsExperienceLabel": "Let izkušenj",
+    "yearsExperienceLabel": "Let vašega zaupanja",
     "locationsStat": "2",
     "locationsLabel": "Lokaciji",
-    "satisfactionStat": "100%",
-    "satisfactionLabel": "Zadovoljni pacienti",
+    "satisfactionStat": "98%",
+    "satisfactionLabel": "Vas priporoča naprej",
     "emergencyHelpStat": "24/7",
-    "emergencyHelpLabel": "Pomoč v nujnih primerih",
-    "servicesSubtitle": "Specializirani smo za vsa področja zobozdravstva - od preventive do najzahtevnejših posegov.",
-    "teamTitle": "Spoznajte naš tim",
-    "teamSubtitle": "Naša družina strokovnjakov je predana zagotavljanju najboljše možne oskrbe za vaše zdravje zob.",
-    "teamLinkText": "Spoznajte celoten tim",
-    "locationsTitle": "Naše lokacije",
-    "locationsSubtitle": "Izberite najbližjo lokacijo in se naročite na pregled",
-    "storjeDescription": "Glavna ordinacija z najširšo ponudbo storitev",
-    "portorozDescription": "Ordinacija na obali za vaše poletne potrebe",
-    "moreInfoText": "Več informacij",
-    "ctaTitle": "Pripravljen za svoj nasmeh?",
-    "ctaSubtitle": "Naročite se na brezplačen posvet in odkrijte, kako lahko izboljšamo vaše zobje.",
-    "contactButtonText": "Kontaktirajte nas",
-    "callButtonText": "Pokličite zdaj",
+    "emergencyHelpLabel": "Tu smo, ko nas potrebujete",
+    "servicesSubtitle": "Od prvega zobka do zlatih let - celovite rešitve za vaš nasmeh na vsakem koraku življenja.",
+    "teamTitle": "Za vas poskrbimo",
+    "teamSubtitle": "Strokovnjaki s srcem - vaš nasmeh je naša skupna zmaga.",
+    "teamLinkText": "Spoznajte našo ekipo",
+    "locationsTitle": "Blizu vašega doma",
+    "locationsSubtitle": "Dve lokaciji za vašo udobnost - izberite tisto, ki vam najbolj ustreza",
+    "storjeDescription": "Polna paleta storitev v mirnem okolju",
+    "portorozDescription": "Vaša zobozdravstvena oskrba tudi med počitnicami",
+    "moreInfoText": "Oglejte si podrobnosti",
+    "ctaTitle": "Začnimo vašo pot do zdravega nasmeha",
+    "ctaSubtitle": "Prvi korak je najlažji - pokličite nas za brezplačen posvet in skupaj bomo našli pravo rešitev za vas.",
+    "contactButtonText": "Pišite nam",
+    "callButtonText": "Pokličite nas",
     "callButtonPhone": "+386 41 234 567"
   },
   "contactForm": {
     "presetMessages": [
       {
-        "label": "Prvi splošni pregled",
+        "label": "Želim spoznati vašo ordinacijo (prvi pregled)",
         "value": "prvi_pregled",
         "enabled": true
       },
       {
-        "label": "Bolečinski pregled / imam težavo",
+        "label": "Boli me / imam težavo in potrebujem pomoč",
         "value": "bolecinski_pregled",
         "enabled": true
       },
       {
-        "label": "Invisalign® zobni aparat",
+        "label": "Zanima me nevidni zobni aparat Invisalign®",
         "value": "invisalign",
         "enabled": true
       },
       {
-        "label": "Prevleke / Mostiček / Proteza / zobni vsadki (implantati)",
+        "label": "Potrebujem novo zobno rešitev (prevleke, mostički, vsadki)",
         "value": "zobni_vsadki",
         "enabled": true
       },
       {
-        "label": "Estetsko zobozdravstvo: preobrazba nasmeha, beljenje, luske, bele zalivke, ….",
+        "label": "Želim lepši nasmeh (beljenje, luske, estetske rešitve)",
         "value": "estetsko_zobozdravstvo",
         "enabled": true
       },
       {
-        "label": "Ustna higiena: čiščenje zobnega kamna, odstranjevanje zabarvanj",
+        "label": "Potrebujem profesionalno čiščenje zob",
         "value": "ustna_higiena",
         "enabled": true
       },
       {
-        "label": "Endodontsko zdravljenje zoba",
+        "label": "Potrebujem zdravljenje korenskečnega kanala",
         "value": "endodontsko_zdravljenje",
         "enabled": true
       },
       {
-        "label": "Drugo",
+        "label": "Imam drugo vprašanje ali željo",
         "value": "drugo",
         "enabled": true
       }
     ],
-    "headerTitle": "Kontaktirajte nas!",
-    "headerSubtitle": "Na voljo smo Vam preko telefona, kontaktnega obrazca ali elektronskega sporočila. Kontaktirajte nas in poskrbeli bomo, da se kmalu vidimo."
+    "headerTitle": "Radi bi slišali od vas",
+    "headerSubtitle": "Vzemite si trenutek za vprašanje ali naročilo. Odgovorimo hitro in z veseljem - vaše zdravje nam ni vseeno."
   }
 }
-
