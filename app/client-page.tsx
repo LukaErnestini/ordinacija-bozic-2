@@ -294,9 +294,11 @@ export default function ClientHomePage({
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center group">
               <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
-                <img
+                <Image
                   src="/images/joskobozic.jpg"
                   alt="Dr. Joško Božić"
+                  width={128}
+                  height={128}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                 />
               </div>
