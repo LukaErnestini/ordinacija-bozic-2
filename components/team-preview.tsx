@@ -6,7 +6,7 @@ import { tinaField } from "tinacms/dist/react";
 import { StaffConnectionQuery } from "@/tina/__generated__/types";
 
 interface TeamPreviewProps {
-  staffConnection: StaffConnectionQuery['staffConnection'];
+  staffConnection: StaffConnectionQuery["staffConnection"];
   global: {
     homePage?: {
       teamTitle?: string;
@@ -38,15 +38,13 @@ export default function TeamPreview({ staffConnection, global }: TeamPreviewProp
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {staffMembers.map((staff, index) => {
+          {staffMembers.map((staff) => {
             if (!staff) return null;
 
             const displayImage = staff.teamPreviewImage || staff.image;
             const displayTitle = staff.teamPreviewTitle || staff.title;
             const displayDescription = staff.teamPreviewDescription;
-            const displayName = staff.teamPreviewPrefix 
-              ? `${staff.teamPreviewPrefix} ${staff.name}` 
-              : staff.name;
+            const displayName = staff.teamPreviewPrefix ? `${staff.teamPreviewPrefix} ${staff.name}` : staff.name;
 
             return (
               <div
