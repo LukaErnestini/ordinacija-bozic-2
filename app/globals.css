@@ -21,7 +21,111 @@
   --accent: 60 166 141; /* #3ca68d */
 }
 
+/* Base body styles */
 body {
   color: rgb(var(--foreground));
   background: rgb(var(--background));
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Ensure content is above background effects */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Background Effect (when enabled) */
+body.with-background {
+  background: linear-gradient(to bottom, #fefefe 0%, #fafbfc 100%);
+  overflow-x: hidden;
+}
+
+/* Main flowing gradient from top-right */
+body.with-background::before {
+  content: '';
+  position: fixed;
+  top: -10%;
+  right: -10%;
+  width: 120%;
+  height: 120%;
+  background: 
+    radial-gradient(ellipse at top right, rgba(176, 144, 84, 0.25) 0%, rgba(176, 144, 84, 0.15) 25%, rgba(60, 166, 141, 0.1) 50%, transparent 70%);
+  filter: blur(40px);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+  animation: flow 20s ease-in-out infinite;
+}
+
+/* Secondary accent blob */
+body.with-background::after {
+  content: '';
+  position: fixed;
+  top: 20%;
+  right: 10%;
+  width: 40%;
+  height: 40%;
+  background: 
+    radial-gradient(circle, rgba(180, 168, 151, 0.3) 0%, transparent 50%);
+  filter: blur(60px);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+  animation: float 15s ease-in-out infinite;
+}
+
+/* Additional floating orbs for depth */
+body.with-background > *:first-child::before {
+  content: '';
+  position: fixed;
+  top: 60%;
+  right: 30%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(176, 144, 84, 0.2) 0%, transparent 40%);
+  filter: blur(50px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: drift 25s ease-in-out infinite;
+}
+
+@keyframes flow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-50px, 30px) scale(1.1);
+  }
+  66% {
+    transform: translate(30px, -20px) scale(0.95);
+  }
+}
+
+@keyframes drift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-100px, 50px);
+  }
+  50% {
+    transform: translate(-50px, -30px);
+  }
+  75% {
+    transform: translate(50px, 20px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  33% {
+    transform: translateY(-30px) translateX(20px);
+  }
+  66% {
+    transform: translateY(30px) translateX(-20px);
+  }
 }

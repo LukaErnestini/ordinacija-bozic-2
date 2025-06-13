@@ -18,11 +18,6 @@ const sanitizeFilename = (filename: string) => {
     .replace(/[^a-z0-9-]/g, "");
 };
 
-// const validateFilename = (filename: string) => {
-//   if (filename !== sanitizeFilename(filename)) {
-//     return "Filename contains invalid characters. Please use only lowercase letters, numbers, and hyphens.";
-//   }
-// };
 
 export default defineConfig({
   branch,
@@ -276,6 +271,30 @@ export default defineConfig({
             type: "image",
             required: true,
           },
+          {
+            name: "teamPreviewImage",
+            label: "Team Preview Image",
+            description: "Image used in the team preview section on homepage",
+            type: "image",
+          },
+          {
+            name: "teamPreviewPrefix",
+            label: "Team Preview Prefix",
+            description: "Prefix shown before name in team preview (e.g., 'Dr.')",
+            type: "string",
+          },
+          {
+            name: "teamPreviewTitle",
+            label: "Team Preview Title",
+            description: "Title shown in team preview section (overrides main title if provided)",
+            type: "string",
+          },
+          {
+            name: "teamPreviewDescription",
+            label: "Team Preview Description",
+            description: "Short description shown in team preview section",
+            type: "string",
+          },
         ],
       },
       {
@@ -336,6 +355,201 @@ export default defineConfig({
               "Description of the site, displayed in the browser tab",
             type: "string",
             required: true,
+          },
+          {
+            name: "backgroundEffect",
+            label: "Background Effect",
+            description: "Enable decorative background effect",
+            type: "boolean",
+            required: true,
+          },
+          {
+            type: "object",
+            label: "Home Page Content",
+            name: "homePage",
+            required: true,
+            fields: [
+              {
+                type: "string",
+                label: "Why Choose Us Title",
+                name: "whyChooseUsTitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Why Choose Us Subtitle",
+                name: "whyChooseUsSubtitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Experience Title",
+                name: "experienceTitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Experience Description",
+                name: "experienceDescription",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Modern Equipment Title",
+                name: "modernEquipmentTitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Modern Equipment Description",
+                name: "modernEquipmentDescription",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Personal Care Title",
+                name: "personalCareTitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Personal Care Description",
+                name: "personalCareDescription",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Years Experience Stat",
+                name: "yearsExperienceStat",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Years Experience Label",
+                name: "yearsExperienceLabel",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Locations Stat",
+                name: "locationsStat",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Locations Label",
+                name: "locationsLabel",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Satisfaction Stat",
+                name: "satisfactionStat",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Satisfaction Label",
+                name: "satisfactionLabel",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Emergency Help Stat",
+                name: "emergencyHelpStat",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Emergency Help Label",
+                name: "emergencyHelpLabel",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Services Subtitle",
+                name: "servicesSubtitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Team Title",
+                name: "teamTitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Team Subtitle",
+                name: "teamSubtitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Team Link Text",
+                name: "teamLinkText",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Locations Title",
+                name: "locationsTitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Locations Subtitle",
+                name: "locationsSubtitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Storje Description",
+                name: "storjeDescription",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Portoroz Description",
+                name: "portorozDescription",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "More Info Text",
+                name: "moreInfoText",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "CTA Title",
+                name: "ctaTitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "CTA Subtitle",
+                name: "ctaSubtitle",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Contact Button Text",
+                name: "contactButtonText",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Call Button Text",
+                name: "callButtonText",
+                required: true,
+              },
+              {
+                type: "string",
+                label: "Call Button Phone",
+                name: "callButtonPhone",
+                required: true,
+              },
+            ],
           },
           {
             type: "object",
@@ -626,35 +840,6 @@ export default defineConfig({
               },
             ],
           },
-          // commented out cause they don't need this and it's not fully implemented.
-          // {
-          //   type: "object",
-          //   name: "faq",
-          //   label: "FAQ Section",
-          //   list: true,
-          //   ui: {
-          //     itemProps: (item) => {
-          //       return { label: item?.question };
-          //     }
-          //   },
-          //   fields: [
-          //     {
-          //       type: "string",
-          //       name: "question",
-          //       label: "Question",
-          //       required: true
-          //     },
-          //     {
-          //       type: "string",
-          //       name: "answer",
-          //       label: "Answer",
-          //       ui: {
-          //         component: "textarea"
-          //       },
-          //       required: true
-          //     }
-          //   ]
-          // }
         ],
       },
     ],

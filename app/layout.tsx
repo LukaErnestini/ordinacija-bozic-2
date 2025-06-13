@@ -99,11 +99,11 @@ export default async function RootLayout({
 
   const navigationItems = [
     {
-      name: "Predstavitev",
+      name: "Kdo smo",
       href: "/predstavitev",
     },
     {
-      name: "Storitve",
+      name: "Kako vam pomagamo",
       subItems: serviceItems,
     },
     {
@@ -115,7 +115,7 @@ export default async function RootLayout({
       href: "/ordinacija-portoroz",
     },
     {
-      name: "Obvestila",
+      name: "Pomembna obvestila",
       href: "/obvestila",
     },
   ];
@@ -216,7 +216,7 @@ export default async function RootLayout({
             }}
           />
         </head>
-        <body className="font-montserrat min-h-dvh flex flex-col min-w-80">
+        <body className={`font-montserrat min-h-dvh flex flex-col min-w-80 ${globalQuery.data.global.backgroundEffect ? 'with-background' : ''}`}>
           <Navbar items={navigationItems} globalQuery={globalQuery}></Navbar>
           <NoticeAlert {...noticesResponse} />
           <div className="mt-nav-mobile lg:mt-nav grow">{children}</div>
