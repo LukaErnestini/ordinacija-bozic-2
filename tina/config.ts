@@ -271,6 +271,30 @@ export default defineConfig({
             type: "image",
             required: true,
           },
+          {
+            name: "teamPreviewImage",
+            label: "Team Preview Image",
+            description: "Image used in the team preview section on homepage",
+            type: "image",
+          },
+          {
+            name: "teamPreviewPrefix",
+            label: "Team Preview Prefix",
+            description: "Prefix shown before name in team preview (e.g., 'Dr.')",
+            type: "string",
+          },
+          {
+            name: "teamPreviewTitle",
+            label: "Team Preview Title",
+            description: "Title shown in team preview section (overrides main title if provided)",
+            type: "string",
+          },
+          {
+            name: "teamPreviewDescription",
+            label: "Team Preview Description",
+            description: "Short description shown in team preview section",
+            type: "string",
+          },
         ],
       },
       {

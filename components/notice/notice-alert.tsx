@@ -98,11 +98,7 @@ export default function NoticeAlert(
           {/* Content */}
           <div className="p-6">
             <div className="prose prose-sm max-w-none [&_p]:text-gray-700 [&_p]:leading-relaxed [&_strong]:text-gray-800 [&_ul]:text-gray-700 [&_li]:text-gray-700 [&_p]:mb-3">
-              {currentNotice.optionalAlertText.children.length ? (
-                <TinaMarkdown content={currentNotice.optionalAlertText} />
-              ) : (
-                <TinaMarkdown content={currentNotice.alertBody} />
-              )}
+              <TinaMarkdown content={currentNotice.alertBody} />
             </div>
 
             {/* Date Info */}
