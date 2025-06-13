@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { tinaField } from "tinacms/dist/react";
-import { StaffConnection } from "@/tina/__generated__/types";
+import { StaffConnectionQuery } from "@/tina/__generated__/types";
 
 interface TeamPreviewProps {
-  staffConnection: StaffConnection;
+  staffConnection: StaffConnectionQuery['staffConnection'];
   global: {
     homePage?: {
       teamTitle?: string;
