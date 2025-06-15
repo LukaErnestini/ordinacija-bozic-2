@@ -90,7 +90,7 @@ export default function ContactForm(props: ContactFormProps) {
         {/* Contact Method Selection */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Kako naj vas kontaktiramo?</span>
+            <span className="label-text">Želim odgovor preko:</span>
           </label>
           <div className="flex gap-4">
             <label className="label cursor-pointer">
@@ -164,7 +164,7 @@ export default function ContactForm(props: ContactFormProps) {
         {/* Location Field */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Lokacija</span>
+            <span className="label-text">Katera ordinacija vam bolj ustreza?</span>
           </label>
           <select name="location" className="select select-bordered w-full">
             {props.locations.map((location) => (
@@ -172,7 +172,7 @@ export default function ContactForm(props: ContactFormProps) {
                 {location}
               </option>
             ))}
-            <option value="No Preference">Lokacija ni pomembna</option>
+            <option value="No Preference">Katera koli ordinacija mi ustreza</option>
           </select>
           {state.errors?.location && (
             <label className="label">
@@ -186,7 +186,7 @@ export default function ContactForm(props: ContactFormProps) {
         {/* Preset Messages Checkboxes */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Zanimam se za:</span>
+            <span className="label-text">Kako vam lahko pomagamo? (lahko izberete več možnosti)</span>
           </label>
           <div className="space-y-3">
             {props.presetMessages
@@ -220,7 +220,7 @@ export default function ContactForm(props: ContactFormProps) {
         {/* Message Field */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Sporočilo</span>
+            <span className="label-text">Vaše sporočilo ali dodatna vprašanja</span>
           </label>
           <textarea
             name="message"
@@ -247,8 +247,8 @@ export default function ContactForm(props: ContactFormProps) {
               required
             />
             <span className="label-text ml-4 flex-1">
-              Strinjam se, da se podatki uporabijo za povratno komunikacijo.
-              Hranijo se v skladu z GDPR.
+              Vaše podatke bomo uporabili izključno za odgovor na vaše povpraševanje.
+              Skrbno jih varujemo v skladu z zakonodajo (GDPR).
             </span>
           </label>
         </div>
@@ -261,7 +261,7 @@ export default function ContactForm(props: ContactFormProps) {
             <span>{state.message}</span>
             {!state.success && (
               <div className="mt-2 text-sm">
-                <p>Kontaktirajte nas neposredno:</p>
+                <p>Lahko nas tudi pokličete ali pišete neposredno:</p>
                 <ul className="list-disc list-inside mt-1">
                   <li>Telefon: 041 823 515</li>
                   <li>E-pošta: some@email.com</li>
@@ -287,7 +287,7 @@ export default function ContactForm(props: ContactFormProps) {
           />
           {!turnstileToken && state.message && (
             <span className="text-sm text-error">
-              Prosimo, potrdite, da niste robot.
+              Prosimo, obkljukajte polje zgoraj za potrditev.
             </span>
           )}
         </div>
@@ -298,7 +298,7 @@ export default function ContactForm(props: ContactFormProps) {
           className="btn btn-primary w-full"
           disabled={!turnstileToken || !gdprConsent || isPending}
         >
-          {isPending ? "Pošiljanje..." : "Pošlji"}
+          {isPending ? "Pošiljamo vaše sporočilo..." : "Pošlji sporočilo"}
         </button>
       </form>
     </div>
