@@ -23,10 +23,7 @@ export default function ClientHomePage({
     ServiceCategoryConnectionQueryVariables
   >;
   globalQuery: TinaQueryClientPageProps<GlobalQuery>;
-  staffConnectionQuery: TinaConnectionClientPageProps<
-    StaffConnectionQuery,
-    StaffConnectionQueryVariables
-  >;
+  staffConnectionQuery: TinaConnectionClientPageProps<StaffConnectionQuery, StaffConnectionQueryVariables>;
 }) {
   const { global } = useTina(globalQuery).data;
   const { staffConnection } = useTina(staffConnectionQuery).data;
@@ -76,6 +73,89 @@ export default function ClientHomePage({
           {/* Carousel */}
           <div className="order-1 lg:order-2">
             <EmblaCarousel slides={carouselSlides}></EmblaCarousel>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="container mx-auto px-4 py-16">
+        <h2
+          id="our-services"
+          data-tina-field={tinaField(global, "ourServicesText")}
+          className="text-center text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4"
+        >
+          {global.ourServicesText}
+        </h2>
+        <p
+          className="text-center text-lg text-gray-600 mb-12 max-w-2xl mx-auto"
+          data-tina-field={tinaField(global.homePage, "servicesSubtitle")}
+        >
+          {global.homePage?.servicesSubtitle}
+        </p>
+        <CategoriesSmall {...categoriesConnectionQuery}></CategoriesSmall>
+      </section>
+
+      {/* Quick Stats */}
+      <section className="py-20 bg-gradient-to-r from-primary via-primary to-primary/95 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
+              <div
+                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
+                data-tina-field={tinaField(global.homePage, "yearsExperienceStat")}
+              >
+                {global.homePage?.yearsExperienceStat}
+              </div>
+              <div
+                className="text-primary-100 font-medium"
+                data-tina-field={tinaField(global.homePage, "yearsExperienceLabel")}
+              >
+                {global.homePage?.yearsExperienceLabel}
+              </div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
+              <div
+                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
+                data-tina-field={tinaField(global.homePage, "locationsStat")}
+              >
+                {global.homePage?.locationsStat}
+              </div>
+              <div
+                className="text-primary-100 font-medium"
+                data-tina-field={tinaField(global.homePage, "locationsLabel")}
+              >
+                {global.homePage?.locationsLabel}
+              </div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
+              <div
+                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
+                data-tina-field={tinaField(global.homePage, "satisfactionStat")}
+              >
+                {global.homePage?.satisfactionStat}
+              </div>
+              <div
+                className="text-primary-100 font-medium"
+                data-tina-field={tinaField(global.homePage, "satisfactionLabel")}
+              >
+                {global.homePage?.satisfactionLabel}
+              </div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
+              <div
+                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
+                data-tina-field={tinaField(global.homePage, "emergencyHelpStat")}
+              >
+                {global.homePage?.emergencyHelpStat}
+              </div>
+              <div
+                className="text-primary-100 font-medium"
+                data-tina-field={tinaField(global.homePage, "emergencyHelpLabel")}
+              >
+                {global.homePage?.emergencyHelpLabel}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -198,91 +278,11 @@ export default function ClientHomePage({
         </div>
       </section>
 
-      {/* Quick Stats */}
-      <section className="py-20 bg-gradient-to-r from-primary via-primary to-primary/95 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
-              <div
-                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
-                data-tina-field={tinaField(global.homePage, "yearsExperienceStat")}
-              >
-                {global.homePage?.yearsExperienceStat}
-              </div>
-              <div
-                className="text-primary-100 font-medium"
-                data-tina-field={tinaField(global.homePage, "yearsExperienceLabel")}
-              >
-                {global.homePage?.yearsExperienceLabel}
-              </div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
-              <div
-                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
-                data-tina-field={tinaField(global.homePage, "locationsStat")}
-              >
-                {global.homePage?.locationsStat}
-              </div>
-              <div
-                className="text-primary-100 font-medium"
-                data-tina-field={tinaField(global.homePage, "locationsLabel")}
-              >
-                {global.homePage?.locationsLabel}
-              </div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
-              <div
-                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
-                data-tina-field={tinaField(global.homePage, "satisfactionStat")}
-              >
-                {global.homePage?.satisfactionStat}
-              </div>
-              <div
-                className="text-primary-100 font-medium"
-                data-tina-field={tinaField(global.homePage, "satisfactionLabel")}
-              >
-                {global.homePage?.satisfactionLabel}
-              </div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 text-center transform hover:scale-105 transition-transform duration-300">
-              <div
-                className="text-4xl lg:text-5xl font-bold font-serif mb-2 text-white"
-                data-tina-field={tinaField(global.homePage, "emergencyHelpStat")}
-              >
-                {global.homePage?.emergencyHelpStat}
-              </div>
-              <div
-                className="text-primary-100 font-medium"
-                data-tina-field={tinaField(global.homePage, "emergencyHelpLabel")}
-              >
-                {global.homePage?.emergencyHelpLabel}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2
-          id="our-services"
-          data-tina-field={tinaField(global, "ourServicesText")}
-          className="text-center text-3xl lg:text-4xl font-serif font-bold text-gray-800 mb-4"
-        >
-          {global.ourServicesText}
-        </h2>
-        <p
-          className="text-center text-lg text-gray-600 mb-12 max-w-2xl mx-auto"
-          data-tina-field={tinaField(global.homePage, "servicesSubtitle")}
-        >
-          {global.homePage?.servicesSubtitle}
-        </p>
-        <CategoriesSmall {...categoriesConnectionQuery}></CategoriesSmall>
-      </section>
-
       {/* Team Preview */}
-      <TeamPreview staffConnection={staffConnection} global={global} />
+      <TeamPreview
+        staffConnection={staffConnection}
+        global={global}
+      />
 
       {/* Locations Quick Access */}
       <section className="py-16">
