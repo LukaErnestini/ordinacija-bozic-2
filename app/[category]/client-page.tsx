@@ -37,16 +37,19 @@ export default function ClientCategoryPage({
     });
 
   // Prepare TOC items for the floating TOC
-  const tocItems = services?.filter(service => service).map(service => ({
-    id: service!._sys.filename,
-    title: service!.title
-  })) || [];
+  const tocItems =
+    services
+      ?.filter((service) => service)
+      .map((service) => ({
+        id: service!._sys.filename,
+        title: service!.title
+      })) || [];
 
   return (
     <div>
       {/* Floating Table of Contents */}
       <FloatingTOC items={tocItems} />
-      
+
       {/* Hero Section with stronger gradient and shadow effects */}
       <div className="relative bg-gradient-to-b from-secondary/30 via-background to-background">
         <div className="absolute inset-0 bg-primary/5 backdrop-blur-[2px]" />
@@ -112,70 +115,72 @@ export default function ClientCategoryPage({
         </div>
       </div>
       {/* Table of Contents */}
-      <div className="mx-auto px-4 py-3 md:py-12">
-        {/* Desktop */}
-        <div className="mx-auto max-w-7xl hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services?.map((service) => {
-            if (!service) return null;
-            const { _sys, title, subtitle, icon } = service;
-            return (
-              <a
-                href={`#${_sys.filename}`}
-                key={_sys.filename}
-                className="btn h-56 justify-start flex-nowrap group p-4 gap-1 lg:gap-2 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
-              >
-                <Image
-                  width={54}
-                  height={54}
-                  src={icon}
-                  alt={title}
-                  className="mb-2"
-                />
-                <h3 className="text-xl font-semibold mb-3">{title}</h3>
-                <p className="text-gray-600 text-sm line-clamp-3">{subtitle}</p>
-              </a>
-            );
-          })}
-        </div>
+      {services && services.length > 0 && (
+        <div className="mx-auto px-4 py-3 md:py-12">
+          {/* Desktop */}
+          <div className="mx-auto max-w-7xl hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services?.map((service) => {
+              if (!service) return null;
+              const { _sys, title, subtitle, icon } = service;
+              return (
+                <a
+                  href={`#${_sys.filename}`}
+                  key={_sys.filename}
+                  className="btn h-56 justify-start flex-nowrap group p-4 gap-1 lg:gap-2 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
+                >
+                  <Image
+                    width={54}
+                    height={54}
+                    src={icon}
+                    alt={title}
+                    className="mb-2"
+                  />
+                  <h3 className="text-xl font-semibold mb-3">{title}</h3>
+                  <p className="text-gray-600 text-sm line-clamp-3">{subtitle}</p>
+                </a>
+              );
+            })}
+          </div>
 
-        {/* Mobile */}
-        <div className="max-w-4xl mx-auto md:hidden">
-          <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl mb-3 md:mb-12">
-            <h2 className="text-3xl font-serif font-bold mb-6">Kazalo</h2>
-            <nav className="space-y-4">
-              {services?.map((service) => {
-                if (!service) return null;
-                const { _sys, title } = service;
-                return (
-                  <a
-                    key={_sys.filename}
-                    href={`#${_sys.filename}`}
-                    className="block text-lg px-6 py-2 rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 relative group"
-                  >
-                    <span className="relative flex items-center">
-                      {title}
-                      <svg
-                        className="w-5 h-5 ml-auto text-primary/40 group-hover:text-primary transition-colors duration-200"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary/60 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                    </span>
-                  </a>
-                );
-              })}
-            </nav>
+          {/* Mobile */}
+          <div className="max-w-4xl mx-auto md:hidden">
+            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl mb-3 md:mb-12">
+              <h2 className="text-3xl font-serif font-bold mb-6">Kazalo</h2>
+              <nav className="space-y-4">
+                {services?.map((service) => {
+                  if (!service) return null;
+                  const { _sys, title } = service;
+                  return (
+                    <a
+                      key={_sys.filename}
+                      href={`#${_sys.filename}`}
+                      className="block text-lg px-6 py-2 rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 relative group"
+                    >
+                      <span className="relative flex items-center">
+                        {title}
+                        <svg
+                          className="w-5 h-5 ml-auto text-primary/40 group-hover:text-primary transition-colors duration-200"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary/60 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                      </span>
+                    </a>
+                  );
+                })}
+              </nav>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {/* Services */}
       <div className="mx-auto px-4 pb-24 pt-3 md:pt-12">
         <div className="max-w-4xl mx-auto space-y-24">
@@ -188,7 +193,7 @@ export default function ClientCategoryPage({
                 id={_sys.filename}
                 className="sm:bg-white/50 sm:backdrop-blur-sm sm:rounded-2xl sm:p-8 sm:shadow-xl"
               >
-                <div className="flex items-start gap-6">
+                <div className="flex flex-col sm:flex-row items-start gap-6">
                   {icon && (
                     <div className="relative shrink-0">
                       <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl transform scale-150" />

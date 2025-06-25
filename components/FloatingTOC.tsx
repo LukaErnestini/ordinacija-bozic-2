@@ -29,9 +29,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
 
   // Calculate current section based on scroll position
   const calculateCurrentSection = useCallback(() => {
-    const elements = items
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean) as HTMLElement[];
+    const elements = items.map((item) => document.getElementById(item.id)).filter(Boolean) as HTMLElement[];
 
     if (elements.length === 0) return;
 
@@ -69,18 +67,18 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
   const checkVisibility = useCallback(() => {
     const firstElement = document.getElementById(items[0]?.id);
     const lastElement = document.getElementById(items[items.length - 1]?.id);
-    
+
     if (firstElement && lastElement) {
       const firstRect = firstElement.getBoundingClientRect();
       const lastRect = lastElement.getBoundingClientRect();
       const headerOffset = 120; // Account for fixed header
-      
+
       // Show TOC when:
       // 1. The first article has reached the top (below header)
       // 2. AND the last article hasn't completely passed above the viewport
       const firstArticleReached = firstRect.top <= headerOffset;
       const lastArticleStillVisible = lastRect.bottom > headerOffset;
-      
+
       setIsVisible(firstArticleReached && lastArticleStillVisible);
     }
   }, [items]);
@@ -121,7 +119,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
 
       window.scrollTo({
         top: elementPosition,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   };
@@ -148,7 +146,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
   return (
     <div className="fixed left-0 top-1/2 transform -translate-y-1/2 z-50">
       {/* Main container - clickable to toggle */}
-      <div 
+      <div
         className="relative cursor-pointer"
         onClick={handleContainerClick}
       >
@@ -162,9 +160,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
         >
           <div className="p-6 w-72">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
-                Kazalo
-              </h3>
+              <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Kazalo</h3>
               {!isWideScreen && (
                 <button
                   onClick={(e) => {
@@ -174,8 +170,18 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
                   className="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100"
                   aria-label="Zapri kazalo"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               )}
@@ -197,15 +203,11 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
                       w-full text-left px-3 py-2 rounded-lg
                       transition-all duration-300 ease-out relative
                       hover:bg-primary/5 hover:text-primary group
-                      ${
-                        isCurrent
-                          ? "bg-primary/10 text-primary font-semibold"
-                          : "text-gray-700"
-                      }
+                      ${isCurrent ? "bg-primary/10 text-primary font-semibold" : "text-gray-700"}
                     `}
                     style={{
                       transform: isCurrent ? "scale(1.05)" : "scale(1)",
-                      transformOrigin: "left center",
+                      transformOrigin: "left center"
                     }}
                   >
                     <span
@@ -238,11 +240,11 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
         </div>
 
         {/* Dots positioned on the right side of the panel */}
-        <div 
+        <div
           className={`
             absolute top-1/2 transform -translate-y-1/2 flex flex-col gap-3
-            transition-all duration-500 ease-out
-            ${isExpanded ? "left-72 ml-2" : "left-0 ml-2"}
+            transition-all duration-500 ease-out ml-0
+            ${isExpanded ? "left-72 ml-2" : "left-0 ml-0.5 sm:ml-2"}
           `}
         >
           {items.map((item, index) => {
@@ -255,9 +257,7 @@ const FloatingTOC: React.FC<FloatingTOCProps> = ({ items }) => {
                   w-3 h-3 rounded-full transition-all duration-300 relative
                   hover:scale-125 cursor-pointer
                   ${
-                    isCurrent
-                      ? "bg-primary scale-110 shadow-lg shadow-primary/30"
-                      : "bg-primary/50 hover:bg-primary/70"
+                    isCurrent ? "bg-primary scale-110 shadow-lg shadow-primary/30" : "bg-primary/50 hover:bg-primary/70"
                   }
                 `}
                 title={item.title}
