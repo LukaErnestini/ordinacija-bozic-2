@@ -48,7 +48,7 @@
   "contactForm": {
     "presetMessages": [
       {
-        "label": "Želim spoznati vašo ordinacijo (prvi pregled)",
+        "label": "prvi pregled",
         "value": "prvi_pregled",
         "enabled": true
       },
@@ -58,12 +58,12 @@
         "enabled": true
       },
       {
-        "label": "Zanima me nevidni zobni aparat Invisalign®",
+        "label": "Zanima me nevidni zobni aparat Invisalign®, Spark",
         "value": "invisalign",
         "enabled": true
       },
       {
-        "label": "Potrebujem novo zobno rešitev (prevleke, mostički, vsadki)",
+        "label": "Potrebujem novo protetično rešitev (prevleke, mostički, vsadki)",
         "value": "zobni_vsadki",
         "enabled": true
       },
