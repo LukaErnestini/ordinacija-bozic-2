@@ -99,7 +99,7 @@ export async function submitContactForm(
 
     // Send email using Resend
     await resend.emails.send({
-      from: "Kontaktni obrazec <onboarding@resend.dev>",
+      from: "Kontaktni obrazec <noreply@ordinacijabozic.si>",
       to: "szo.infos@gmail.com",
       subject: `Novo sporočilo od ${name}`,
       html: `
