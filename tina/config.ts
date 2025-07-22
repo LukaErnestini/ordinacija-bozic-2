@@ -140,26 +140,15 @@ export default defineConfig({
             name: "activeFrom",
             label: "Active From",
             type: "datetime",
-            description: "From when to display alert to visitors.",
-            ui: {
-              validate: (value, data) => {
-                if (data.activeTo && !value) {
-                  return "Active From must be set if Active To is set";
-                }
-              },
-            },
+            description: "From when to display alert to visitors. If not set, alert is active immediately.",
           },
           {
             name: "activeTo",
             label: "Active To",
             type: "datetime",
-            description: "Until when to display alert to visitors.",
+            description: "Until when to display alert to visitors. If not set, alert remains active indefinitely.",
             ui: {
               validate: (value, data) => {
-                if (!value && data.activeFrom) {
-                  return "Active To must be set if Active From is set";
-                }
-
                 if (
                   value &&
                   data.activeFrom &&
