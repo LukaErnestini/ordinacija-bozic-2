@@ -141,7 +141,7 @@ export default async function RootLayout({
       }) || [];
 
   // Helper function to parse address string into structured format
-  const parseAddress = (addressText: any, locationName: string) => {
+  const parseAddress = (addressText: string | { children?: Array<{ children?: Array<{ text?: string }> }> }) => {
     // Address is rich-text, extract plain text
     const plainText = typeof addressText === 'string'
       ? addressText
@@ -176,7 +176,7 @@ export default async function RootLayout({
   });
 
   const schemaAddresses = locations
-    .map(loc => parseAddress(loc.address, loc.name))
+    .map(loc => parseAddress(loc.address))
     .filter((addr): addr is NonNullable<typeof addr> => addr !== null);
 
   const schemaEmail = locations[0]?.email || "szo.infos@gmail.com";
