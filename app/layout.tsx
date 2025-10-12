@@ -130,7 +130,7 @@ export default async function RootLayout({
           googleMapsEmbedSrc: node?.googleMapsEmbedSrc || "",
           name: node?.label || "",
           email: node?.mail || "",
-          address: node?.address || "",
+          addressStructured: node?.addressStructured,
         };
       })
       .sort((a, b) => {
@@ -140,43 +140,40 @@ export default async function RootLayout({
         return 0;
       }) || [];
 
-  // Helper function to parse address string into structured format
-  const parseAddress = (addressText: string | { children?: Array<{ children?: Array<{ text?: string }> }> }) => {
-    // Address is rich-text, extract plain text
-    const plainText = typeof addressText === 'string'
-      ? addressText
-      : addressText?.children?.[0]?.children?.[0]?.text || '';
-
-    const lines = plainText.split(/\\|[\n\r]+/).map((line: string) => line.trim()).filter((line: string) => line);
-    if (lines.length < 2) return null;
-
-    const streetAddress = lines[0].replace(/,$/, ''); // Remove trailing comma if present
-    const cityLine = lines[1];
-    const match = cityLine.match(/^(\d{4})\s+(.+)$/);
-
-    if (!match) return null;
-
-    return {
-      "@type": "PostalAddress",
-      streetAddress,
-      addressLocality: match[2],
-      postalCode: match[1],
-      addressCountry: "SI"
-    };
-  };
-
   // Build schema data from locations
   const allPhones = locations.flatMap(loc => loc.phone).map(phone => {
-    // Normalize phone numbers to E.164 format
+    // Normalize phone numbers to E.164 format with spaces
     const cleaned = phone.replace(/\s/g, '');
     if (cleaned.startsWith('0')) {
-      return `+386 ${cleaned.substring(1)}`;
+      // Format as +386 XX XXX XXX or +386 X XXXX XXX depending on length
+      const withoutZero = cleaned.substring(1);
+      if (withoutZero.length === 8) {
+        // Mobile: +386 XX XXX XXX
+        return `+386 ${withoutZero.substring(0, 2)} ${withoutZero.substring(2, 5)} ${withoutZero.substring(5)}`;
+      } else if (withoutZero.length === 7) {
+        // Landline: +386 X XXXX XXX
+        return `+386 ${withoutZero.substring(0, 1)} ${withoutZero.substring(1, 5)} ${withoutZero.substring(5)}`;
+      }
+      return `+386 ${withoutZero}`;
     }
     return phone;
   });
 
+  // Build schema addresses from structured data
   const schemaAddresses = locations
-    .map(loc => parseAddress(loc.address))
+    .map((loc) => {
+      const addr = loc.addressStructured;
+      if (!addr || !addr.street || !addr.postalCode || !addr.city) {
+        return null;
+      }
+      return {
+        "@type": "PostalAddress",
+        streetAddress: addr.street,
+        addressLocality: addr.city,
+        postalCode: addr.postalCode,
+        addressCountry: addr.country || "SI"
+      };
+    })
     .filter((addr): addr is NonNullable<typeof addr> => addr !== null);
 
   const schemaEmail = locations[0]?.email || "szo.infos@gmail.com";
