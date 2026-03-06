@@ -61,10 +61,56 @@ export default defineConfig({
             required: true,
           },
           {
-            name: "address",
+            name: "addressStructured",
             label: "Address",
-            type: "rich-text",
+            type: "object",
             required: true,
+            fields: [
+              {
+                name: "street",
+                label: "Street Address",
+                type: "string",
+                required: true,
+                description: "e.g., Štorje 41A",
+              },
+              {
+                name: "postalCode",
+                label: "Postal Code",
+                type: "string",
+                required: true,
+                description: "4-digit postal code (e.g., 6210)",
+                ui: {
+                  validate: (value) => {
+                    if (value && !/^\d{4}$/.test(value)) {
+                      return "Postal code must be exactly 4 digits";
+                    }
+                  },
+                },
+              },
+              {
+                name: "city",
+                label: "City",
+                type: "string",
+                required: true,
+                description: "e.g., Sežana",
+              },
+              {
+                name: "country",
+                label: "Country Code",
+                type: "string",
+                required: true,
+                description: "2-letter country code (e.g., SI for Slovenia)",
+                ui: {
+                  component: "select",
+                  options: [
+                    { label: "Slovenia (SI)", value: "SI" },
+                    { label: "Italy (IT)", value: "IT" },
+                    { label: "Croatia (HR)", value: "HR" },
+                    { label: "Austria (AT)", value: "AT" },
+                  ],
+                },
+              },
+            ],
           },
           {
             name: "googleMapsEmbedSrc",

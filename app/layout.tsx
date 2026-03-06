@@ -130,6 +130,7 @@ export default async function RootLayout({
           googleMapsEmbedSrc: node?.googleMapsEmbedSrc || "",
           name: node?.label || "",
           email: node?.mail || "",
+          addressStructured: node?.addressStructured,
         };
       })
       .sort((a, b) => {
@@ -138,6 +139,44 @@ export default async function RootLayout({
         if (b.name.includes("Štorje")) return 1;
         return 0;
       }) || [];
+
+  // Build schema data from locations
+  const allPhones = locations.flatMap(loc => loc.phone).map(phone => {
+    // Normalize phone numbers to E.164 format with spaces
+    const cleaned = phone.replace(/\s/g, '');
+    if (cleaned.startsWith('0')) {
+      // Format as +386 XX XXX XXX or +386 X XXXX XXX depending on length
+      const withoutZero = cleaned.substring(1);
+      if (withoutZero.length === 8) {
+        // Mobile: +386 XX XXX XXX
+        return `+386 ${withoutZero.substring(0, 2)} ${withoutZero.substring(2, 5)} ${withoutZero.substring(5)}`;
+      } else if (withoutZero.length === 7) {
+        // Landline: +386 X XXXX XXX
+        return `+386 ${withoutZero.substring(0, 1)} ${withoutZero.substring(1, 5)} ${withoutZero.substring(5)}`;
+      }
+      return `+386 ${withoutZero}`;
+    }
+    return phone;
+  });
+
+  // Build schema addresses from structured data
+  const schemaAddresses = locations
+    .map((loc) => {
+      const addr = loc.addressStructured;
+      if (!addr || !addr.street || !addr.postalCode || !addr.city) {
+        return null;
+      }
+      return {
+        "@type": "PostalAddress",
+        streetAddress: addr.street,
+        addressLocality: addr.city,
+        postalCode: addr.postalCode,
+        addressCountry: addr.country || "SI"
+      };
+    })
+    .filter((addr): addr is NonNullable<typeof addr> => addr !== null);
+
+  const schemaEmail = locations[0]?.email || "szo.infos@gmail.com";
 
   return (
     <>
@@ -161,26 +200,11 @@ export default async function RootLayout({
                 "name": globalQuery.data.global.pageTitle,
                 "description": globalQuery.data.global.siteDescription,
                 "url": "https://www.ordinacijabozic.si",
-                "logo": `https://www.ordinacijabozic.si${globalQuery.data.global.logo}`,
-                "image": `https://www.ordinacijabozic.si${globalQuery.data.global.logo}`,
-                "telephone": ["+386 41 823 515", "+386 5 7686 001", "+386 5 6744 025"],
-                "email": "szo.infos@gmail.com",
-                "address": [
-                  {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Štorje 41A",
-                    "addressLocality": "Sežana",
-                    "postalCode": "6210",
-                    "addressCountry": "SI"
-                  },
-                  {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Zatišje 5",
-                    "addressLocality": "Portorož",
-                    "postalCode": "6320",
-                    "addressCountry": "SI"
-                  }
-                ],
+                "logo": globalQuery.data.global.logo,
+                "image": globalQuery.data.global.logo,
+                "telephone": allPhones,
+                "email": schemaEmail,
+                "address": schemaAddresses,
                 "sameAs": [
                   "https://www.ordinacijabozic.si/ordinacija-storje",
                   "https://www.ordinacijabozic.si/ordinacija-portoroz"
@@ -188,29 +212,15 @@ export default async function RootLayout({
                 "hasOfferCatalog": {
                   "@type": "OfferCatalog",
                   "name": "Zobozdravstvene storitve",
-                  "itemListElement": [
-                    {
+                  "itemListElement": serviceCategoriesResponse.data?.serviceCategoryConnection.edges?.map(
+                    (edge) => ({
                       "@type": "Offer",
                       "itemOffered": {
                         "@type": "MedicalProcedure",
-                        "name": "Splošno zobozdravstvo"
+                        "name": edge?.node?.title || ""
                       }
-                    },
-                    {
-                      "@type": "Offer", 
-                      "itemOffered": {
-                        "@type": "MedicalProcedure",
-                        "name": "Ortodontija"
-                      }
-                    },
-                    {
-                      "@type": "Offer",
-                      "itemOffered": {
-                        "@type": "MedicalProcedure", 
-                        "name": "Protetika"
-                      }
-                    }
-                  ]
+                    })
+                  ) || []
                 }
               })
             }}

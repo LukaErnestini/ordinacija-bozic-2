@@ -8,7 +8,7 @@ import { LocationQuery } from "@/tina/__generated__/types";
 
 export function LocationComponent(data: LocationQuery) {
   const location = data.location;
-  const { images, label, address, phone, officeHours, mail, googleMapsEmbedSrc } = location;
+  const { images, label, addressStructured, phone, officeHours, mail, googleMapsEmbedSrc } = location;
   return (
     <div>
       {/* Hero Section */}
@@ -39,10 +39,17 @@ export function LocationComponent(data: LocationQuery) {
             <div className="grid gap-6 xs:grid-cols-2 items-start">
               <div
                 className="flex gap-3"
-                data-tina-field={tinaField(location, "address")}
+                data-tina-field={tinaField(location, "addressStructured")}
               >
                 <MapPin className="w-5 h-5 mt-1 text-primary" />
-                <TinaMarkdown content={address} />
+                <div>
+                  {addressStructured && (
+                    <>
+                      <div>{addressStructured.street}</div>
+                      <div>{addressStructured.postalCode} {addressStructured.city}</div>
+                    </>
+                  )}
+                </div>
               </div>
 
               <div
