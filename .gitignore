@@ -40,5 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# local git worktrees
+.worktrees/
+
 node_modules
 .env

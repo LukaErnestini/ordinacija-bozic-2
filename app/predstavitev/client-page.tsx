@@ -24,7 +24,7 @@ export default function ClientAboutUsPage(
               data-tina-field={tinaField(about, "image")}
               className="object-cover object-top"
               src={about.image}
-              alt=""
+              alt={about.title ?? "Predstavitev ekipe ordinacije Božič"}
               fill
               priority
               sizes="100vw"

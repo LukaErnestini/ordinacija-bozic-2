@@ -56,8 +56,9 @@ export default function ScrollGallery({ images, interval = 5000, className = "" 
           >
             <Image
               src={src}
-              alt={`Gallery image ${index + 1}`}
+              alt={`Ordinacija Božič – galerija ${index + 1}`}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
               priority={index === 0}
             />
@@ -70,18 +71,20 @@ export default function ScrollGallery({ images, interval = 5000, className = "" 
         <>
           <button
             onClick={goToPrevious}
+            aria-label="Prejšnja fotografija"
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 backdrop-blur-sm p-2 rounded-full transform opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
             disabled={isAnimating}
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-6 h-6 text-white" aria-hidden="true" />
           </button>
 
           <button
             onClick={goToNext}
+            aria-label="Naslednja fotografija"
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 backdrop-blur-sm p-2 rounded-full transform opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
             disabled={isAnimating}
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-6 h-6 text-white" aria-hidden="true" />
           </button>
 
           {/* Dots indicator */}
@@ -96,6 +99,8 @@ export default function ScrollGallery({ images, interval = 5000, className = "" 
                     setTimeout(() => setIsAnimating(false), 500);
                   }
                 }}
+                aria-label={`Skoči na fotografijo ${index + 1}`}
+                aria-current={currentIndex === index ? "true" : undefined}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   currentIndex === index ? "bg-white w-4" : "bg-white/50 hover:bg-white/70"
                 }`}

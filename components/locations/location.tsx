@@ -96,6 +96,7 @@ export function LocationComponent(data: LocationQuery) {
         >
           <iframe
             src={googleMapsEmbedSrc}
+            title={`Zemljevid – ${label}`}
             width="100%"
             height="100%"
             style={{ border: 0 }}

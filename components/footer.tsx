@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { TinaMarkdown, TinaMarkdownContent } from "tinacms/dist/rich-text";
 
 interface Location {
@@ -59,6 +60,7 @@ export default function Footer({ locations }: FooterProps) {
                 <div className="grow lg:max-w-md xl:max-w-lg h-64 lg:h-80">
                   <iframe
                     src={location.googleMapsEmbedSrc}
+                    title={`Zemljevid – ${location.name}`}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -75,15 +77,16 @@ export default function Footer({ locations }: FooterProps) {
 
         {/* Copyright Section */}
         <div className="container mx-auto mt-12 pt-8 border-t border-neutral-700 px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-neutral-400">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-400">
             <p className="text-base">© {new Date().getFullYear()} Ordinacija Božič. Vse pravice pridržane.</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a
-                href="#"
-                className="hover:text-white transition-colors text-base"
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <Link
+                href="/politika-zasebnosti"
+                className="text-base hover:text-white transition-colors underline-offset-4 hover:underline"
               >
-                Zasnova in razvoj: 43SOFT
-              </a>
+                Politika zasebnosti
+              </Link>
+              <span className="text-base">Zasnova in razvoj: 43SOFT</span>
             </div>
           </div>
         </div>

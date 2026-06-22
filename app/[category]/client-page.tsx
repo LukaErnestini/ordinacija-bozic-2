@@ -66,7 +66,7 @@ export default function ClientCategoryPage({
                 <Image
                   data-tina-field={tinaField(serviceCategory, "icon")}
                   src={serviceCategory.icon}
-                  alt=""
+                  alt={serviceCategory.title ? `Ikona: ${serviceCategory.title}` : ""}
                   width={120}
                   height={120}
                   className="relative z-10 drop-shadow-2xl transition-all duration-300 group-hover:drop-shadow-[0_0_2em_rgba(176,144,84,0.3)]"
@@ -119,14 +119,30 @@ export default function ClientCategoryPage({
         <div className="mx-auto px-4 py-3 md:py-12">
           {/* Desktop */}
           <div className="mx-auto max-w-7xl hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services?.map((service) => {
+            {services?.map((service, index) => {
               if (!service) return null;
               const { _sys, title, subtitle, icon } = service;
+              const total = services?.length ?? 0;
+              const isLast = index === total - 1;
+              // Orphan centering: when the last row has just one card,
+              // span the row and center the card at that breakpoint.
+              const sm2colOrphan = isLast && total % 2 === 1;
+              const lg3colOrphan = isLast && total % 3 === 1;
+              const orphanClasses = [
+                // At sm (2 cols), single orphan: span both cols, center via auto margins, cap at ~half
+                sm2colOrphan && "sm:col-span-2 sm:mx-auto sm:max-w-[50%]",
+                // At lg (3 cols), single orphan: place it in column 2 (the middle) — natural column width
+                lg3colOrphan && "lg:col-span-1 lg:col-start-2 lg:max-w-none lg:mx-0",
+                // Reset sm orphan styling at lg if it isn't a 3-col orphan there too
+                sm2colOrphan && !lg3colOrphan && "lg:col-span-1 lg:max-w-none lg:mx-0",
+              ]
+                .filter(Boolean)
+                .join(" ");
               return (
                 <a
                   href={`#${_sys.filename}`}
                   key={_sys.filename}
-                  className="btn h-56 justify-start flex-nowrap group p-4 gap-1 lg:gap-2 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
+                  className={`btn !h-64 justify-start flex-nowrap group p-4 gap-1 lg:gap-2 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center ${orphanClasses}`}
                 >
                   <Image
                     width={54}

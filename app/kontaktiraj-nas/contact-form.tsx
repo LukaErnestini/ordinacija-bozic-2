@@ -26,6 +26,11 @@ interface ContactFormProps {
   }[];
   headerTitle: string;
   headerSubtitle: string;
+  fallbackContacts?: {
+    label: string;
+    phones: string[];
+    email: string;
+  }[];
 }
 
 export default function ContactForm(props: ContactFormProps) {
@@ -59,7 +64,7 @@ export default function ContactForm(props: ContactFormProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto w-fit">
+    <div className="max-w-4xl mx-auto w-full">
       {/* Header */}
       <div className="mb-12 max-w-xl">
         <h1 className="text-4xl font-bold mb-4">{props.headerTitle}</h1>
@@ -259,13 +264,26 @@ export default function ContactForm(props: ContactFormProps) {
             className={`alert ${state.success ? "alert-success" : "alert-error"}`}
           >
             <span>{state.message}</span>
-            {!state.success && (
+            {!state.success && props.fallbackContacts && props.fallbackContacts.length > 0 && (
               <div className="mt-2 text-sm">
                 <p>Lahko nas tudi pokličete ali pišete neposredno:</p>
-                <ul className="list-disc list-inside mt-1">
-                  <li>Telefon: 041 823 515</li>
-                  <li>E-pošta: some@email.com</li>
-                </ul>
+                {props.fallbackContacts.map((contact) => (
+                  <div key={contact.label} className="mt-2">
+                    <p className="font-semibold">{contact.label}</p>
+                    <ul className="list-disc list-inside">
+                      {contact.phones.map((phone) => (
+                        <li key={phone}>
+                          Telefon: <a href={`tel:${phone.replace(/\s/g, "")}`} className="underline">{phone}</a>
+                        </li>
+                      ))}
+                      {contact.email && (
+                        <li>
+                          E-pošta: <a href={`mailto:${contact.email}`} className="underline">{contact.email}</a>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                ))}
               </div>
             )}
           </div>

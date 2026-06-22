@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import BackToTopButton from "@/components/BackToTopButton";
 import client from "@/tina/__generated__/client";
 import NoticeAlert from "@/components/notice/notice-alert";
+import AnalyticsProvider from "@/components/analytics-provider";
 import { Metadata } from "next";
 
 const montserrat = Montserrat({
@@ -143,7 +144,7 @@ export default async function RootLayout({
     <>
       <html
         data-theme="mytheme"
-        lang="en"
+        lang="sl"
         className={`${montserrat.variable} ${playfairDisplay.variable} antialiased scroll-smooth scroll-pt-48`}
       >
         <head>
@@ -158,11 +159,14 @@ export default async function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "DentalClinic",
+                "@id": "https://www.ordinacijabozic.si/#clinic",
                 "name": globalQuery.data.global.pageTitle,
                 "description": globalQuery.data.global.siteDescription,
                 "url": "https://www.ordinacijabozic.si",
                 "logo": `https://www.ordinacijabozic.si${globalQuery.data.global.logo}`,
                 "image": `https://www.ordinacijabozic.si${globalQuery.data.global.logo}`,
+                "medicalSpecialty": "Dentistry",
+                "priceRange": "€€",
                 "telephone": ["+386 41 823 515", "+386 5 7686 001", "+386 5 6744 025"],
                 "email": "szo.infos@gmail.com",
                 "address": [
@@ -222,6 +226,7 @@ export default async function RootLayout({
           <div className="mt-nav-mobile lg:mt-nav grow">{children}</div>
           <Footer locations={locations} />
           <BackToTopButton />
+          <AnalyticsProvider />
         </body>
       </html>
     </>
