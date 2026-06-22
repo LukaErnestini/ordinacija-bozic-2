@@ -5,7 +5,9 @@ import Footer from "@/components/footer";
 import BackToTopButton from "@/components/BackToTopButton";
 import client from "@/tina/__generated__/client";
 import NoticeAlert from "@/components/notice/notice-alert";
+import AnalyticsProvider from "@/components/analytics-provider";
 import { Metadata } from "next";
+import { buildDentalClinicSchema } from "./schema";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -130,6 +132,7 @@ export default async function RootLayout({
           googleMapsEmbedSrc: node?.googleMapsEmbedSrc || "",
           name: node?.label || "",
           email: node?.mail || "",
+          addressStructured: node?.addressStructured || null,
         };
       })
       .sort((a, b) => {
@@ -139,11 +142,24 @@ export default async function RootLayout({
         return 0;
       }) || [];
 
+  const serviceCategoryTitles =
+    serviceCategoriesResponse.data?.serviceCategoryConnection.edges
+      ?.map((edge) => edge?.node?.title)
+      .filter((title): title is string => Boolean(title)) || [];
+
+  const clinicSchema = buildDentalClinicSchema({
+    siteTitle: globalQuery.data.global.pageTitle,
+    siteDescription: globalQuery.data.global.siteDescription,
+    logoPath: globalQuery.data.global.logo,
+    locations,
+    serviceCategoryTitles,
+  });
+
   return (
     <>
       <html
         data-theme="mytheme"
-        lang="en"
+        lang="sl"
         className={`${montserrat.variable} ${playfairDisplay.variable} antialiased scroll-smooth scroll-pt-48`}
       >
         <head>
@@ -155,64 +171,7 @@ export default async function RootLayout({
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "DentalClinic",
-                "name": globalQuery.data.global.pageTitle,
-                "description": globalQuery.data.global.siteDescription,
-                "url": "https://www.ordinacijabozic.si",
-                "logo": `https://www.ordinacijabozic.si${globalQuery.data.global.logo}`,
-                "image": `https://www.ordinacijabozic.si${globalQuery.data.global.logo}`,
-                "telephone": ["+386 41 823 515", "+386 5 7686 001", "+386 5 6744 025"],
-                "email": "szo.infos@gmail.com",
-                "address": [
-                  {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Štorje 41A",
-                    "addressLocality": "Sežana",
-                    "postalCode": "6210",
-                    "addressCountry": "SI"
-                  },
-                  {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Zatišje 5",
-                    "addressLocality": "Portorož",
-                    "postalCode": "6320",
-                    "addressCountry": "SI"
-                  }
-                ],
-                "sameAs": [
-                  "https://www.ordinacijabozic.si/ordinacija-storje",
-                  "https://www.ordinacijabozic.si/ordinacija-portoroz"
-                ],
-                "hasOfferCatalog": {
-                  "@type": "OfferCatalog",
-                  "name": "Zobozdravstvene storitve",
-                  "itemListElement": [
-                    {
-                      "@type": "Offer",
-                      "itemOffered": {
-                        "@type": "MedicalProcedure",
-                        "name": "Splošno zobozdravstvo"
-                      }
-                    },
-                    {
-                      "@type": "Offer", 
-                      "itemOffered": {
-                        "@type": "MedicalProcedure",
-                        "name": "Ortodontija"
-                      }
-                    },
-                    {
-                      "@type": "Offer",
-                      "itemOffered": {
-                        "@type": "MedicalProcedure", 
-                        "name": "Protetika"
-                      }
-                    }
-                  ]
-                }
-              })
+              __html: JSON.stringify(clinicSchema)
             }}
           />
         </head>
@@ -222,6 +181,7 @@ export default async function RootLayout({
           <div className="mt-nav-mobile lg:mt-nav grow">{children}</div>
           <Footer locations={locations} />
           <BackToTopButton />
+          <AnalyticsProvider />
         </body>
       </html>
     </>

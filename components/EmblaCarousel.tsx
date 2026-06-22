@@ -55,6 +55,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   alt={slide.alt}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   fill
+                  priority={index === 0}
                 />
               </div>
             </div>

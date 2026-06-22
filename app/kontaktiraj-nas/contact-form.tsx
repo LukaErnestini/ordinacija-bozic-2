@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useActionState } from "react";
 import { submitContactForm } from "./actions";
-import Turnstile from "react-turnstile";
+import Turnstile, { BoundTurnstileObject } from "react-turnstile";
 
 interface FormState {
   success: boolean;
@@ -26,6 +26,11 @@ interface ContactFormProps {
   }[];
   headerTitle: string;
   headerSubtitle: string;
+  fallbackContacts?: {
+    label: string;
+    phones: string[];
+    email: string;
+  }[];
 }
 
 export default function ContactForm(props: ContactFormProps) {
@@ -43,6 +48,16 @@ export default function ContactForm(props: ContactFormProps) {
   const [isPending, startTransition] = useTransition();
   const [selectedMessages, setSelectedMessages] = useState<string[]>([]);
   const [gdprConsent, setGdprConsent] = useState(false);
+  const turnstileRef = useRef<BoundTurnstileObject | null>(null);
+
+  useEffect(() => {
+    if (!state.message) {
+      return;
+    }
+
+    setTurnstileToken(null);
+    turnstileRef.current?.reset();
+  }, [state]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,7 +74,7 @@ export default function ContactForm(props: ContactFormProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto w-fit">
+    <div className="max-w-4xl mx-auto w-full">
       {/* Header */}
       <div className="mb-12 max-w-xl">
         <h1 className="text-4xl font-bold mb-4">{props.headerTitle}</h1>
@@ -255,27 +270,92 @@ export default function ContactForm(props: ContactFormProps) {
 
         {/* Status Messages */}
         {state.message && (
-          <div
-            className={`alert ${state.success ? "alert-success" : "alert-error"}`}
-          >
-            <span>{state.message}</span>
-            {!state.success && (
-              <div className="mt-2 text-sm">
-                <p>Lahko nas tudi pokličete ali pišete neposredno:</p>
-                <ul className="list-disc list-inside mt-1">
-                  <li>Telefon: 041 823 515</li>
-                  <li>E-pošta: some@email.com</li>
-                </ul>
+          state.success ? (
+            <div className="alert alert-success">
+              <span>{state.message}</span>
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50/90 p-5 text-amber-950 shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700">
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                    />
+                  </svg>
+                </div>
+                <div className="min-w-0 flex-1 space-y-3">
+                  <div>
+                    <p className="font-semibold">Sporočila trenutno ni bilo mogoče poslati</p>
+                    <p className="mt-1 text-sm leading-relaxed text-amber-900/80">
+                      Prosimo, poskusite znova. Če se težava ponovi, nas lahko kontaktirate neposredno.
+                    </p>
+                  </div>
+
+                  {props.fallbackContacts && props.fallbackContacts.length > 0 && (
+                    <div className="space-y-3 pt-1">
+                      {props.fallbackContacts.map((contact) => (
+                        <div
+                          key={contact.label}
+                          className="rounded-xl border border-amber-200/70 bg-white/70 p-3"
+                        >
+                          <p className="mb-2 font-semibold text-amber-950">{contact.label}</p>
+                          <div className="space-y-1.5 text-sm">
+                            {contact.phones.map((phone) => (
+                              <p
+                                key={phone}
+                                className="flex w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-lg text-amber-900"
+                              >
+                                <span className="font-medium">Telefon:</span>
+                                <a
+                                  href={`tel:${phone.replace(/\s/g, "")}`}
+                                  className="break-words underline underline-offset-2"
+                                >
+                                  {phone}
+                                </a>
+                              </p>
+                            ))}
+                            {contact.email && (
+                              <p
+                                className="flex w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-lg text-amber-900"
+                              >
+                                <span className="font-medium">E-pošta:</span>
+                                <a
+                                  href={`mailto:${contact.email}`}
+                                  className="break-words underline underline-offset-2"
+                                >
+                                  {contact.email}
+                                </a>
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
+            </div>
+          )
         )}
 
         {/* Turnstile */}
         <div className="flex flex-col items-center gap-2">
           <Turnstile
             sitekey="0x4AAAAAAA4nzao-OjNdyws5"
-            onVerify={(token) => setTurnstileToken(token)}
+            onVerify={(token, boundTurnstile) => {
+              turnstileRef.current = boundTurnstile;
+              setTurnstileToken(token);
+            }}
             onError={() => {
               setTurnstileToken(null);
               console.error("Turnstile validation failed");

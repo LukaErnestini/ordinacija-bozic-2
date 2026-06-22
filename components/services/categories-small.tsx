@@ -14,14 +14,14 @@ export default function CategoriesSmall(
   return (
     <section className="pb-12">
       <div className="container mx-auto px-2 max-w-7xl">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
           {data?.serviceCategoryConnection.edges?.map((categoryData) => {
             const category = categoryData!.node!;
             return (
               <Link
                 href={category._sys.filename}
                 key={category?.id}
-                className="group relative h-80 sm:h-96 lg:h-72 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
+                className="group relative min-h-80 sm:min-h-96 lg:min-h-80 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 sm:[&:last-child:nth-child(odd)]:col-span-2 sm:[&:last-child:nth-child(odd)]:max-w-[calc(50%_-_8px)] sm:[&:last-child:nth-child(odd)]:justify-self-center lg:[&:last-child:nth-child(odd)]:col-span-1 lg:[&:last-child:nth-child(odd)]:max-w-none"
               >
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-5">

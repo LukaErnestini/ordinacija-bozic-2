@@ -196,12 +196,16 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-primary focus:outline-none transition-all duration-300 hover:scale-110"
+              aria-label={isMenuOpen ? "Zapri navigacijski meni" : "Odpri navigacijski meni"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
             >
               <svg
                 className={`transition-all duration-500 ${scrolled ? 'h-6 w-6' : 'h-8 w-8'}`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 {isMenuOpen ? (
                   <path
@@ -226,7 +230,7 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
 
       {/* Enhanced Mobile menu with smoother animations */}
       {isMenuOpen && (
-        <div className="lg:hidden relative">
+        <div id="mobile-navigation" className="lg:hidden relative">
           <div className="bg-white/95 backdrop-blur-md px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-white/20">
             {items.map((item) => (
               <div key={item.name} className="space-y-1">

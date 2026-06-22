@@ -20,7 +20,7 @@ export default function TeamPreview({ staffConnection, global }: TeamPreviewProp
   const staffMembers = staffConnection.edges?.map((edge) => edge?.node).filter(Boolean) || [];
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
+    <section className="py-20 bg-gradient-to-br from-primary/5 via-base-100 to-base-100">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2
@@ -45,11 +45,15 @@ export default function TeamPreview({ staffConnection, global }: TeamPreviewProp
             const displayTitle = staff.teamPreviewTitle || staff.title;
             const displayDescription = staff.teamPreviewDescription;
             const displayName = staff.teamPreviewPrefix ? `${staff.teamPreviewPrefix} ${staff.name}` : staff.name;
+            const staffSlug = staff._sys.breadcrumbs?.join("/") || staff._sys.filename;
+            const staffHref = `/predstavitev/${staffSlug}`;
 
             return (
-              <div
+              <Link
                 key={staff._sys.filename}
-                className="text-center group"
+                href={staffHref}
+                className="text-center group block bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-gray-100 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label={`Predstavitev: ${displayName}`}
               >
                 <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
                   {displayImage ? (
@@ -100,15 +104,15 @@ export default function TeamPreview({ staffConnection, global }: TeamPreviewProp
                     {displayDescription}
                   </p>
                 )}
-              </div>
+              </Link>
             );
           })}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-12">
           <Link
             href="/predstavitev"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors font-medium"
+            className="btn btn-primary text-white gap-2 px-8"
           >
             <span data-tina-field={tinaField(global.homePage, "teamLinkText")}>{global.homePage?.teamLinkText}</span>
             <svg

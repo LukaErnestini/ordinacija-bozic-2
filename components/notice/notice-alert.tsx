@@ -122,14 +122,14 @@ export default function NoticeAlert(
           <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
             <div className="flex gap-3">
               <button
-                className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg transition-colors font-medium text-sm"
+                className="btn btn-sm flex-1 btn-ghost bg-gray-100 hover:bg-gray-200 text-gray-800"
                 onClick={acknowledgeNotice}
               >
                 Razumem
               </button>
               <Link
                 href="/obvestila"
-                className="flex-1 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium text-sm text-center"
+                className="btn btn-sm flex-1 btn-primary text-white"
                 onClick={acknowledgeAllNotices}
               >
                 Prikaži vse

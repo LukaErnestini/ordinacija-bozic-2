@@ -98,7 +98,7 @@ export async function submitContactForm(
     const parsedSelectedMessages = JSON.parse(selectedMessages);
 
     // Send email using Resend
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: "Kontaktni obrazec <noreply@ordinacijabozic.si>",
       to: "szo.infos@gmail.com",
       subject: `Novo sporočilo od ${name}`,
@@ -116,6 +116,15 @@ export async function submitContactForm(
         <p>${message}</p>
       `,
     });
+
+    if (error) {
+      console.error("Napaka pri pošiljanju e-pošte:", error);
+      return {
+        success: false,
+        message:
+          "Prišlo je do napake pri pošiljanju sporočila. Prosimo, poskusite ponovno kasneje.",
+      };
+    }
 
     return {
       success: true,

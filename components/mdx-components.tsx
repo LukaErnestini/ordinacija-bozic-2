@@ -25,7 +25,7 @@ export const createStaffMdxComponents = (
       <div>
         <Link
           className="uppercase"
-          href={`predstavitev/${staff._sys.filename}`}
+          href={`/predstavitev/${staff._sys.filename}`}
         >
           {staff.name}
         </Link>
