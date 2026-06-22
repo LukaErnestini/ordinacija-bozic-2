@@ -56,7 +56,7 @@ export default function ScrollGallery({ images, interval = 5000, className = "" 
           >
             <Image
               src={src}
-              alt={`Ordinacija Božič – galerija ${index + 1}`}
+              alt=""
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"

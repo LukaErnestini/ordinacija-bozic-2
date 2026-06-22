@@ -84,7 +84,7 @@ export default function Navbar({ items, globalQuery }: NavbarProps) {
                 <Image
                   data-tina-field={tinaField(global, "logo")}
                   src={global.logo}
-                  alt={`${global.pageTitle ?? "Ordinacija Božič"} – logotip`}
+                  alt=""
                   width={64}
                   height={64}
                   className={`object-contain transition-all duration-500 ease-out ${

@@ -19,7 +19,7 @@ export default function ClientPredstavitevPage(props: TinaQueryClientPageProps<S
             <Image
               data-tina-field={tinaField(staff, "image")}
               src={image}
-              alt={name ? `${name} – portret` : "Predstavitev"}
+              alt=""
               fill
               sizes="(max-width: 768px) 100vw, 18rem"
               className="w-full h-full object-cover object-top"

@@ -87,7 +87,7 @@ export default function ClientHomePage({
   const carouselSlides =
     global.heroImages?.map((i, index) => ({
       src: i as string,
-      alt: `${global.pageTitle ?? "Ordinacija Božič"} – fotografija ${index + 1}`,
+      alt: "",
       tinaField: tinaField(global, "heroImages")
     })) ?? [];
 

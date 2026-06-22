@@ -66,7 +66,7 @@ export default function ClientCategoryPage({
                 <Image
                   data-tina-field={tinaField(serviceCategory, "icon")}
                   src={serviceCategory.icon}
-                  alt={serviceCategory.title ? `Ikona: ${serviceCategory.title}` : ""}
+                  alt=""
                   width={120}
                   height={120}
                   className="relative z-10 drop-shadow-2xl transition-all duration-300 group-hover:drop-shadow-[0_0_2em_rgba(176,144,84,0.3)]"
